@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.awt.print.Book;
 import java.util.Date;
 
 @Entity
@@ -12,7 +13,7 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotBlank
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ") //E.g. 2020-08-17@08:30:00.000+0000
     private Date date;
     @NotBlank
     @Min(value = 20, message = "Duration must be at least 10 minutes")
@@ -25,6 +26,18 @@ public class Booking {
     private long customerId;
     @NotBlank(message = "Must associate a employee")
     private long employeeId;
+
+    protected Booking() {
+
+    }
+
+    public Booking(Date date, int duration, long serviceId, long customerId, long employeeId){
+        setDate(date);
+        setDuration(duration);
+        setServiceId(serviceId);
+        setCustomerId(customerId);
+        setEmployeeId(employeeId);
+    }
 
     public long getId() {
         return id;
@@ -50,10 +63,6 @@ public class Booking {
         this.duration = duration;
     }
 
-    public long getServiceId() {
-        return serviceId;
-    }
-
     public void setServiceId(long serviceId) {
         this.serviceId = serviceId;
     }
@@ -66,7 +75,7 @@ public class Booking {
         return new Customer(); //Will retrieve customer by stored id
     }
 
-    public void setCustomer(long customerId) {
+    public void setCustomerId(long customerId) {
         this.customerId = customerId;
     }
 
@@ -74,7 +83,7 @@ public class Booking {
         return new Employee(); //Will retrieve employee by stored id
     }
 
-    public void setEmployee(long employeeId) {
+    public void setEmployeeId(long employeeId) {
         this.employeeId = employeeId;
     }
 }

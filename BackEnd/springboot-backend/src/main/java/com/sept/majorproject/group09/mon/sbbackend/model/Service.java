@@ -22,7 +22,7 @@ public class Service {
     private int duration;
     private String description;
 
-    public Service() {
+    protected Service() {
     }
 
     public long getId() {
