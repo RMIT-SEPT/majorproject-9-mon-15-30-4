@@ -12,11 +12,12 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotBlank
-    @JsonFormat(pattern ="yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date date;
     @NotBlank
     @Min(value = 20, message = "Duration must be at least 10 minutes")
     @Max(value = 360, message = "Duration must not exceed 6 hours (360 minutes)")
+    //This may become redundant depending on design choices i.e. duration could be fetched via service
     private int duration;
     @NotBlank(message = "Must specify a service")
     private long serviceId;
