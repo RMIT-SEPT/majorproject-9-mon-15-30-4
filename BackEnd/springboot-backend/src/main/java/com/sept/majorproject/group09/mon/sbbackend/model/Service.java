@@ -25,6 +25,13 @@ public class Service {
     protected Service() {
     }
 
+    public Service(long id, String name, int duration, String description){
+        setId(id);
+        setName(name);
+        setDuration(duration);
+        setDescription(description);
+    }
+
     public long getId() {
         return id;
     }

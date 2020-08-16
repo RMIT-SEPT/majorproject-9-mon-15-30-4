@@ -31,7 +31,8 @@ public class Booking {
 
     }
 
-    public Booking(Date date, int duration, long serviceId, long customerId, long employeeId){
+    public Booking(long id, Date date, int duration, long serviceId, long customerId, long employeeId){
+        setId(id);
         setDate(date);
         setDuration(duration);
         setServiceId(serviceId);
@@ -63,24 +64,24 @@ public class Booking {
         this.duration = duration;
     }
 
+    public long getServiceId() {
+        return serviceId;
+    }
+
     public void setServiceId(long serviceId) {
         this.serviceId = serviceId;
     }
 
-    public Service getService() {
-        return new Service(); //Will retrieve service by stored title
-    }
-
-    public Customer getCustomer() {
-        return new Customer(); //Will retrieve customer by stored id
+    public long getCustomerId() {
+        return customerId;
     }
 
     public void setCustomerId(long customerId) {
         this.customerId = customerId;
     }
 
-    public Employee getEmployee() {
-        return new Employee(); //Will retrieve employee by stored id
+    public long getEmployeeId() {
+        return employeeId;
     }
 
     public void setEmployeeId(long employeeId) {
