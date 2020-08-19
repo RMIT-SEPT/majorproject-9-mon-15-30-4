@@ -17,6 +17,11 @@ public class BookingController {
         return bookingService.getAllBookings();
     }
 
+    @GetMapping("/bookings/{id}")
+    private List<Booking> getBookingsByEmployee(@PathVariable("id") long id) {
+        return bookingService.getBookingsByEmployee(id);
+    }
+
     @PostMapping("/bookings")
     private long saveBooking(@RequestBody Booking booking) {
         bookingService.saveOrUpdate(booking);
