@@ -26,6 +26,12 @@ public class BookingService {
         return bookings;
     }
 
+    public List<Booking> getBookingsByService(long serviceId) {
+        List<Booking> bookings = new ArrayList<Booking>();
+        bookingRepository.findAllByService(serviceId).forEach(booking -> bookings.add(booking));
+        return bookings;
+    }
+
     public List<Date[]> getAvailableTimesByServiceAndEmployee(long serviceId, long employeeId){
         List<Date[]> timeslots = new ArrayList<Date[]>();
 
