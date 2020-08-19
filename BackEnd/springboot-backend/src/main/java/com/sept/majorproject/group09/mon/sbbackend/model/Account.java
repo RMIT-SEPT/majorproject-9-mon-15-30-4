@@ -3,6 +3,8 @@ package com.sept.majorproject.group09.mon.sbbackend.model;
 import javax.persistence.*;
 
 
+
+//TODO Is a place holder Place Overwrite
 @Entity
 @Inheritance( strategy = InheritanceType.JOINED)
 public abstract class Account
@@ -40,6 +42,10 @@ public abstract class Account
         return name;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
 
     //Returns true if the passwords match.
     // The password should never be passed up the chain hence the need to check it in the class
@@ -49,7 +55,5 @@ public abstract class Account
     }
 
 
-    public String getUserName() {
-        return userName;
-    }
+
 }
