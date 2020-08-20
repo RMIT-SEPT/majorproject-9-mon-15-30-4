@@ -1,5 +1,6 @@
 package com.sept.majorproject.group09.mon.sbbackend.model;
 
+
 import javax.persistence.*;
 
 
@@ -12,10 +13,14 @@ public abstract class Account
     @Id
     private String userName;
     
+
     private String name;
     private String password;
 
     public Account()
+
+
+
     {
 
     }
@@ -53,6 +58,7 @@ public abstract class Account
     {
         return this.password == password;
     }
+
 
 
 
