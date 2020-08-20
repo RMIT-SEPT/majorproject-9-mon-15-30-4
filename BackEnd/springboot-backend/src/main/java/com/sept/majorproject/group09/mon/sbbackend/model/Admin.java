@@ -20,15 +20,21 @@ public class Admin extends Account{
     }
 
     /**
-     * Assumptions - There will be additional employees being created
+     * Assumptions
+     * - There is one employee that is being created, (i.e here). Does not interact with the frontend at all
+     * --^ Is subject is change
+     *
+     * --Double Check - Tutorial Example was applied and extracted into employeeController-Service-RepositoryLink
      */
-    public void createEmployee()
-    {
-        //Create Employee
+//    public void createEmployee()
+//    {
+//        //Create Employee
+//
+//        Employee newEmployee = new Employee("testName", "hunter2", "employeeZ",911,"testEmail@hotmail.com");
+//        //Add Employee to existing list of employee accounts
+//        //Added to the repository
+//    }
 
-        Employee newEmployee = new Employee("testName", "hunter2", "employeeZ",911,"testEmail@hotmail.com");
-        //Add Employee to existing list of employee accounts
-    }
 
 
 
