@@ -1,74 +1,63 @@
 package com.sept.majorproject.group09.mon.sbbackend.model;
 
-import com.sun.javafx.beans.IDProperty;
 
 import javax.persistence.*;
 
 
-//@Entity
-/*
- * If Entity is commented out, then it cannot be seen within the H2 console/database.
- * Lack of Account within database - good or bad? Cannot interact with it - may be good?
- */
-@Inheritance(strategy = InheritanceType.JOINED)
-public  abstract class Account {
 
+//TODO Is a place holder Place Overwrite
+@Entity
+@Inheritance( strategy = InheritanceType.JOINED)
+public abstract class Account
+{
     @Id
     private String userName;
+    
+
     private String name;
     private String password;
 
     public Account()
-    {}
 
-    public Account(String nameInput, String passwordInput, String userNameInput)
+
+
     {
-        this.name = nameInput;
-        this.password = passwordInput;
-        this.userName = userNameInput;
+
     }
 
-    public void setName(String nameInput)
-    {
-        this.name=nameInput;
+    public Account(String name, String password, String userName) {
+        this.name = name;
+        this.password = password;
+        this.userName = userName;
     }
 
-    public void setPassword(String passwordInput)
-    {
-        this.password = passwordInput;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setUserName(String usernameInput)
-    {
-        this.userName = usernameInput;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getName()
-    {
-        return this.name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getUserName()
-    {
-        return this.userName;
+    public String getName() {
+        return name;
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
 
     //Returns true if the passwords match.
-
-    public boolean checkHashedPassword(String passwordInput)
+    // The password should never be passed up the chain hence the need to check it in the class
+    public boolean checkHashedPassword(String password)
     {
-        boolean passwordMatch = false;
-
-        if(passwordInput.equals(this.password))
-        {
-            passwordMatch = true;
-        }
-
-        return passwordMatch;
+        return this.password == password;
     }
-
-
-
 
 
 

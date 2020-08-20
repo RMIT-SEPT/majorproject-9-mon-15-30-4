@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/majorproject-9-mon-15-30-4.iml" filepath="$PROJECT_DIR$/.idea/majorproject-9-mon-15-30-4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BackEnd/springboot-backend/sb-backend.iml" filepath="$PROJECT_DIR$/BackEnd/springboot-backend/sb-backend.iml" />
     </modules>
   </component>
 </project>

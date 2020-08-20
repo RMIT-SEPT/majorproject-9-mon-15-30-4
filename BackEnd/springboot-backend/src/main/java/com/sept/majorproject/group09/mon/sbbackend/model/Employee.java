@@ -1,9 +1,12 @@
+
 package com.sept.majorproject.group09.mon.sbbackend.model;
 
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.regex.Pattern;
+ ArrayList<WorkingHours> workingHours = new ArrayList<WorkingHours>();
+    ArrayList<Booking> bookings = new ArrayList<Booking>();
 
 @Entity
 public class Employee extends Account{
@@ -94,5 +97,40 @@ public class Employee extends Account{
     {
         this.employeeEmail = emailInput;
     }
+  
+  
+   ArrayList<WorkingHours> workingHours = new ArrayList<WorkingHours>();
+    ArrayList<Booking> bookings = new ArrayList<Booking>();
+   ArrayList getWorkingHours() {
+        return workingHours;
+    }
+
+    ArrayList getBookings() {
+        return bookings;
+    }
+
+    boolean addBooking(Booking bookingToAdd) {
+        return bookings.add(bookingToAdd);
+    }
 
 }
+
+//=======
+//package com.sept.majorproject.group09.mon.sbbackend.model;
+//
+//import javax.persistence.Entity;
+//
+//@Entity
+//public class Employee extends Account
+//{
+//
+//    public Employee()
+//    {
+//
+//    }
+//
+//    public Employee(String name, String password, String userName) {
+//        super(name, password, userName);
+//    }
+//>>>>>>> origin/LoggingAuthenticiation
+
