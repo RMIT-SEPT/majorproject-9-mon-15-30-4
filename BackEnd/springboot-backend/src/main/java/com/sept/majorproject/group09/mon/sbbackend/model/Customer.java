@@ -8,10 +8,6 @@ import javax.persistence.Id;
 
 public class Customer extends Account{
 
-    @Id //This makes customerID the PK in the H2 Database
-    private String customerID;
-
-
     /*
      * Optional - but allows Customer to perform actions
      */

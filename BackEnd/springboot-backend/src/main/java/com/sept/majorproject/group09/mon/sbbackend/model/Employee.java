@@ -11,9 +11,6 @@ import java.util.regex.Pattern;
 @Entity
 public class Employee<WorkingHours> extends Account{
 
-    @Id
-    private String employeeID; //For Database uses
-
     private int employeePhone;
     private String employeeEmail;
 

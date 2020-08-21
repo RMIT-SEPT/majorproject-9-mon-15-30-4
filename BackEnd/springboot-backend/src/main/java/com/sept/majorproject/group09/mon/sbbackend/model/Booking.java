@@ -22,15 +22,15 @@ public class Booking {
     @NotBlank(message = "Must specify a service")
     private long serviceId;
     @NotBlank(message = "Must associate a customer")
-    private long customerId;
+    private String customerId;
     @NotBlank(message = "Must associate a employee")
-    private long employeeId;
+    private String employeeId;
 
     protected Booking() {
 
     }
 
-    public Booking(long id, Date date, int duration, long serviceId, long customerId, long employeeId){
+    public Booking(long id, Date date, int duration, long serviceId, String customerId, String employeeId){
         setId(id);
         setDate(date);
         setDuration(duration);
@@ -71,19 +71,19 @@ public class Booking {
         this.serviceId = serviceId;
     }
 
-    public long getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(long customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
-    public long getEmployeeId() {
+    public String getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(long employeeId) {
+    public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
     }
 }

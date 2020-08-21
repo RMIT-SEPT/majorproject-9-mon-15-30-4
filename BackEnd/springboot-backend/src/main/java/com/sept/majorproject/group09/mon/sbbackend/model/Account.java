@@ -1,13 +1,9 @@
 package com.sept.majorproject.group09.mon.sbbackend.model;
 
-
 import javax.persistence.*;
 
-
-
 //TODO Is a place holder Place Overwrite
-@Entity
-@Inheritance( strategy = InheritanceType.JOINED)
+@MappedSuperclass
 public abstract class Account
 {
     @Id
@@ -17,13 +13,7 @@ public abstract class Account
     private String name;
     private String password;
 
-    public Account()
-
-
-
-    {
-
-    }
+    public Account() { }
 
     public Account(String name, String password, String userName) {
         this.name = name;

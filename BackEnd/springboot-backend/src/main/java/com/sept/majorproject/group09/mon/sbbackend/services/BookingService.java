@@ -1,7 +1,10 @@
 package com.sept.majorproject.group09.mon.sbbackend.services;
 
 import com.sept.majorproject.group09.mon.sbbackend.model.Booking;
+import com.sept.majorproject.group09.mon.sbbackend.model.WorkingHours;
 import com.sept.majorproject.group09.mon.sbbackend.repositories.BookingRepository;
+import com.sept.majorproject.group09.mon.sbbackend.repositories.WorkingHoursRepository;
+import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,20 +23,22 @@ public class BookingService {
         return bookings;
     }
 
-    public List<Booking> getBookingsByEmployee(long employeeId) {
+    public List<Booking> getBookingsByEmployee(String employeeId) {
         List<Booking> bookings = new ArrayList<Booking>();
         bookingRepository.findAllByEmployee(employeeId).forEach(booking -> bookings.add(booking));
         return bookings;
     }
 
-    public List<Booking> getBookingsByService(long serviceId) {
+    public List<Booking> getBookingsByService(String serviceId) {
         List<Booking> bookings = new ArrayList<Booking>();
         bookingRepository.findAllByService(serviceId).forEach(booking -> bookings.add(booking));
         return bookings;
     }
-
-    public List<Date[]> getAvailableTimesByServiceAndEmployee(long serviceId, long employeeId){
+    @Autowired
+    WorkingHoursRepository workingHoursRepository;
+    public List<Date[]> getAvailableTimesByServiceAndEmployee(long serviceId, String employeeId){
         List<Date[]> timeslots = new ArrayList<Date[]>();
+        List<WorkingHours> workingHours = workingHoursRepository.findAllByEmployee(employeeId);
 
         // Get Employee's working hours
         // Deduct already schedule bookings from working hour.
