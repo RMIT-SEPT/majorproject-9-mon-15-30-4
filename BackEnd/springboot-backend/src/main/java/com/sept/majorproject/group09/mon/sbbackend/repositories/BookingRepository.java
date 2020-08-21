@@ -11,9 +11,12 @@ import java.util.List;
 @Repository
 public interface BookingRepository extends CrudRepository<Booking, Long> {
 
-    @Query(value = "SELECT * FROM Booking WHERE employee_id = :employeeId", nativeQuery = true)
+    @Query(value = "SELECT * FROM Booking WHERE employee_id = :employeeId ORDER BY date ASC", nativeQuery = true)
     List<Booking> findAllByEmployee(@Param("employeeId") String employeeId);
 
-    @Query(value = "SELECT * FROM Booking WHERE service_id = :serviceId", nativeQuery = true)
+    @Query(value = "SELECT * FROM Booking WHERE employee_id = :employeeId AND date LIKE ':date%' ORDER BY date ASC", nativeQuery = true)
+    List<Booking> findAllByDateAndEmployee(@Param("employeeId") String employeeId, @Param("date") String date);
+
+    @Query(value = "SELECT * FROM Booking WHERE service_id = :serviceId ORDER BY date ASC", nativeQuery = true)
     List<Booking> findAllByService(@Param("serviceId") String serviceId);
 }

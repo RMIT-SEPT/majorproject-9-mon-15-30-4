@@ -5,7 +5,6 @@ import com.sept.majorproject.group09.mon.sbbackend.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -24,7 +23,7 @@ public class BookingController {
     }
 
     @GetMapping("/bookings/available/{serviceId}/{employeeId}")
-    private List<Date[]> getAvailableTimes(@PathVariable("serviceId") long serviceId,
+    private List<int[]> getAvailableTimes(@PathVariable("serviceId") long serviceId,
                                            @PathVariable("employeeId") String employeeId) {
         return bookingService.getAvailableTimesByServiceAndEmployee(serviceId, employeeId);
     }

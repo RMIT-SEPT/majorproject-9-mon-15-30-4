@@ -1,8 +1,6 @@
 package com.sept.majorproject.group09.mon.sbbackend.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sun.xml.internal.ws.api.pipe.FiberContextSwitchInterceptor;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +24,7 @@ public class WorkingHours {
         return id;
     }
 
-    enum DayOfWeek {
+    public enum DayOfWeek {
         MONDAY,
         TUESDAY,
         WEDNESDAY,

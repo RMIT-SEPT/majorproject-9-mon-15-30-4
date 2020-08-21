@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface WorkingHoursRepository extends CrudRepository<WorkingHours, Long> {
 
-    @Query(value = "SELECT * FROM Working_Hours WHERE employee_id = :employeeId", nativeQuery = true)
+    @Query(value = "SELECT * FROM Working_Hours WHERE employee_id = :employeeId ORDER BY date ASC", nativeQuery = true)
     List<WorkingHours> findAllByEmployee(@Param("employeeId") String employeeId);
 
 }
