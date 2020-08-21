@@ -1,4 +1,4 @@
-package com.sept.majorproject.group09.mon.sbbackend.repository;
+package com.sept.majorproject.group09.mon.sbbackend.repositories;
 
 import com.sept.majorproject.group09.mon.sbbackend.model.Account;
 
