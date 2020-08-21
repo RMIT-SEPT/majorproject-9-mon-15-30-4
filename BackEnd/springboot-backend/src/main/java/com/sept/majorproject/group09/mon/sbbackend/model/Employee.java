@@ -2,14 +2,14 @@
 package com.sept.majorproject.group09.mon.sbbackend.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.lang.reflect.Array;
 import java.util.regex.Pattern;
- ArrayList<WorkingHours> workingHours = new ArrayList<WorkingHours>();
-    ArrayList<Booking> bookings = new ArrayList<Booking>();
+
 
 @Entity
-public class Employee extends Account{
+public class Employee<WorkingHours> extends Account{
 
     @Id
     private String employeeID; //For Database uses
@@ -18,8 +18,11 @@ public class Employee extends Account{
     private String employeeEmail;
 
 
+    @Transient
+    ArrayList<WorkingHours> workingHours = new ArrayList<WorkingHours>();
 
-
+    @Transient
+    ArrayList<Booking> bookings = new ArrayList<Booking>();
 
 
     // --- CONSTRUCTORS
@@ -99,9 +102,8 @@ public class Employee extends Account{
     }
   
   
-   ArrayList<WorkingHours> workingHours = new ArrayList<WorkingHours>();
-    ArrayList<Booking> bookings = new ArrayList<Booking>();
-   ArrayList getWorkingHours() {
+
+    ArrayList getWorkingHours() {
         return workingHours;
     }
 
