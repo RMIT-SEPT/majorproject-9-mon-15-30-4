@@ -1,3 +1,5 @@
+package com.sept.majorproject.group09.mon.sbbackend.model;
+
 import com.sun.xml.internal.ws.api.pipe.FiberContextSwitchInterceptor;
 
 import java.util.Date;
