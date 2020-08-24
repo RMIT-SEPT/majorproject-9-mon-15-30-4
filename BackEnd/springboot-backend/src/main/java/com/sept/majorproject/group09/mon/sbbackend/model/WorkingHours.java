@@ -35,7 +35,7 @@ public class WorkingHours {
     }
 
     private double startTime, endTime;
-    @JsonFormat(pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ") //E.g. 2020-08-17@08:30:00.000+0000
+    @JsonFormat(pattern = "yyyy-MM-dd") //E.g. 2020-08-17
     private Date date;
     private DayOfWeek day;
     public WorkingHours(String employeeId, double startTime, double endTime, Date date, DayOfWeek day){

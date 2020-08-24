@@ -22,10 +22,9 @@ public class BookingController {
         return bookingService.getBookingsByEmployee(id);
     }
 
-    @GetMapping("/bookings/available/{serviceId}/{employeeId}")
-    private List<int[]> getAvailableTimes(@PathVariable("serviceId") long serviceId,
-                                           @PathVariable("employeeId") String employeeId) {
-        return bookingService.getAvailableTimesByServiceAndEmployee(serviceId, employeeId);
+    @GetMapping("/bookings/available/{employeeId}")
+    private List<int[]> getAvailableTimes(@PathVariable("employeeId") String employeeId) {
+        return bookingService.getAvailableTimesByEmployee(employeeId);
     }
 
     @PostMapping("/bookings")
