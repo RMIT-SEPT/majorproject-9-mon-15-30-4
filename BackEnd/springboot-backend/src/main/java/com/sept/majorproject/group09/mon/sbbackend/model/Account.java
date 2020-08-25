@@ -2,7 +2,7 @@ package com.sept.majorproject.group09.mon.sbbackend.model;
 
 import javax.persistence.*;
 
-//TODO Is a place holder Place Overwrite
+
 @MappedSuperclass
 public abstract class Account
 {
