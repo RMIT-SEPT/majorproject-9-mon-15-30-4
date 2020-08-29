@@ -10,16 +10,17 @@ import java.util.List;
 
 
 @RestController
+@RequestMapping("/api/working_hours")
 public class WorkingHoursController {
     @Autowired
     WorkingHoursService workingHoursService;
 
-    @GetMapping("/working_hours")
+    @GetMapping("all")
     private List<WorkingHours> getAllWorkingHours() {
         return workingHoursService.getAllWorkingHours();
     }
 
-    @PostMapping("/working_hours")
+    @PostMapping("")
     private long saveWorkingHours(@RequestBody WorkingHours workingHours) {
         workingHoursService.saveOrUpdate(workingHours);
         return workingHours.getId();

@@ -8,21 +8,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/services")
 public class ServiceController {
     @Autowired
     ServiceService serviceService;
 
-    @GetMapping("/services")
+    @GetMapping("/all")
     private List<Service> getAllServices() {
         return serviceService.getAllServices();
     }
 
-    @GetMapping("/services/{id}")
+    @GetMapping("/{id}")
     private Service getService(@PathVariable("id") long id) {
         return serviceService.getServiceById(id);
     }
 
-    @PostMapping("/services")
+    @PostMapping("")
     private long saveService(@RequestBody Service service) {
         serviceService.saveOrUpdate(service);
         return service.getId();
