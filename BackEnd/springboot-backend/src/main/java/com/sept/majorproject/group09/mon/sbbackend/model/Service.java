@@ -32,6 +32,12 @@ public class Service {
         setDescription(description);
     }
 
+    public Service(String name, int duration, String description){
+        setName(name);
+        setDuration(duration);
+        setDescription(description);
+    }
+
     public long getId() {
         return id;
     }

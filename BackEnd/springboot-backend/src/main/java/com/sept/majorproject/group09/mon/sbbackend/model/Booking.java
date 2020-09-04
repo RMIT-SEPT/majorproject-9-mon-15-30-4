@@ -14,11 +14,6 @@ public class Booking {
     @NotBlank
     @JsonFormat(pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ") //E.g. 2020-08-17@08:30:00.000+0000
     private Date date;
-    @NotBlank
-    @Min(value = 20, message = "Duration must be at least 10 minutes")
-    @Max(value = 360, message = "Duration must not exceed 6 hours (360 minutes)")
-    //This may become redundant depending on design choices i.e. duration could be fetched via service
-    private int duration;
     @NotBlank(message = "Must specify a service")
     private long serviceId;
     @NotBlank(message = "Must associate a customer")
@@ -30,10 +25,16 @@ public class Booking {
 
     }
 
-    public Booking(long id, Date date, int duration, long serviceId, String customerId, String employeeId){
+    public Booking(long id, Date date, long serviceId, String customerId, String employeeId){
         setId(id);
         setDate(date);
-        setDuration(duration);
+        setServiceId(serviceId);
+        setCustomerId(customerId);
+        setEmployeeId(employeeId);
+    }
+
+    public Booking(Date date, long serviceId, String customerId, String employeeId) {
+        setDate(date);
         setServiceId(serviceId);
         setCustomerId(customerId);
         setEmployeeId(employeeId);
@@ -53,14 +54,6 @@ public class Booking {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
     }
 
     public long getServiceId() {
