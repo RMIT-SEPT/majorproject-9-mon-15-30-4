@@ -11,9 +11,6 @@ public class LoggingInController
     @Autowired
     CustomerService customerService;
 
-
-
-
     //Method assumes password is hashed
     public boolean authenticateUser(String userName, String password)
     {
