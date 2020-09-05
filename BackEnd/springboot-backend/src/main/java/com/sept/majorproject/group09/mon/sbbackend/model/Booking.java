@@ -40,6 +40,11 @@ public class Booking {
         setEmployeeId(employeeId);
     }
 
+    public Booking(Date date, long serviceId) {
+        setDate(date);
+        setServiceId(serviceId);
+    }
+
     public long getId() {
         return id;
     }

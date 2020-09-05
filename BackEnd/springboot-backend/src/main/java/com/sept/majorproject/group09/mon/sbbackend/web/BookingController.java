@@ -29,6 +29,13 @@ public class BookingController {
         return bookingService.getAvailableTimesByEmployee(employeeId);
     }
 
+    @GetMapping("/available/time/{date}/{serviceId}/{employeeId}")
+    private boolean getAvailableTimes(@PathVariable("date") String date,
+                                      @PathVariable("serviceId") long serviceId,
+                                      @PathVariable("employeeId") String employeeId) {
+        return bookingService.slotAvailable(date, serviceId, employeeId);
+    }
+
     @PostMapping("")
     private long saveBooking(@RequestBody Booking booking) {
         bookingService.saveOrUpdate(booking);

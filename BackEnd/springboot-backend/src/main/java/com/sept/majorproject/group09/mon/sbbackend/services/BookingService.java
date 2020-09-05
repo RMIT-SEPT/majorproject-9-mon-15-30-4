@@ -137,6 +137,43 @@ public class BookingService {
         return timeslots; // [DAY, YEAR, MONTH, DAY_OF_MONTH, START_HOUR, START_MINUTE, END_HOUR, END_MINUTE]
     }
 
+    public boolean slotAvailable(String dateString, long serviceId, String employeeId) {
+        Calendar check = Calendar.getInstance();
+        String tokens[] = dateString.split("-|@|:");
+
+        check.set(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]) - 1,
+                Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]),
+                Integer.parseInt(tokens[4]));
+        Booking checkBooking = new Booking(check.getTime(), serviceId);
+        List<int[]> timeslots = getAvailableTimesByEmployee(employeeId);
+        Calendar timeFrame = Calendar.getInstance();
+
+        int duration = serviceRepository.findById(checkBooking.getServiceId()).get().getDuration();
+
+        for (int timeslot = 0; timeslot < timeslots.size(); timeslot++) {
+            timeFrame.setTime(checkBooking.getDate());
+
+            // If booking starts on or after timeslot start.
+            if (timeFrame.get(Calendar.YEAR) == timeslots.get(timeslot)[YEAR]
+                    && (timeFrame.get(Calendar.MONTH) + 1) == timeslots.get(timeslot)[MONTH]
+                    && timeFrame.get(Calendar.DAY_OF_MONTH) == timeslots.get(timeslot)[DAY_OF_MONTH]
+                    && (timeFrame.get(Calendar.HOUR_OF_DAY) > timeslots.get(timeslot)[START_HOUR]
+                    || (timeFrame.get(Calendar.HOUR_OF_DAY) == timeslots.get(timeslot)[START_HOUR]
+                    && timeFrame.get(Calendar.MINUTE) >= timeslots.get(timeslot)[START_MINUTE]))) {
+                timeFrame.add(Calendar.MINUTE, duration);
+
+                // If booking ends on or before timeslot end.
+                if (timeFrame.get(Calendar.HOUR_OF_DAY) < timeslots.get(timeslot)[END_HOUR]
+                        || (timeFrame.get(Calendar.HOUR_OF_DAY) == timeslots.get(timeslot)[END_HOUR]
+                        && timeFrame.get(Calendar.MINUTE) <= timeslots.get(timeslot)[END_MINUTE])) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public void saveOrUpdate(Booking booking) {
         System.out.println(booking.getDate());
         bookingRepository.save(booking);

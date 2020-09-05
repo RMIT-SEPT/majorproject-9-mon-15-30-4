@@ -25,6 +25,7 @@ public class SbBackendApplication {
                 registry.addMapping("/api/bookings/all").allowedOrigins("http://localhost:3000");
                 registry.addMapping("/api/bookings").allowedOrigins("http://localhost:3000");
                 registry.addMapping("/api/bookings/available/{employeeId}").allowedOrigins("http://localhost:3000");
+                registry.addMapping("/api/bookings/available/time/{date}/{serviceId}/{employeeId}").allowedOrigins("http://localhost:3000");
                 registry.addMapping("/api/services/all").allowedOrigins("http://localhost:3000");
                 registry.addMapping("/api/services/{id}").allowedOrigins("http://localhost:3000");
                 registry.addMapping("/api/services/name/{name}").allowedOrigins("http://localhost:3000");
