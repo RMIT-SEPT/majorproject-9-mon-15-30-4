@@ -12,7 +12,10 @@ import java.util.List;
 @Repository
 public interface ServiceRepository extends CrudRepository<Service, Long> {
 
-    @Query(value = "SELECT * FROM Service WHERE employee_id = :employeeId ORDER BY date ASC", nativeQuery = true)
+    @Query(value = "SELECT * FROM Service WHERE employee_id = :employeeId", nativeQuery = true)
     List<Service> findAllByEmployee(@Param("employeeId") String employeeId);
+
+    @Query(value = "SELECT * FROM Service WHERE name = :name", nativeQuery = true)
+    List<Service> findAllByName(@Param("name") String name);
 
 }

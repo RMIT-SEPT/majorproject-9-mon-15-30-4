@@ -18,7 +18,7 @@ public interface EmployeeRepository extends AccountRepository{
     Iterable<Account> findAllById(Iterable<String> iterable);
 
     //Query to retrieve data from Employee username
-    @Query(value = "SELECT * From EMPLOYEE WHERE userName = :userName", nativeQuery = true)
+    @Query(value = "SELECT * From EMPLOYEE WHERE USER_NAME = :userName", nativeQuery = true)
     List<Employee> employeeUsername(@Param("userName") String userName);
 
 

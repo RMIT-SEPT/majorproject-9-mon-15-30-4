@@ -30,6 +30,11 @@ public class ServiceController {
         return serviceService.getServicesByEmployee(id);
     }
 
+    @GetMapping("/name/{name}")
+    private List<Service> getServicesByName(@PathVariable("name") String name) {
+        return serviceService.getServicesByName(name);
+    }
+
     @PostMapping("")
     private long saveService(@RequestBody Service service) {
         serviceService.saveOrUpdate(service);

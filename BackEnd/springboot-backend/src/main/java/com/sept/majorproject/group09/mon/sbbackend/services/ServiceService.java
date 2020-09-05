@@ -29,6 +29,12 @@ public class ServiceService {
         return services;
     }
 
+    public List<Service> getServicesByName(String name) {
+        List<Service> services = new ArrayList<>();
+        serviceRepository.findAllByName(name).forEach(service -> services.add(service));
+        return services;
+    }
+
     public void saveOrUpdate(Service service) {
         serviceRepository.save(service);
     }

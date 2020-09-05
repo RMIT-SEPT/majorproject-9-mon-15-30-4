@@ -21,7 +21,7 @@ public class EmployeeLoader implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
         this.repository.save(new Employee("Jim", "1234", "1", "Jim@mail.com"));
-        this.repository.save(new Employee("Frank", "1234", "Frank", "Frank@mail.com"));
+        this.repository.save(new Employee("Frank", "1234", "2", "Frank@mail.com"));
         this.repository.save(new Employee("Bill", "1234", "Bilbo", "Bilbo@mail.com"));
     }
 }
