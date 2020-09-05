@@ -19,7 +19,7 @@ public class SbBackendApplication {
 
         AccountRepository customerRepository = configurableApplicationContext.getBean(CustomerRepository.class);
         
-        new Customer("Name", "Password", "Username", "Email", 0404);
+        customerRepository.save(new Customer("Name", "Password", "Username", "Email", 0404));
     }
 
 }
