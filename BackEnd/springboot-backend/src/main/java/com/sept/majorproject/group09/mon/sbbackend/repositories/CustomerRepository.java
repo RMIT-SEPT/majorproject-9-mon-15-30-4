@@ -20,7 +20,7 @@ public interface CustomerRepository extends AccountRepository
     @Override
     Iterable<Account> findAllById(Iterable<String> iterable);
 
-    @Query(value = "SELECT * From CUSTOMER WHERE userName = :userName", nativeQuery = true)
+    @Query(value = "SELECT * From CUSTOMER WHERE USER_NAME = :userName", nativeQuery = true)
     List<Customer> customerUsername(@Param("userName") String userName);
 
 

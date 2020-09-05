@@ -13,9 +13,9 @@ public interface AccountRepository extends CrudRepository<Account, String> {
 
     abstract Iterable<Account> findAllById(Iterable<String> iterable);
 
-    @Query(value = "SELECT * from ACCOUNT WHERE userName = :userName", nativeQuery = true)
+    @Query(value = "SELECT * from ACCOUNT WHERE USER_NAME = :userName", nativeQuery = true)
     List<Account> accountByUsername(@Param("userName") String userName);
 
-    @Query(value = "SELECT password from ACCOUNT WHERE userName = :userName", nativeQuery = true)
+    @Query(value = "SELECT password from ACCOUNT WHERE USER_NAME = :userName", nativeQuery = true)
     List<String> passwordByUserName(@Param("userName") String userNAme);
 }

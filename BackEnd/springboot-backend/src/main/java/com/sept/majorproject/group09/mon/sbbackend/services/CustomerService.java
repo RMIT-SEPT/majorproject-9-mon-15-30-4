@@ -22,7 +22,15 @@ public class CustomerService {
 
         public Customer getCustomerByUsername(String userName)
         {
-            return customerRepository.customerUsername(userName).get(0);
+        	
+        	try
+        	{
+        		return customerRepository.customerUsername(userName).get(0);
+        	}
+            catch(IndexOutOfBoundsException e)
+            {
+            	return null;
+            }
         }
 
 

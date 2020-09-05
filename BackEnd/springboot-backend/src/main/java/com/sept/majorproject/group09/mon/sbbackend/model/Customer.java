@@ -13,7 +13,7 @@ public class Customer extends Account{
      */
     private int contactNumber;
     private String contactHomeAddress;
-    private String contactEmail;
+    private String contactEmail = "NO EMAIL";
 
     /** CONSTRUCTORS
      *

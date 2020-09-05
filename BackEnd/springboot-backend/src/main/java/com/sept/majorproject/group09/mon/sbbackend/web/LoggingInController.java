@@ -24,7 +24,7 @@ public class LoggingInController
 
     //Method assumes password is hashed
     @GetMapping("/authentication/{userName}/{password}")
-    public ResponseEntity<Account> authenticateUser(@PathVariable("username") String userName, @PathVariable("password") String password)
+    public ResponseEntity<Account> authenticateUser(@PathVariable("userName") String userName, @PathVariable("password") String password)
     {
         loggedInAccount = customerService.getCustomerByUsername(userName);
         
@@ -73,15 +73,15 @@ public class LoggingInController
     }
     
     @GetMapping("/loggedIn")
-    public ResponseEntity<Account> isLoggedIn()
+    public ResponseEntity<Boolean> isLoggedIn()
     {
     	if(loggedInAccount != null)
     	{
-    		return new ResponseEntity<>(loggedInAccount, HttpStatus.OK);
+    		return new ResponseEntity<>(true, HttpStatus.OK);
     	}
     	else
     	{
-    		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    		return new ResponseEntity<>(false, HttpStatus.OK);
     	}
     	
     }

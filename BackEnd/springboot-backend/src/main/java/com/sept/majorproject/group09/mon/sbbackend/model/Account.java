@@ -46,7 +46,7 @@ public abstract class Account
     // The password should never be passed up the chain hence the need to check it in the class
     public boolean checkHashedPassword(String password)
     {
-        return this.password == password;
+        return this.password.matches(password);
     }
 
 
