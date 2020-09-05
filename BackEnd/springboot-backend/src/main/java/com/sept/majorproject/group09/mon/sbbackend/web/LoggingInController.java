@@ -24,7 +24,7 @@ public class LoggingInController
 
     //Method assumes password is hashed
     @GetMapping("/authentication/{userName}/{password}")
-    public ResponseEntity<HttpStatus> authenticateUser(@PathVariable("username") String userName, @PathVariable("password") String password)
+    public ResponseEntity<Account> authenticateUser(@PathVariable("username") String userName, @PathVariable("password") String password)
     {
         loggedInAccount = customerService.getCustomerByUsername(userName);
         
@@ -35,7 +35,7 @@ public class LoggingInController
 
         if(loggedInAccount.checkHashedPassword(password)) 
         {
-        	return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        	return new ResponseEntity<>(loggedInAccount, HttpStatus.OK);
         }
         else
         {
@@ -46,7 +46,7 @@ public class LoggingInController
     
     Account account = null;
     @GetMapping("/findUserByName/{userName}")
-    public ResponseEntity<HttpStatus> getUserByName(@PathVariable("userName") String userName)
+    public ResponseEntity<Account> getUserByName(@PathVariable("userName") String userName)
     {
     	account = customerService.getCustomerByUsername(userName);
     	if(account == null)
@@ -55,16 +55,16 @@ public class LoggingInController
     	}
     	else
     	{
-    		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    		return new ResponseEntity<>(loggedInAccount, HttpStatus.OK);
     	}
     }
     
     @GetMapping("/checkPassword/{password}")
-    public ResponseEntity<HttpStatus> checkPassword(@PathVariable("password") String password)
+    public ResponseEntity<Account> checkPassword(@PathVariable("password") String password)
     {
     	if(account.checkHashedPassword(password))
     	{
-    		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    		return new ResponseEntity<>(loggedInAccount, HttpStatus.OK);
     	}
     	else
     	{
@@ -73,11 +73,11 @@ public class LoggingInController
     }
     
     @GetMapping("/loggedIn")
-    public ResponseEntity<HttpStatus> isLoggedIn()
+    public ResponseEntity<Account> isLoggedIn()
     {
     	if(loggedInAccount != null)
     	{
-    		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    		return new ResponseEntity<>(loggedInAccount, HttpStatus.OK);
     	}
     	else
     	{
