@@ -5,8 +5,12 @@ class BookingDataService {
         return http.get("/bookings/all");
     }
 
+    getByEmployee(id) {
+        return http.get("/bookings/available/" + id);
+    }
+
     create(data){
-        return http.get("/bookings")
+        return http.post("/bookings")
     }
 }
 export default new BookingDataService();
