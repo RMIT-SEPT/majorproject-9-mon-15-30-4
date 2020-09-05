@@ -21,7 +21,9 @@ class AddBooking extends Component {
             servicePlaceholder: "Select a service.",
             employeePlaceholder: "Select a employee.",
             serviceSelected: false,
-            employeeSelected: false
+            employeeSelected: false,
+            dateSelected: false,
+            timeSelected: false
         };
 
         this.updateBookingFields = this.updateBookingFields.bind(this);
@@ -50,9 +52,7 @@ class AddBooking extends Component {
                     }).catch(e => {
                             console.log(e);
                     });
-
                 }
-
             })
             .catch(e => {
                 console.log(e);
@@ -89,6 +89,11 @@ class AddBooking extends Component {
           this.setState({employees: []});
           this.setState({serviceSelected: false});
       }
+
+      if(e.target.name === "date")
+          this.setState({dateSelected: true});
+      if(e.target.name === "time")
+        this.setState({timeSelected: true});
     }
 
     updateEmployees(name){
@@ -114,18 +119,20 @@ class AddBooking extends Component {
 
     onSubmit(e){
         e.preventDefault();
-        const newBooking = {
-            date: this.state.date,
-            time: this.state.time,
-            serviceId: this.state.serviceId.split("#")[1],
-            employeeId: this.state.employeeId.split("#")[1]
-        }
-        console.log(newBooking);
-        bookingService.create(newBooking)
-            .then(response => {
-                console.log(response);
-            })
-        .catch(e => {
+        // "2020-08-17@08:30:00.000+1000"
+        servicesService.getByEmployeeAndName(
+            this.state.employeeId.split("#")[1],
+            this.state.serviceId).then(response => {
+                console.log(this.state.date);
+                console.log();
+                const newBooking = {
+                    customerId: "1",
+                    date: this.state.date + "@" + this.state.time + ":00.000+1000",
+                    serviceId: response["data"]["id"],
+                    employeeId: this.state.employeeId.split("#")[1]
+                }
+                bookingService.create(newBooking);
+        }).catch(e => {
             console.log(e);
         });
     }
@@ -135,13 +142,14 @@ class AddBooking extends Component {
     };
 
     formatAvailableTimes(){
-        let formattedString = <div><h3>Available Times:</h3></div>;
-        // for (const element of this.state.availableTimes) {
-        //     console.log(element);
-        //     // 0,2020,8,17,8,30,10,30
-        //     formattedString += <h5>Day: {element[0].value}, {element[3]}/{element[2]}/{element[1]},
-        //         {element[4]}:{element[5]} - {element[6]}:{element[7]}</h5>;
-        // }
+        let formattedString = "Available Times: \n";
+        for (const element of this.state.availableTimes) {
+            console.log(element);
+            // 0,2020,8,17,8,30,10,30
+            formattedString += element[3] + "/" + element[2] + "/" + element[1] + ", "
+                + element[4] + ":" + element[5] + " - " + element[6] + ":" + element[7]
+                + "\n";
+        }
         return formattedString;
     }
 
@@ -195,13 +203,16 @@ class AddBooking extends Component {
                                     <input type="time" className="form-control form-control-lg"
                                            name="time"
                                            value= {this.state.time}
+                                           step="900"
                                            onChange = {this.onChange}
                                            disabled={!this.state.employeeSelected}
                                     />
                                 </div>
-                                <input type="submit" className="btn btn-primary btn-block mt-4" />
+                                <input type="submit" className="btn btn-primary btn-block mt-4"
+                                disabled={!this.state.serviceSelected || !this.state.employeeSelected
+                                    || !this.state.dateSelected || !this.state.timeSelected}/>
                             </form>
-                            {availableTimes}
+                            <pre>{availableTimes}</pre>
                         </div>
                     </div>
                 </div>

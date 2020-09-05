@@ -13,5 +13,9 @@ class ServiceDataService {
         return http.get("/services/name/" + name);
     }
 
+    getByEmployeeAndName(id, name) {
+        return http.get("/services/fetch/" + id + "/" +name);
+    }
+
 }
 export default new ServiceDataService();

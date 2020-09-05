@@ -1,4 +1,5 @@
 import http from "./httpCommon";
+import axios from "axios";
 
 class BookingDataService {
     getAll() {
@@ -10,7 +11,13 @@ class BookingDataService {
     }
 
     create(data){
-        return http.post("/bookings")
+        axios({
+            method: 'post',
+            url: "http://localhost:8080/api/bookings",
+            data: data
+        }).catch(e => {
+            console.log(e);
+        });
     }
 }
 export default new BookingDataService();
