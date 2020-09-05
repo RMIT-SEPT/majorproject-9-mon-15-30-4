@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import LoginButton from '../Login/LoginButton'
+import RegisterButton from '../Register/RegisterButton'
 
 
 class Header extends Component {
@@ -26,13 +27,12 @@ class Header extends Component {
     
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-                            <a className="nav-link " href="register.html">
-                                Sign Up
-                            </a>
+                            <RegisterButton/>
                         </li>
                         <li className="nav-item">
                             <LoginButton/>
                         </li>
+                        
                     </ul>
                 </div>
             </div>

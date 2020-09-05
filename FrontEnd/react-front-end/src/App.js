@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from './componets/Layout/Header';
 import {BrowserRouter as Router, Route} from "react-router-dom"
 import Login from './componets/Login/Login';
+import Register from './componets/Register/Register';
 
 // import {Provider} from "react-redux";
 // import store from "./store";
@@ -17,6 +18,7 @@ function App() {
       <div>
         <Header/>
         <Route exact path="/login" component = { Login } />
+        <Route exact path = "/register" component = {Register}/>
       </div>
     </Router>
 
