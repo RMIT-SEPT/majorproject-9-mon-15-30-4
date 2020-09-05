@@ -6,6 +6,7 @@ import com.sept.majorproject.group09.mon.sbbackend.services.WorkingHoursService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,5 +25,10 @@ public class WorkingHoursController {
     private long saveWorkingHours(@RequestBody WorkingHours workingHours) {
         workingHoursService.saveOrUpdate(workingHours);
         return workingHours.getId();
+    }
+
+    @GetMapping("/{id}")
+    public List<WorkingHours> getWorkingHoursByEmployee(@PathVariable("id") String id) {
+        return workingHoursService.getWorkingHoursByEmployee(id);
     }
 }

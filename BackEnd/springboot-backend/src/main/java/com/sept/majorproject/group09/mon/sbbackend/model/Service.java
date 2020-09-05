@@ -21,21 +21,25 @@ public class Service {
     @Max(value = 360, message = "Duration must not exceed 6 hours (360 minutes)")
     private int duration;
     private String description;
+    @NotBlank(message = "Must associate a employee")
+    private String employeeId;
 
     protected Service() {
     }
 
-    public Service(long id, String name, int duration, String description){
+    public Service(long id, String name, int duration, String description, String employeeId){
         setId(id);
         setName(name);
         setDuration(duration);
         setDescription(description);
+        setEmployeeId(employeeId);
     }
 
-    public Service(String name, int duration, String description){
+    public Service(String name, int duration, String description, String employeeId){
         setName(name);
         setDuration(duration);
         setDescription(description);
+        setEmployeeId(employeeId);
     }
 
     public long getId() {
@@ -68,5 +72,13 @@ public class Service {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
     }
 }

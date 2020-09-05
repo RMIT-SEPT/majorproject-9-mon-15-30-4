@@ -1,5 +1,6 @@
 package com.sept.majorproject.group09.mon.sbbackend.web;
 
+import com.sept.majorproject.group09.mon.sbbackend.model.Booking;
 import com.sept.majorproject.group09.mon.sbbackend.model.Service;
 import com.sept.majorproject.group09.mon.sbbackend.services.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/services")
 public class ServiceController {
     @Autowired
@@ -21,6 +23,11 @@ public class ServiceController {
     @GetMapping("/{id}")
     private Service getService(@PathVariable("id") long id) {
         return serviceService.getServiceById(id);
+    }
+
+    @GetMapping("/employee/{id}")
+    private List<Service> getServicesByEmployee(@PathVariable("id") String id) {
+        return serviceService.getServicesByEmployee(id);
     }
 
     @PostMapping("")

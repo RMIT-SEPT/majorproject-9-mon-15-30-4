@@ -26,7 +26,7 @@ public class BookingService {
         return bookings;
     }
 
-    public List<Booking> getBookingsByService(String serviceId) {
+    public List<Booking> getBookingsByService(long serviceId) {
         List<Booking> bookings = new ArrayList<>();
         bookingRepository.findAllByService(serviceId).forEach(booking -> bookings.add(booking));
         return bookings;

@@ -18,10 +18,10 @@ public class ServiceLoader implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-        this.repository.save(new Service("Medical", 120, "Full Medical"));
-        this.repository.save(new Service("Medical", 60, "Full Medical Extended"));
-        this.repository.save(new Service("Eye Test", 20, "Annual Checkup"));
-        this.repository.save(new Service("X-Ray", 90, "Fracture Checkup"));
-        this.repository.save(new Service("Physical Therapy", 30, "Mobility Training"));
+        this.repository.save(new Service("Medical", 60, "Full Medical", "1"));
+        this.repository.save(new Service("Medical", 120, "Full Medical Extended", "1"));
+        this.repository.save(new Service("Eye Test", 20, "Annual Checkup", "1"));
+        this.repository.save(new Service("X-Ray", 90, "Fracture Checkup", "2"));
+        this.repository.save(new Service("Physical Therapy", 30, "Mobility Training", "2"));
     }
 }
