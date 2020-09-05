@@ -164,6 +164,7 @@ class AddBooking extends Component {
         this.setState({employeeSelected: false});
         this.setState({dateSelected: false});
         this.setState({timeSelected: false});
+        this.setState({availableTimes: []});
     }
 
     makeOption = function (X) {
