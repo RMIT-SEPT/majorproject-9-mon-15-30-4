@@ -2,6 +2,7 @@ package com.sept.majorproject.group09.mon.sbbackend.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 @MappedSuperclass
@@ -13,11 +14,11 @@ public abstract class Account
     private String userName;
 
     @NotBlank(message = "The individual's name MUST be entered")
-    @Column(nullable = false)
+    @NotNull
     private String name;
 
     @NotBlank(message = "The individual's password MUST be entered")
-    @Column(nullable = false) //A Springboot validator command, that prompts back-end errors if individual leaves password blank
+    @NotNull
     private String password;
 
     public Account() { }
