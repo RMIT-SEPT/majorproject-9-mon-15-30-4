@@ -83,6 +83,9 @@ class AddBooking extends Component {
                 });
             }
 
+        if(e.target.name === "employeeId")
+            this.setState({availableTimes: []});
+
         if (e.target.value === this.state.employeePlaceholder)
             this.setState({employeeSelected: false});
 
