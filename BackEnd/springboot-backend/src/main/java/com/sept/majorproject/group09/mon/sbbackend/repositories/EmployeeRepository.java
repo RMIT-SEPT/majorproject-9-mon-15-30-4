@@ -17,9 +17,6 @@ public interface EmployeeRepository extends AccountRepository{
      */
     Iterable<Account> findAllById(Iterable<String> iterable);
 
-    @Query(value = "SELECT * FROM Working_Hours WHERE employee_id = :employeeId ORDER BY date ASC", nativeQuery = true)
-    List<Employee> findAllByEmployee(@Param("employeeId") String employeeId);
-
     //Query to retrieve data from Employee username
     @Query(value = "SELECT * From EMPLOYEE WHERE userName = :userName", nativeQuery = true)
     List<Employee> employeeUsername(@Param("userName") String userName);
