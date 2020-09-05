@@ -126,8 +126,8 @@ class AddBooking extends Component {
     }
 
     onSubmit(e) {
+        let submit = false;
         e.preventDefault();
-        // "2020-08-17@08:30:00.000+1000"
         servicesService.getByEmployeeAndName(
             this.state.employeeId.split("#")[1],
             this.state.serviceId).then(response => {
@@ -137,10 +137,33 @@ class AddBooking extends Component {
                 serviceId: response["data"]["id"],
                 employeeId: this.state.employeeId.split("#")[1]
             }
-            bookingService.create(newBooking);
+            submit = this.confirmTimeslot(newBooking.date, newBooking.serviceId,
+                newBooking.employeeId).then(response => {
+                if(response["data"]) {
+                    bookingService.create(newBooking);
+                    this.resetForm();
+                }
+            }).catch(e => {
+                console.log(e);
+            });
         }).catch(e => {
             console.log(e);
         });
+    }
+
+    confirmTimeslot(date, serviceId, employeeId){
+        return bookingService.checkAvailable(date, serviceId, employeeId);
+    }
+
+    resetForm(){
+        this.setState({serviceId: ""});
+        this.setState({employeeId: ""});
+        this.setState({date: ""});
+        this.setState({time: ""});
+        this.setState({serviceSelected: false});
+        this.setState({employeeSelected: false});
+        this.setState({dateSelected: false});
+        this.setState({timeSelected: false});
     }
 
     makeOption = function (X) {

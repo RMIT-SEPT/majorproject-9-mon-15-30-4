@@ -19,5 +19,11 @@ class BookingDataService {
             console.log(e);
         });
     }
+
+    checkAvailable(date, serviceId, employeeId) {
+        return http.get("/bookings/available/time/" + date +
+            "/" + serviceId + "/" + employeeId);
+    }
+
 }
 export default new BookingDataService();
