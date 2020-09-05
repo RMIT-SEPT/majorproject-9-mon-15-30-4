@@ -35,6 +35,12 @@ public class ServiceController {
         return serviceService.getServicesByName(name);
     }
 
+    @GetMapping("/fetch/{employeeId}/{name}")
+    private Service getServicesByEmployeeAndName(@PathVariable("employeeId") String employeeId,
+                                                 @PathVariable("name") String name) {
+        return serviceService.getServicesByEmployeeAndName(employeeId, name);
+    }
+
     @PostMapping("")
     private long saveService(@RequestBody Service service) {
         serviceService.saveOrUpdate(service);

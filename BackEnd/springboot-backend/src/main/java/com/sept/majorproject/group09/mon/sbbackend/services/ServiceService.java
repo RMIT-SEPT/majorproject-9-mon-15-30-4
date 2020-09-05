@@ -35,6 +35,10 @@ public class ServiceService {
         return services;
     }
 
+    public Service getServicesByEmployeeAndName(String id, String name) {
+        return serviceRepository.findAllByEmployeeAndName(id, name);
+    }
+
     public void saveOrUpdate(Service service) {
         serviceRepository.save(service);
     }
