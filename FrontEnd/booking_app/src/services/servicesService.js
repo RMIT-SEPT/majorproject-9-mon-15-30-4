@@ -8,5 +8,10 @@ class ServiceDataService {
     getById(id) {
         return http.get("/services/" + id); // Placeholder
     }
+
+    getByName(name) {
+        return http.get("/services/name/" + name);
+    }
+
 }
 export default new ServiceDataService();

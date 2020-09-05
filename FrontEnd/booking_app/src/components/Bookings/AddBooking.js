@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import bookingService from "../../services/bookingService";
 import servicesService from "../../services/servicesService";
 import workingHoursService from "../../services/workingHoursService";
+import employeeService from "../../services/employeeService";
 
 class AddBooking extends Component {
     constructor(props){
@@ -18,7 +19,9 @@ class AddBooking extends Component {
             availableTimes: [],
             bookingsCount: 0,
             servicePlaceholder: "Select a service.",
-            employeePlaceholder: "Select a employee."
+            employeePlaceholder: "Select a employee.",
+            serviceSelected: false,
+            employeeSelected: false
         };
 
         this.updateBookingFields = this.updateBookingFields.bind(this);
@@ -32,6 +35,10 @@ class AddBooking extends Component {
         this.updateBookingFields();
     }
 
+    onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+    }
+
     updateBookingFields() {
         servicesService.getAll()
             .then(response => {
@@ -39,22 +46,29 @@ class AddBooking extends Component {
                 for (const responseElement of response["data"]) {
                     servicesService.getById(responseElement["id"]).then(response => {
                         this.setState({services: [...this.state.services,
-                                response["data"]["name"] + " #" + response["data"]["id"]]});
+                                response["data"]["name"]]});
                     }).catch(e => {
                             console.log(e);
                     });
+
                 }
+
             })
             .catch(e => {
                 console.log(e);
             });
+
     }
 
     onChange(e){
       this.setState({[e.target.name]: e.target.value});
       console.log("CT: " + e.target.name + " : " + e.target.value);
+      if(e.target.name == "serviceId")
+          this.updateEmployees(e.target.value);
+
       if(this.state.serviceId !== "")
         if(e.target.name === "employeeId" && e.target.value !== this.state.employeePlaceholder) {
+            this.setState({employeeSelected: true});
             bookingService.getByEmployee(e.target.value.split("#")[1]).then(response => {
                 console.log(response["data"]);
                 for (const responseElement of response["data"]) {
@@ -65,6 +79,37 @@ class AddBooking extends Component {
                 console.log(e);
             });
         }
+
+        if(e.target.value === this.state.employeePlaceholder)
+            this.setState({employeeSelected: false});
+
+      if(e.target.value === this.state.servicePlaceholder) {
+          this.setState({employeeId: ""});
+          this.setState({employeeSelected: false});
+          this.setState({employees: []});
+          this.setState({serviceSelected: false});
+      }
+    }
+
+    updateEmployees(name){
+        this.setState({employees: []});
+        servicesService.getByName(name)
+            .then(response => {
+                for (const responseElement of response["data"]) {
+                    employeeService.getByUserName(responseElement["employeeId"])
+                        .then(response => {
+                                this.setState({employees: [...this.state.employees,
+                                        response["data"]["name"] + " #" + response["data"]["userName"]]});
+                        })
+                        .catch(e => {
+                            console.log(e);
+                        });
+                }
+            })
+            .catch(e => {
+                console.log(e);
+            });
+        this.setState({serviceSelected: true});
     }
 
     onSubmit(e){
@@ -86,7 +131,7 @@ class AddBooking extends Component {
     }
 
     makeOption = function(X) {
-        return <option key={"serviceId" + X}>{X}</option>;
+        return <option key={"itemId" + X}>{X}</option>;
     };
 
     formatAvailableTimes(){
@@ -101,7 +146,9 @@ class AddBooking extends Component {
     }
 
     render() {
-        const services = this.state.services.toString().split(",");
+        const services = this.state.services
+            .filter((v, i, a) => a.indexOf(v) === i)
+            .toString().split(",");
         let serviceSelect = <select className="form-control form-control-lg "
                          name="serviceId"
                          value= {this.state.serviceId}
@@ -109,11 +156,12 @@ class AddBooking extends Component {
                             <option default>{this.state.servicePlaceholder}</option>
                             {services.map(this.makeOption)}</select>;
 
-        const employees = ["Jim #1"];
+        const employees = this.state.employees.toString().split(",");
         let employeeSelect = <select className="form-control form-control-lg "
                                     name="employeeId"
                                     value= {this.state.employeeId}
-                                    onChange = {this.onChange} >
+                                    onChange = {this.onChange}
+                                     disabled={!this.state.serviceSelected}>
                                         <option default>{this.state.employeePlaceholder}</option>
                                         {employees.map(this.makeOption)}</select>;
 
@@ -139,6 +187,7 @@ class AddBooking extends Component {
                                            name="date"
                                            value= {this.state.date}
                                            onChange = {this.onChange}
+                                           disabled={!this.state.employeeSelected}
                                     />
                                 </div>
                                 <h6>Time</h6>
@@ -147,6 +196,7 @@ class AddBooking extends Component {
                                            name="time"
                                            value= {this.state.time}
                                            onChange = {this.onChange}
+                                           disabled={!this.state.employeeSelected}
                                     />
                                 </div>
                                 <input type="submit" className="btn btn-primary btn-block mt-4" />
