@@ -23,7 +23,11 @@ public class SbBackendApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/bookings/all").allowedOrigins("http://localhost:3000");
+                registry.addMapping("/api/bookings").allowedOrigins("http://localhost:3000");
+                registry.addMapping("/api/bookings/available/{employeeId}").allowedOrigins("http://localhost:3000");
                 registry.addMapping("/api/services/all").allowedOrigins("http://localhost:3000");
+                registry.addMapping("/api/services/{id}").allowedOrigins("http://localhost:3000");
+                registry.addMapping("/api/working_hours/{id}").allowedOrigins("http://localhost:3000");
             }
         };
     }
