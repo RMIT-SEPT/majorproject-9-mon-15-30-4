@@ -1,4 +1,4 @@
-import http from "../http-common";
+import http from './httpCommon';
 
 class LoginService 
 {
@@ -19,7 +19,13 @@ class LoginService
 
     authenticateUser(userName, password)
     {
-        return http.get(`login/authentication/${userName}/${password}`)
+        return http.get(`login/authentication/${userName}/${password}`);
     }
+
+    isLoggedIn()
+    {
+        return http.get(`login/loggedIn`);
+    }
+
 }
 export default new LoginService();

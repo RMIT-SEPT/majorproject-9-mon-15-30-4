@@ -2,21 +2,28 @@ import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"; 
-import Header from './componets/Layout/Header';
+import Header from './components/Layout/Header';
 import {BrowserRouter as Router, Route} from "react-router-dom"
-import Login from './componets/Login/Login';
+import Login from './components/Login/Login';
+import Home from './components/Home';
 
-// import {Provider} from "react-redux";
-// import store from "./store";
+
+import Customer from "./components/Customer/Customer";
+
 
 function App() {
+  
   return (
 
 
     <Router>
       <div>
         <Header/>
+
+        <Route exact path="/Customer" component = {Customer}/>
+        <Route exact path="/Home.html" component = {Home}/>
         <Route exact path="/login" component = { Login } />
+
       </div>
     </Router>
 

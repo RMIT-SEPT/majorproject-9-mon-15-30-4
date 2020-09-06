@@ -1,15 +1,17 @@
 package com.sept.majorproject.group09.mon.sbbackend.web;
 
-import com.sept.majorproject.group09.mon.sbbackend.model.Account;
-import com.sept.majorproject.group09.mon.sbbackend.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.sept.majorproject.group09.mon.sbbackend.model.Account;
+import com.sept.majorproject.group09.mon.sbbackend.services.CustomerService;
 
 @RestController
 @RequestMapping("/api/login")
@@ -46,6 +48,7 @@ public class LoggingInController
     
     Account account = null;
     @GetMapping("/findUserByName/{userName}")
+    
     public ResponseEntity<Account> getUserByName(@PathVariable("userName") String userName)
     {
     	account = customerService.getCustomerByUsername(userName);
