@@ -20,7 +20,9 @@ public class LoggingInController
     CustomerService customerService;
 
 
+
     Account loggedInAccount = null;
+
 
     //Method assumes password is hashed
     @GetMapping("/authentication/{userName}/{password}")

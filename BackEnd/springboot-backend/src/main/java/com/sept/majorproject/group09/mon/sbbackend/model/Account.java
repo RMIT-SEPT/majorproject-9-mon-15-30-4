@@ -1,16 +1,24 @@
 package com.sept.majorproject.group09.mon.sbbackend.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 @MappedSuperclass
 public abstract class Account
 {
     @Id
+    @NotBlank(message = "Username MUST be entered")
+    @Column(unique = true, nullable = false) //A command that allows only one creation of unique username
     private String userName;
-    
 
+    @NotBlank(message = "The individual's name MUST be entered")
+    @NotNull
     private String name;
+
+    @NotBlank(message = "The individual's password MUST be entered")
+    @NotNull
     private String password;
 
     public Account() { }
