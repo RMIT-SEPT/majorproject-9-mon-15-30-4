@@ -31,7 +31,7 @@ public class RegisterController {
                     @PathVariable("password") String password,
                     @PathVariable("name") String name,
                     @PathVariable("contactEmail") String contactEmail,
-                    @PathVariable("contactNumber") String contactPhone
+                    @PathVariable("contactNumber") int contactPhone
                 )
     {
 
@@ -41,8 +41,8 @@ public class RegisterController {
         //IF there is NO existing (customer) account, create one
         if(account ==null)
         {
-            int number = Integer.parseInt(contactPhone);
-            Customer customerInput = new Customer(name, password, userName,contactEmail,number);
+            //int number = Integer.parseInt(contactPhone);
+            Customer customerInput = new Customer(name, password, userName,contactEmail,contactPhone);
             Customer newCustomer = customerService.saveOrUpdateCustomer(customerInput);
             return new ResponseEntity<Customer>(newCustomer, HttpStatus.CREATED);
         }
