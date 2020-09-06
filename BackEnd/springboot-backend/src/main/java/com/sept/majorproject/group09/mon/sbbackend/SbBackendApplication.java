@@ -29,6 +29,7 @@ public class SbBackendApplication {
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
+
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/bookings/all").allowedOrigins("http://localhost:3000");
@@ -41,7 +42,12 @@ public class SbBackendApplication {
                 registry.addMapping("/api/services/fetch/{employeeId}/{name}").allowedOrigins("http://localhost:3000");
                 registry.addMapping("/api/working_hours/{id}").allowedOrigins("http://localhost:3000");
                 registry.addMapping("/api/Employee/{userName}").allowedOrigins("http://localhost:3000");
+                registry.addMapping("/api/register/findUserByName/{userName}/{password}/{name}/{contactEmail}/{contactNumber}").allowedOrigins("http://localhost:3000");
+
+
             }
+
+
         };
     }
 }

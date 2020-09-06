@@ -27,7 +27,7 @@ public class Customer extends Account{
     @NotBlank(message = "Email address must be added")
     @Size(min = 5, max = 300, message = "Must enter a contact email address")
     @NotNull
-    private String contactEmailAddress;
+    private String contactEmail;
 
     /** CONSTRUCTORS
      *
@@ -40,7 +40,7 @@ public class Customer extends Account{
     public Customer(String nameInput, String passwordInput, String userNameInput, String contactEmailAddressInput, int contactNumberInput)
     {
         super(nameInput,passwordInput,userNameInput);
-        this.contactEmailAddress = contactEmailAddressInput;
+        this.contactEmail = contactEmailAddressInput;
         this.contactNumber = contactNumberInput;
     }
 
@@ -66,7 +66,7 @@ public class Customer extends Account{
     public String getContactEmail()
     {
 
-        return this.contactEmailAddress;
+        return this.contactEmail;
     }
 
 

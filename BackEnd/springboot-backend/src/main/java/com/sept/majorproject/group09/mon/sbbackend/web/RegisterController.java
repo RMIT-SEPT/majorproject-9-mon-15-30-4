@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.xml.ws.Response;
 
+
+
 @RestController
 @RequestMapping("api/register")
 public class RegisterController {
@@ -20,6 +22,8 @@ public class RegisterController {
     private CustomerService customerService;
 
     Account account = null;
+
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/findUserByName/{userName}/{password}/{name}/{contactEmail}/{contactNumber}")
     public ResponseEntity<Customer> getUserByName
                 (
@@ -27,7 +31,7 @@ public class RegisterController {
                     @PathVariable("password") String password,
                     @PathVariable("name") String name,
                     @PathVariable("contactEmail") String contactEmail,
-                    @PathVariable("contactNumber") int contactPhone
+                    @PathVariable("contactNumber") String contactPhone
                 )
     {
 
@@ -37,7 +41,8 @@ public class RegisterController {
         //IF there is NO existing (customer) account, create one
         if(account ==null)
         {
-            Customer customerInput = new Customer(name, password, userName,contactEmail,contactPhone);
+            int number = Integer.parseInt(contactPhone);
+            Customer customerInput = new Customer(name, password, userName,contactEmail,number);
             Customer newCustomer = customerService.saveOrUpdateCustomer(customerInput);
             return new ResponseEntity<Customer>(newCustomer, HttpStatus.CREATED);
         }

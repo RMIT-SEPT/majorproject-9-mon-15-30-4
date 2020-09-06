@@ -32,6 +32,9 @@ class Register extends Component {
     onSubmit(e)
     {
         e.preventDefault();
+        /*
+        * const newAccount is an intern 'struct', allowing us to access certain key properties
+        */
         const newAccount =
         {
             userName: this.state.userName,
@@ -41,13 +44,19 @@ class Register extends Component {
             contactNumber: this.state.contactNumber
 
         }
+
         console.log(newAccount);
+
+        
         registerService.checkDetails(newAccount.userName, newAccount.password, newAccount.name, newAccount.contactEmail, newAccount.contactNumber)
             .then(response => {
                 console.log(response);
+                console.log(e);
+                console.log();
             })
             .catch(e => {
                 console.log(e);
+                console.log();
             });
     }
 
@@ -73,7 +82,7 @@ class Register extends Component {
                         </div>
 
                         <div className="form-group">
-                            <input type=" text" className="form-control form-control-lg " 
+                            <input type="password" className="form-control form-control-lg " 
                             placeholder="Enter Password" 
                             name="password"
                             value= {this.state.password}

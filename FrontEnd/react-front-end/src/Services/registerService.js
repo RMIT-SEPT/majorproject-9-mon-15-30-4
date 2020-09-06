@@ -1,36 +1,28 @@
+
 import http from "../http-common";
+import Axios from "axios";
 
 class RegisterService 
 {
-  
-    getByUsername(userName)
-    {
-        return http.get(`register/findUserByUsername/${userName}`);
-    }
-
-    getByPassword(password)
-    {
-        return http.get(`register/checkpassword/${password}`);
-    }
-
-    getByName(name)
-    {
-        return http.get(`register/checkName/${name}`);
-    }
     
-    getByEmail(contactEmail)
+    //++OUT-GOING METHODS
+    getByUsername(userName,password, name, contactEmail, contactNumber)
     {
-        return http.get(`register/checkContactEmail/${contactEmail}`);
+        // return http.get(`register/findUserByName/${userName}/${password}/${name}/${contactEmail}/${contactNumber}`);
+        return Axios.get(`http://localhost:8080/api/register/findUserByName/${userName}/${password}/${name}/${contactEmail}/${contactNumber}`);
     }
 
-    getByNumber(contactNumber)
-    {
-        return http.get(`register/checkContactPhone/${contactNumber}`);
-    }
 
-    checkDetails(userName, password, name, contactEmail, contactNumber )
+
+
+    //++INCOMING METHODS
+    /*
+        * Register.js ( onSubmit(e) will call checkDetails(...). This.getByUsername will send the key components into the method above )
+    */
+
+    checkDetails(userName, password, name, contactEmail, contactNumber)
     {
-        return this.getByUsername(userName) && this.getByPassword(password) && this.getByName(name) && this.getByEmail(contactEmail) && this.getByNumber(contactNumber)
+        return this.getByUsername(userName, password, name, contactEmail, contactNumber);
     }
 
 }
