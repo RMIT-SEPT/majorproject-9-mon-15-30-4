@@ -16,6 +16,7 @@ import javax.xml.ws.Response;
 
 @RestController
 @RequestMapping("api/register")
+@CrossOrigin
 public class RegisterController {
 
     @Autowired
@@ -23,7 +24,6 @@ public class RegisterController {
 
     Account account = null;
 
-    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/findUserByName/{userName}/{password}/{name}/{contactEmail}/{contactNumber}")
     public ResponseEntity<Customer> getUserByName
                 (
