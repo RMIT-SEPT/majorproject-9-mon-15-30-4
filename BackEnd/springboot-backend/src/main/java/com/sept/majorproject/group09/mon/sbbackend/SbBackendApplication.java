@@ -7,6 +7,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.sept.majorproject.group09.mon.sbbackend.model.Customer;
+import com.sept.majorproject.group09.mon.sbbackend.repositories.AccountRepository;
+import com.sept.majorproject.group09.mon.sbbackend.repositories.CustomerRepository;
+
 @SpringBootApplication
 public class SbBackendApplication {
 
@@ -14,6 +18,11 @@ public class SbBackendApplication {
     {
         ConfigurableApplicationContext configurableApplicationContext =
                 SpringApplication.run(SbBackendApplication.class, args);
+
+
+        AccountRepository customerRepository = configurableApplicationContext.getBean(CustomerRepository.class);
+        
+        customerRepository.save(new Customer("Name", "Password", "Username", "Email", 0404));
 
     }
 
