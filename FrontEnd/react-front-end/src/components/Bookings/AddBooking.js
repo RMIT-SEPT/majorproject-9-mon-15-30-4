@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import bookingService from "../../services/bookingService";
 import servicesService from "../../services/servicesService";
-import workingHoursService from "../../services/workingHoursService";
 import employeeService from "../../services/employeeService";
 
 class AddBooking extends Component {
@@ -65,7 +64,7 @@ class AddBooking extends Component {
 
     onChange(e) {
         this.setState({[e.target.name]: e.target.value});
-        if (e.target.name == "serviceId")
+        if (e.target.name === "serviceId")
             this.updateEmployees(e.target.value);
 
         if (this.state.serviceId !== "")
@@ -126,7 +125,6 @@ class AddBooking extends Component {
     }
 
     onSubmit(e) {
-        let submit = false;
         e.preventDefault();
         servicesService.getByEmployeeAndName(
             this.state.employeeId.split("#")[1],
@@ -137,7 +135,7 @@ class AddBooking extends Component {
                 serviceId: response["data"]["id"],
                 employeeId: this.state.employeeId.split("#")[1]
             }
-            submit = this.confirmTimeslot(newBooking.date, newBooking.serviceId,
+            this.confirmTimeslot(newBooking.date, newBooking.serviceId,
                 newBooking.employeeId).then(response => {
                 if(response["data"]) {
                     bookingService.create(newBooking);

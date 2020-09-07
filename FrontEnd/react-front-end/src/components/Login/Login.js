@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "./Login.css";
-import loginService from "../../Services/loginService.js";
+import loginService from "../../services/loginService.js";
 import LoginHeader from './LoginHeader';
 import Header from "../Layout/Header";
 

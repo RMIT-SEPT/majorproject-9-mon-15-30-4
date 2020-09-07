@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "./Register.css";
-import registerService from "../../Services/registerService.js";
+import registerService from "../../services/registerService.js";
 
 class Register extends Component {
     constructor(props)
