@@ -122,6 +122,10 @@ class AddBooking extends Component {
                 console.log(e);
             });
         this.setState({serviceSelected: true});
+        this.setState({employeeId: ""});
+        this.setState({employeeSelected: false});
+        this.setState({availableTimes: []});
+        console.log(this.state.employeeId);
     }
 
     onSubmit(e) {
