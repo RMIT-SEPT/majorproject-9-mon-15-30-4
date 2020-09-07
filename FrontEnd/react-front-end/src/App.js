@@ -6,11 +6,8 @@ import Header from './components/Layout/Header';
 import {BrowserRouter as Router, Route} from "react-router-dom"
 import Login from './components/Login/Login';
 import Home from './components/Home';
-
-
 import Customer from "./components/Customer/Customer";
-import Login from './componets/Login/Login';
-import Register from './componets/Register/Register';
+import Register from './components/Register/Register';
 
 
 function App() {
