@@ -53,11 +53,9 @@ class Header extends Component {
                     </ul>
     
                     <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
                             <li className="nav-item">
                                 <RegisterButton/>
                             </li>
-                        </li>
                         <li className="nav-item">
                             {this.logButton()}
                         </li>
