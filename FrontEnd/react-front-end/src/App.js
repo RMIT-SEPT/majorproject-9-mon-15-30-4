@@ -9,6 +9,8 @@ import Home from './components/Home';
 
 
 import Customer from "./components/Customer/Customer";
+import Login from './componets/Login/Login';
+import Register from './componets/Register/Register';
 
 
 function App() {
@@ -23,13 +25,9 @@ function App() {
         <Route exact path="/Customer" component = {Customer}/>
         <Route exact path="/Home.html" component = {Home}/>
         <Route exact path="/login" component = { Login } />
-
-      </div>
+        <Route exact path = "/register" component = {Register}/>
+        </div>
     </Router>
-
-
-      
-
   );
 }
 

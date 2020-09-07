@@ -1,5 +1,6 @@
 package com.sept.majorproject.group09.mon.sbbackend.services;
 
+import com.sept.majorproject.group09.mon.sbbackend.model.Booking;
 import com.sept.majorproject.group09.mon.sbbackend.model.Service;
 import com.sept.majorproject.group09.mon.sbbackend.repositories.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,22 @@ public class ServiceService {
 
     public Service getServiceById(long id) {
         return serviceRepository.findById(id).get();
+    }
+
+    public List<Service> getServicesByEmployee(String employeeId) {
+        List<Service> services = new ArrayList<>();
+        serviceRepository.findAllByEmployee(employeeId).forEach(service -> services.add(service));
+        return services;
+    }
+
+    public List<Service> getServicesByName(String name) {
+        List<Service> services = new ArrayList<>();
+        serviceRepository.findAllByName(name).forEach(service -> services.add(service));
+        return services;
+    }
+
+    public Service getServicesByEmployeeAndName(String id, String name) {
+        return serviceRepository.findAllByEmployeeAndName(id, name);
     }
 
     public void saveOrUpdate(Service service) {

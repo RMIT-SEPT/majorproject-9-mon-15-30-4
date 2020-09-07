@@ -8,26 +8,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
+@RequestMapping("/api/bookings")
 public class BookingController {
     @Autowired
     BookingService bookingService;
 
-    @GetMapping("/bookings")
+    @GetMapping("/all")
     private List<Booking> getAllBookings() {
         return bookingService.getAllBookings();
     }
 
-    @GetMapping("/bookings/{id}")
+    @GetMapping("/{id}")
     private List<Booking> getBookingsByEmployee(@PathVariable("id") String id) {
         return bookingService.getBookingsByEmployee(id);
     }
 
-    @GetMapping("/bookings/available/{employeeId}")
+    @GetMapping("/available/{employeeId}")
     private List<int[]> getAvailableTimes(@PathVariable("employeeId") String employeeId) {
         return bookingService.getAvailableTimesByEmployee(employeeId);
     }
 
-    @PostMapping("/bookings")
+    @GetMapping("/available/time/{date}/{serviceId}/{employeeId}")
+    private boolean getAvailableTimes(@PathVariable("date") String date,
+                                      @PathVariable("serviceId") long serviceId,
+                                      @PathVariable("employeeId") String employeeId) {
+        return bookingService.slotAvailable(date, serviceId, employeeId);
+    }
+
+    @PostMapping("")
     private long saveBooking(@RequestBody Booking booking) {
         bookingService.saveOrUpdate(booking);
         return booking.getId();

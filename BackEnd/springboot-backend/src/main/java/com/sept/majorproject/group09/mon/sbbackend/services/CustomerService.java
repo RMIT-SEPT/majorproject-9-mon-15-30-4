@@ -8,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomerService {
+public class CustomerService 
+{
         @Autowired
         private CustomerRepository customerRepository;
 
@@ -22,14 +23,14 @@ public class CustomerService {
 
         public Customer getCustomerByUsername(String userName)
         {
-        	
-        	try
-        	{
-        		return customerRepository.customerUsername(userName).get(0);
-        	}
+
+            try
+            {
+                return customerRepository.customerUsername(userName).get(0);
+            }
             catch(IndexOutOfBoundsException e)
             {
-            	return null;
+                return null;
             }
         }
 

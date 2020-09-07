@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-
-
 import {Link} from "react-router-dom";
-
 import LoginService from '../../Services/loginService'
+import RegisterButton from '../Register/RegisterButton'
 
 
 class Header extends Component {
@@ -57,9 +55,9 @@ class Header extends Component {
     
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-                            <a className="nav-link " href="register.html">
-                                Sign Up
-                            </a>
+                            <li className="nav-item">
+                                <RegisterButton/>
+                            </li>
                         </li>
                         <li className="nav-item">
                             {this.logButton()}

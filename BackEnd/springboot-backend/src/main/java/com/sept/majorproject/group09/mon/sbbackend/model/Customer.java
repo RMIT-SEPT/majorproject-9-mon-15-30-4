@@ -1,8 +1,14 @@
 package com.sept.majorproject.group09.mon.sbbackend.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+
+import javax.persistence.Transient;
+import javax.validation.constraints.*;
 
 @Entity
 
@@ -11,9 +17,19 @@ public class Customer extends Account{
     /*
      * Optional - but allows Customer to perform actions
      */
+
+
+    @NotBlank(message = "Enter around 8 to 10 digits")
+    @NotNull
+    @Size(min = 8, max = 10, message = "Contact Number must be between 8 to 10 digits")
     private int contactNumber;
-    private String contactHomeAddress;
-    private String contactEmail = "NO EMAIL";
+
+
+    @NotBlank(message = "Email address must be added")
+    @Size(min = 5, max = 300, message = "Must enter a contact email address")
+    @NotNull
+    private String contactEmail;
+
 
     /** CONSTRUCTORS
      *
@@ -22,23 +38,19 @@ public class Customer extends Account{
     {
 
     }
-    public Customer(String nameInput, String passwordInput, String userNameInput, String contactHomeAddressInput, int contactNumberInput)
-    {
-        super(nameInput,passwordInput,userNameInput);
-        this.contactNumber = contactNumberInput;
-        this.contactHomeAddress = contactHomeAddressInput;
-    }
 
-    public Customer(String nameInput, String passwordInput, String userNameInput, String contactEmailInput )
+    public Customer(String nameInput, String passwordInput, String userNameInput, String contactEmailAddressInput, int contactNumberInput)
     {
         super(nameInput,passwordInput,userNameInput);
-        this.contactEmail = contactEmailInput;
+        this.contactEmail = contactEmailAddressInput;
+        this.contactNumber = contactNumberInput;
     }
 
     /**GET METHODS
      *
      * @return
      */
+
     public int getContactNumber()
     {
         int returnContactNumber = 0;
@@ -52,40 +64,18 @@ public class Customer extends Account{
 
     }
 
+
     public String getContactEmail()
     {
-        String returnEmail = "";
 
-        if(contactEmail != null || contactEmail.equals(""))
-        {
-            returnEmail = this.contactEmail;
-        }
-
-        return returnEmail;
+        return this.contactEmail;
     }
 
-    public String getContactHomeAddress()
-    {
-        return this.contactHomeAddress;
-
-
-    }
 
     /**
      * MUTATOR METHODS
      */
 
-    /**
-     * setContactHomeAddress
-     * Input - Assumes that the input is legitimate
-     * Output - Void - Sets the customer's home address to the following
-     * @param addressInput
-     *
-     */
-    public void setContactHomeAddress(String addressInput)
-    {
-        this.contactHomeAddress = addressInput;
-    }
 
     /**
      * setContactNumber
@@ -104,10 +94,10 @@ public class Customer extends Account{
      * Output - Void - But customer's account is set to input
      * @param contactEmailInput
      */
-    public void setContactEmail( String contactEmailInput)
-    {
-        this.contactEmail = contactEmailInput;
-    }
+//    public void setContactEmail( String contactEmailInput)
+//    {
+//        this.contactEmailAddress = contactEmailInput;
+//    }
 
 
 }
