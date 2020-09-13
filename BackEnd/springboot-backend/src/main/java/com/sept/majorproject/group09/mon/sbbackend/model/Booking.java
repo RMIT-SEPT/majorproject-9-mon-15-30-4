@@ -1,24 +1,26 @@
 package com.sept.majorproject.group09.mon.sbbackend.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Date;
 
+@Validated
 @Entity
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @NotBlank
+    @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ") //E.g. 2020-08-17@08:30:00.000+0000
     private Date date;
-    @NotBlank(message = "Must specify a service")
+    @NotNull(message = "Must specify a service")
     private long serviceId;
-    @NotBlank(message = "Must associate a customer")
+    @NotNull(message = "Must associate a customer")
     private String customerId;
-    @NotBlank(message = "Must associate a employee")
+    @NotNull(message = "Must associate a employee")
     private String employeeId;
 
     protected Booking() {

@@ -5,6 +5,7 @@ import com.sept.majorproject.group09.mon.sbbackend.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -37,7 +38,7 @@ public class BookingController {
     }
 
     @PostMapping("")
-    private long saveBooking(@RequestBody Booking booking) {
+    private long saveBooking(@Valid @RequestBody Booking booking) {
         bookingService.saveOrUpdate(booking);
         return booking.getId();
     }

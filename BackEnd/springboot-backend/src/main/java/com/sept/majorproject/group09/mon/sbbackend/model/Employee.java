@@ -5,9 +5,7 @@ package com.sept.majorproject.group09.mon.sbbackend.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.lang.reflect.Array;
 import java.util.regex.Pattern;
@@ -21,7 +19,8 @@ public class Employee<WorkingHours> extends Account{
 
 
     @NotNull
-    @Size(min = 8, max = 10, message = "Must enter in a number between 8 to 10 digits")
+    @Min(8)
+    @Max(10)
     private int employeePhone;
 
 

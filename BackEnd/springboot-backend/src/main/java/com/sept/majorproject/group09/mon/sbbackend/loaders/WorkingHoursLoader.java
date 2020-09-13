@@ -27,7 +27,6 @@ public class WorkingHoursLoader implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-//        String employeeId, double startTime, double endTime, Date date, DayOfWeek day
         Calendar date = Calendar.getInstance();
 
         date.set(2020, Calendar.AUGUST, 17);
