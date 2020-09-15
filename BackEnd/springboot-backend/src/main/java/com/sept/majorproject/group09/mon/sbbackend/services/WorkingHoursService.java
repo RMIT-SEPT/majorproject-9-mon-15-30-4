@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class WorkingHoursService {
@@ -27,5 +28,13 @@ public class WorkingHoursService {
 
     public void saveOrUpdate(WorkingHours workingHours) {
         workingHoursRepository.save(workingHours);
+    }
+
+    public Optional<WorkingHours> findById(long id){
+        return workingHoursRepository.findById(id);
+    }
+
+    public void deleteHours(long id) {
+        workingHoursRepository.deleteById(id);
     }
 }

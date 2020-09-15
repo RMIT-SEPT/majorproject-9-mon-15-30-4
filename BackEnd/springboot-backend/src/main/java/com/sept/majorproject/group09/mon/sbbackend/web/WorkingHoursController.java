@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/working_hours")
 public class WorkingHoursController {
     @Autowired
@@ -30,5 +32,25 @@ public class WorkingHoursController {
     @GetMapping("/{id}")
     public List<WorkingHours> getWorkingHoursByEmployee(@PathVariable("id") String id) {
         return workingHoursService.getWorkingHoursByEmployee(id);
+    }
+
+    @PutMapping("")
+    public void updateTimeFrame(@RequestBody WorkingHours newHours) {
+        workingHoursService.findById(newHours.getId())
+                .map(hours -> {
+                    hours.setDate(newHours.getDate());
+                    hours.setStartTime(newHours.getStartTime());
+                    hours.setEndTime(newHours.getEndTime());
+                    workingHoursService.saveOrUpdate(hours);
+                    return null;
+                }).orElseGet(() -> {
+                    workingHoursService.saveOrUpdate(newHours);
+                    return null;
+                });
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteHours(@PathVariable("id") long id) {
+        workingHoursService.deleteHours(id);
     }
 }
