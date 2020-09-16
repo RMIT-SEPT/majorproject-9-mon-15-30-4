@@ -42,9 +42,61 @@ public class Customer extends Account{
     public Customer(String nameInput, String passwordInput, String userNameInput, String contactEmailAddressInput, int contactNumberInput)
     {
         super(nameInput,passwordInput,userNameInput);
-        this.contactEmail = contactEmailAddressInput;
-        this.contactNumber = contactNumberInput;
+
+//        if(Integer.toString(contactNumberInput).length() >=  8  || Integer.toString(contactNumberInput).length()  <= 10 )
+//        {
+//            this.contactNumber = contactNumberInput;
+//        }
+
+
+//        if(contactEmailAddressInput.length() >= 5  || contactEmailAddressInput.length() <= 300)
+//        {
+//            this.contactEmail = contactEmailAddressInput;
+//        }
+
+        if(AcceptableContactNumberLength(contactNumberInput) == true)
+        {
+            this.contactNumber = contactNumberInput;
+        }
+        else
+        {
+            this.contactNumber = 000000000;
+        }
+
+        if(AcceptableEmailCharacterLength(contactEmailAddressInput) == true)
+        {
+            this.contactEmail = contactEmailAddressInput;
+        }
+        else {
+            this.contactEmail = "INVALID EMAIL";
+        }
+
     }
+
+    private boolean AcceptableContactNumberLength(int contact_number_input)
+    {
+        boolean result = false;
+
+        if(Integer.toString(contact_number_input).length() >=8 || Integer.toString(contact_number_input).length() <= 10)
+        {
+            result = true;
+        }
+
+        return result;
+    }
+
+    private boolean AcceptableEmailCharacterLength(String contact_email_input)
+    {
+        boolean result = false;
+
+        if(contact_email_input.length() >= 10 || contact_email_input.length() <= 300)
+        {
+            result = true;
+        }
+
+        return result;
+    }
+
 
     /**GET METHODS
      *

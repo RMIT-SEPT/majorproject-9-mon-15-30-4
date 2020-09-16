@@ -20,7 +20,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     //Initial pathway for employeeID retrieval
-    @GetMapping("/{userName}")
+    @GetMapping
     private Employee getEmployeeByUserName(@PathVariable("userName") String userName)
     {
         return employeeService.getEmployeeByUsername(userName);

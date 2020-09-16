@@ -26,7 +26,15 @@ public class EmployeeService {
 
     public Employee getEmployeeByUsername(String username)
     {
-        return employeeRepository.employeeUsername(username).get(0);
+
+        try
+        {
+            return employeeRepository.employeeUsername(username).get(0);
+        }
+        catch(IndexOutOfBoundsException e)
+        {
+            return null;
+        }
     }
 
 }
