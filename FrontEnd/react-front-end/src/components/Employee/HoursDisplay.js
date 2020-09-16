@@ -47,10 +47,10 @@ class HoursDisplay extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-        let startTime = e.target.startTime.value.toString().split(":");
-        let endTime = e.target.endTime.value.toString().split(":");
-
-        if (this.state.action === "Submit") {
+        if (this.state.action === "Submit" && this.validateForm(e.target.id.value, true)) {
+            console.log("Submitting");
+            let startTime = e.target.startTime.value.toString().split(":");
+            let endTime = e.target.endTime.value.toString().split(":");
             const newHours = {
                 id: e.target.id.value,
                 day: 0,
@@ -68,6 +68,25 @@ class HoursDisplay extends Component {
             workingHoursService.deleteById(e.target.id.value).then(response => {
                 this.loadHours();
             });
+        }
+    }
+
+    validateForm(id, rt){
+        const form = document.getElementById(id); //Issue retrieving new form
+
+        console.log(id);
+        console.log(form);
+
+        if(form !== null) {
+            if (typeof id !== "undefined"
+                && form.elements[2]["value"] /*start time*/ < form.elements[3]["value"] /*end time*/) {
+                if(rt)
+                return true;
+            } else {
+                form.elements[2].setCustomValidity("Start time must preceed end time,");
+                if(rt)
+                return false;
+            }
         }
     }
 
@@ -104,7 +123,7 @@ class HoursDisplay extends Component {
         let sTime = startTime.toString().split(".");
         let eTime = endTime.toString().split(".");
 
-        return <form onSubmit={this.onSubmit} key={id}>
+        return <form onSubmit={this.onSubmit} key={id} id={id} onChange={this.validateForm(id, false)}>
             <h6>Date</h6>
             <div className="form-group">
                 <input type="hidden" name="id" value={id}/>
@@ -112,6 +131,7 @@ class HoursDisplay extends Component {
                        name="date"
                        defaultValue={date}
                        onChange={this.onChange}
+                       required
                 />
             </div>
             <h6>Start Time</h6>
@@ -122,6 +142,7 @@ class HoursDisplay extends Component {
                            + (sTime[1].length === 1 ? "0" : "") : "00")}
                        step="900"
                        onChange={this.onChange}
+                       required
                 />
             </div>
             <h6>End Time</h6>
@@ -132,6 +153,7 @@ class HoursDisplay extends Component {
                            + (eTime[1].length === 1 ? "0" : "") : "00")}
                        step="900"
                        onChange={this.onChange}
+                       required
                 />
             </div>
             <input type="submit" className="btn btn-primary btn-block mt-4" name="action" value="Submit"
@@ -147,9 +169,10 @@ class HoursDisplay extends Component {
             newEntryActive:
                 true
         })
+        let id = 0;
         this.setState({
             newEntries:
-                <form onSubmit={this.onSubmit}>
+                <form onSubmit={this.onSubmit} id={id} onChange={this.validateForm(id, false)}>
                     <h6>New Time Frame</h6>
                     <h6>Date</h6>
                     <div className="form-group">
@@ -157,6 +180,7 @@ class HoursDisplay extends Component {
                         <input type="date" className="form-control form-control-lg"
                                name="date"
                                onChange={this.onChange}
+                               required
                         />
                     </div>
                     <h6>Start Time</h6>
@@ -165,6 +189,7 @@ class HoursDisplay extends Component {
                                name="startTime"
                                step="900"
                                onChange={this.onChange}
+                               required
                         />
                     </div>
                     <h6>End Time</h6>
@@ -173,6 +198,7 @@ class HoursDisplay extends Component {
                                name="endTime"
                                step="900"
                                onChange={this.onChange}
+                               required
                         />
                     </div>
                     <input type="submit" className="btn btn-primary btn-block mt-4" name="action" value="Submit"
