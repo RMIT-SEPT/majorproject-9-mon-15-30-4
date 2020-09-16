@@ -61,10 +61,13 @@ class HoursDisplay extends Component {
             }
             workingHoursService.saveHours(newHours).then(response => {
                 this.setState({newEntryActive: false});
+                this.setState({newEntries: []});
                 this.loadHours();
             });
         } else if (this.state.action === "Delete") {
-            workingHoursService.deleteById(e.target.id.value);
+            workingHoursService.deleteById(e.target.id.value).then(response => {
+                this.loadHours();
+            });
         }
     }
 
