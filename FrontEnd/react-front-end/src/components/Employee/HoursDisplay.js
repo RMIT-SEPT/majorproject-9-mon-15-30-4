@@ -9,7 +9,9 @@ class HoursDisplay extends Component {
         this.state = {
             action: "",
             hours: [],
-            employeeId: "1"
+            employeeId: "1",
+            newEntries: [],
+            newEntryActive: false
         };
 
         this.loadHours = this.loadHours.bind(this);
@@ -25,8 +27,8 @@ class HoursDisplay extends Component {
     }
 
     loadHours() {
+        this.setState({hours: []});
         workingHoursService.getById("1").then(response => {
-            console.log(response);
             for (const responseElement of response["data"]) {
                 this.setState({
                     hours: [...this.state.hours,
@@ -38,17 +40,8 @@ class HoursDisplay extends Component {
         });
     }
 
-    /*
-     * https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
-     * User: TLindig
-     */
-    onlyUnique(value, index, self) {
-        return self.indexOf(value) === index;
-    }
-
     onChange(e) {
         this.setState({[e.target.name]: e.target.value});
-        console.log(e.target.name);
     }
 
     onSubmit(e) {
@@ -66,7 +59,10 @@ class HoursDisplay extends Component {
                 startTime: parseFloat(startTime[0] + "." + startTime[1]),
                 endTime: parseFloat(endTime[0] + "." + endTime[1])
             }
-            workingHoursService.saveHours(newHours);
+            workingHoursService.saveHours(newHours).then(response => {
+                this.setState({newEntryActive: false});
+                this.loadHours();
+            });
         } else if(this.state.action === "Delete"){
             workingHoursService.deleteById(e.target.id.value);
         }
@@ -105,7 +101,7 @@ class HoursDisplay extends Component {
         let sTime = startTime.toString().split(".");
         let eTime = endTime.toString().split(".");
 
-        return <form onSubmit={this.onSubmit}>
+        return <form onSubmit={this.onSubmit} key={id}>
             <h6>Date</h6>
             <div className="form-group">
                 <input type="hidden" name="id" value={id}/>
@@ -113,7 +109,6 @@ class HoursDisplay extends Component {
                        name="date"
                        defaultValue={date}
                        onChange={this.onChange}
-                       onSubmit={this.onChange}
                 />
             </div>
             <h6>Start Time</h6>
@@ -144,6 +139,42 @@ class HoursDisplay extends Component {
         </form>;
     }
 
+    generateEntryFormNew() {
+        this.setState({newEntryActive:
+                true})
+        this.setState({newEntries:
+                <form onSubmit={this.onSubmit}>
+                    <h6>New Time Frame</h6>
+            <h6>Date</h6>
+            <div className="form-group">
+                {/*<input type="hidden" name="id" value={id}/>*/}
+                <input type="date" className="form-control form-control-lg"
+                       name="date"
+                       onChange={this.onChange}
+                />
+            </div>
+            <h6>Start Time</h6>
+            <div className="form-group">
+                <input type="time" className="form-control form-control-lg"
+                       name="startTime"
+                       step="900"
+                       onChange={this.onChange}
+                />
+            </div>
+            <h6>End Time</h6>
+            <div className="form-group">
+                <input type="time" className="form-control form-control-lg"
+                       name="endTime"
+                       step="900"
+                       onChange={this.onChange}
+                />
+            </div>
+            <input type="submit" className="btn btn-primary btn-block mt-4" name="action" value="Submit"
+                   onClick={() => this.setState({action: "Submit"})}/>
+            <br/>
+        </form>});
+    }
+
     render() {
         let workHours = this.formatWorkHours();
         let entryForms = [];
@@ -161,7 +192,14 @@ class HoursDisplay extends Component {
                             <h5 className="display-4 text-center"> Working Hours</h5>
                             <hr/>
                             <pre>{workHours}</pre>
+                            <button type="submit"className="btn btn-primary btn-block mt-4" value="New"
+                                    onClick={() => this.generateEntryFormNew()}
+                                    disabled={this.state.newEntryActive}
+                                    style={this.state.newEntryActive === true ? {display: "none"} : {display: "block"}}>New</button>
+                            {this.state.newEntries}
+                            <br/>
                             {entryForms}
+                            <br/>
                         </div>
                     </div>
                 </div>

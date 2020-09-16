@@ -16,7 +16,7 @@ class WorkingHoursDataService {
 
     saveHours(data){
         console.log(data);
-        axios({
+        return axios({
             method: 'put',
             url: "http://localhost:8080/api/working_hours/",
             data: data
