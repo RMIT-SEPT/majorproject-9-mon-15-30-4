@@ -50,7 +50,7 @@ class HoursDisplay extends Component {
         let startTime = e.target.startTime.value.toString().split(":");
         let endTime = e.target.endTime.value.toString().split(":");
 
-        if(this.state.action === "Submit"){
+        if (this.state.action === "Submit") {
             const newHours = {
                 id: e.target.id.value,
                 day: 0,
@@ -63,7 +63,7 @@ class HoursDisplay extends Component {
                 this.setState({newEntryActive: false});
                 this.loadHours();
             });
-        } else if(this.state.action === "Delete"){
+        } else if (this.state.action === "Delete") {
             workingHoursService.deleteById(e.target.id.value);
         }
     }
@@ -140,39 +140,43 @@ class HoursDisplay extends Component {
     }
 
     generateEntryFormNew() {
-        this.setState({newEntryActive:
-                true})
-        this.setState({newEntries:
+        this.setState({
+            newEntryActive:
+                true
+        })
+        this.setState({
+            newEntries:
                 <form onSubmit={this.onSubmit}>
                     <h6>New Time Frame</h6>
-            <h6>Date</h6>
-            <div className="form-group">
-                {/*<input type="hidden" name="id" value={id}/>*/}
-                <input type="date" className="form-control form-control-lg"
-                       name="date"
-                       onChange={this.onChange}
-                />
-            </div>
-            <h6>Start Time</h6>
-            <div className="form-group">
-                <input type="time" className="form-control form-control-lg"
-                       name="startTime"
-                       step="900"
-                       onChange={this.onChange}
-                />
-            </div>
-            <h6>End Time</h6>
-            <div className="form-group">
-                <input type="time" className="form-control form-control-lg"
-                       name="endTime"
-                       step="900"
-                       onChange={this.onChange}
-                />
-            </div>
-            <input type="submit" className="btn btn-primary btn-block mt-4" name="action" value="Submit"
-                   onClick={() => this.setState({action: "Submit"})}/>
-            <br/>
-        </form>});
+                    <h6>Date</h6>
+                    <div className="form-group">
+                        {/*<input type="hidden" name="id" value={id}/>*/}
+                        <input type="date" className="form-control form-control-lg"
+                               name="date"
+                               onChange={this.onChange}
+                        />
+                    </div>
+                    <h6>Start Time</h6>
+                    <div className="form-group">
+                        <input type="time" className="form-control form-control-lg"
+                               name="startTime"
+                               step="900"
+                               onChange={this.onChange}
+                        />
+                    </div>
+                    <h6>End Time</h6>
+                    <div className="form-group">
+                        <input type="time" className="form-control form-control-lg"
+                               name="endTime"
+                               step="900"
+                               onChange={this.onChange}
+                        />
+                    </div>
+                    <input type="submit" className="btn btn-primary btn-block mt-4" name="action" value="Submit"
+                           onClick={() => this.setState({action: "Submit"})}/>
+                    <br/>
+                </form>
+        });
     }
 
     render() {
@@ -192,10 +196,11 @@ class HoursDisplay extends Component {
                             <h5 className="display-4 text-center"> Working Hours</h5>
                             <hr/>
                             <pre>{workHours}</pre>
-                            <button type="submit"className="btn btn-primary btn-block mt-4" value="New"
+                            <button type="submit" className="btn btn-primary btn-block mt-4" value="New"
                                     onClick={() => this.generateEntryFormNew()}
                                     disabled={this.state.newEntryActive}
-                                    style={this.state.newEntryActive === true ? {display: "none"} : {display: "block"}}>New</button>
+                                    style={this.state.newEntryActive === true ? {display: "none"} : {display: "block"}}>New
+                            </button>
                             {this.state.newEntries}
                             <br/>
                             {entryForms}
