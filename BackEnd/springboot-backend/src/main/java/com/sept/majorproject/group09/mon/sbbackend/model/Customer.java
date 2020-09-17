@@ -43,16 +43,6 @@ public class Customer extends Account{
     {
         super(nameInput,passwordInput,userNameInput);
 
-//        if(Integer.toString(contactNumberInput).length() >=  8  || Integer.toString(contactNumberInput).length()  <= 10 )
-//        {
-//            this.contactNumber = contactNumberInput;
-//        }
-
-
-//        if(contactEmailAddressInput.length() >= 5  || contactEmailAddressInput.length() <= 300)
-//        {
-//            this.contactEmail = contactEmailAddressInput;
-//        }
 
         if(AcceptableContactNumberLength(contactNumberInput) == true)
         {

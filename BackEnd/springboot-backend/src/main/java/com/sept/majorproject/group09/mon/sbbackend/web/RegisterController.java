@@ -6,11 +6,9 @@ import com.sept.majorproject.group09.mon.sbbackend.model.Customer;
 import com.sept.majorproject.group09.mon.sbbackend.model.Employee;
 import com.sept.majorproject.group09.mon.sbbackend.services.CustomerService;
 import com.sept.majorproject.group09.mon.sbbackend.services.EmployeeService;
-import org.omg.CORBA.RepositoryIdHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.ws.Response;
@@ -39,7 +37,7 @@ public class RegisterController {
 
     /*  LOGIC::
         * IF there is NO existing customer account by the SAME username,
-        *       CREATE a new account
+        *       CREATE a new customer account, and add it into the repository
         * ELSE
         *       REJECT the input
      */
@@ -54,10 +52,10 @@ public class RegisterController {
                 )
     {
 
-        //SEARCH for an existing (customer) account via userName
+        //1. SEARCH for an existing (customer) account via userName
         account = customerService.getCustomerByUsername(userName);
 
-        //IF there is NO existing (customer) account, create one
+        //2. IF there is NO existing (customer) account, create one
         if(account == null)
         {
 
@@ -67,13 +65,19 @@ public class RegisterController {
         }
         else
         {
-            //ELSE if there is an existing (customer) account, do not create on
-            //SEND error
+            //ELSE send ERROR
             return new ResponseEntity<Customer>(HttpStatus.NOT_ACCEPTABLE);
         }
 
     }
 
+    /* LOGIC::
+        * IF there is NO existing employee account by the SAME username,
+        *       CREATE a new EMPLOYEE account, and add it into the repository
+        * ELSE
+        *       REJECT the input
+
+     */
     @GetMapping("/findEmployeeByUsername/{userName}/{password}/{name}/{employeeEmail}/{employeePhone}")
     public ResponseEntity<Employee> getEmployeeByUserName
             (
