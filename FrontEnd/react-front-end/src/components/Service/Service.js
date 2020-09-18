@@ -9,6 +9,8 @@ class Service extends Component
             employeeId: "2",//1 is used for testing. Need to know how to parse emploeeeId from previous page
 
             serviceId: "",
+            serviceDescription: "",
+            serviceDuration: 0,
             services: [],
             serviceIdRemove:"",
             employeeServices: [],
@@ -107,11 +109,34 @@ class Service extends Component
     {
         // e.preventDefault();
         console.log(this.state.serviceIdRemove);
+        delete(this.state.employeeId, this.state.serviceId);
     }
     onSubmit(e)
     {
         e.preventDefault();
-        console.log(this.state.serviceId);
+        servicesService.getByName(this.state.serviceId).then(response =>
+        {
+            for(const responseElement of response["data"])
+            {
+                this.setState({
+                    serviceDescription: response["data"]["description"],
+                    serviceDuration: response["data"]["duration"],
+                });
+            }
+        }).catch(e)
+        {
+
+        }
+        const newService =
+        {
+            name: this.state.serviceId,
+            duration: 100,
+            description: "Hello Darkness My old Friend",
+            employeeId: this.state.employeeId,
+
+        }
+
+        servicesService.create(newService);
     }
 
     render() 

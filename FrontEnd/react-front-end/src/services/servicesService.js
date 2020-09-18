@@ -1,4 +1,5 @@
 import http from "./httpCommon";
+import axios from "axios";
 
 class ServiceDataService {
     getAll() {
@@ -22,5 +23,19 @@ class ServiceDataService {
         return http.get("/services/employee/" + id);
     }
 
+    create(data){
+        axios({
+            method: 'post',
+            url: "http://localhost:8080/api/services",
+            data: data
+        }).catch(e => {
+            console.log(e);
+        });
+    }
+
+    delete(employeeId, name)
+    {
+        http.delete("/services/delete/" + employeeId + "/" + name);
+    }
 }
 export default new ServiceDataService();
