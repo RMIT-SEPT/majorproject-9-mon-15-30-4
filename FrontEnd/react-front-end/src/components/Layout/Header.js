@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import LoginService from '../../services/loginService'
 import RegisterButton from '../Register/RegisterButton'
 import BookingsButton from "../Bookings/BookingsButton";
+import DashboardButton from "../Dashboard/DashboardButton";
 
 
 class Header extends Component {
@@ -49,6 +50,11 @@ class Header extends Component {
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
                             <BookingsButton/>
+                        </li>
+                    </ul>
+                    <ul className="navbar-nav mr-auto">
+                        <li className="nav-item">
+                            <DashboardButton/>
                         </li>
                     </ul>
     
