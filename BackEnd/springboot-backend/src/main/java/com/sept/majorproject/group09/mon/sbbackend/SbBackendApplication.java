@@ -49,6 +49,7 @@ public class SbBackendApplication {
                 registry.addMapping("/api/bookings/available/time/{date}/{serviceId}/{employeeId}").allowedOrigins("http://localhost:3000");
                 registry.addMapping("/api/services/fetch/{employeeId}/{name}").allowedOrigins("http://localhost:3000");
                 registry.addMapping("/api/register/findUserByName/{userName}/{password}/{name}/{contactEmail}/{contactNumber}").allowedOrigins("http://localhost:3000");
+                registry.addMapping("/api/Employee/AllEmployees").allowedOrigins("http://localhost:3000");
             }
                 
         };
