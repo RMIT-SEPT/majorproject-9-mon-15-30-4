@@ -17,8 +17,6 @@ public class AccountTest
     @Test
     void checkHashedPasswordTest()
     {
-
-
         Assertions.assertTrue(account.checkHashedPassword("Password"));
     };
 
@@ -27,5 +25,20 @@ public class AccountTest
     {
         Assertions.assertFalse(account.checkHashedPassword("password"));
     };
+
+
+    @Test
+    void changeNameTest1()
+    {
+        account.setName("Bob");
+        Assertions.assertEquals("Bob", account.getName());
+    }
+
+    @Test
+    void changeNameTest2()
+    {
+        account.setName("Bob");
+        Assertions.assertNotEquals("John",account.getName());
+    }
 
 }

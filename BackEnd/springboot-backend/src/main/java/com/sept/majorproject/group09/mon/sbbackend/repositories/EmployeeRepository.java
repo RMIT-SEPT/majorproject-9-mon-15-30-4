@@ -21,5 +21,6 @@ public interface EmployeeRepository extends AccountRepository{
     @Query(value = "SELECT * From EMPLOYEE WHERE USER_NAME = :userName", nativeQuery = true)
     List<Employee> employeeUsername(@Param("userName") String userName);
 
-
+    @Query(value = "SELECT * FROM EMPLOYEE", nativeQuery = true)
+    List<Employee> getAllEmployees();
 }

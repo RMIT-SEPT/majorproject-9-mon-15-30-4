@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {Link} from "react-router-dom";
-import LoginService from '../../services/loginService'
 import RegisterButton from '../Register/RegisterButton'
 import BookingsButton from "../Bookings/BookingsButton";
 import DashboardButton from "../Dashboard/DashboardButton";

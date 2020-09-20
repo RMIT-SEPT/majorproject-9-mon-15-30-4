@@ -19,6 +19,8 @@ public class SbBackendApplication {
         ConfigurableApplicationContext configurableApplicationContext =
                 SpringApplication.run(SbBackendApplication.class, args);
 
+//        AccountRepository customerRepository = configurableApplicationContext.getBean(CustomerRepository.class);
+//        customerRepository.save(new Customer("Name", "Password", "Username", "Email", 0404));
 
     }
 
@@ -47,7 +49,7 @@ public class SbBackendApplication {
                 registry.addMapping("/api/bookings/available/time/{date}/{serviceId}/{employeeId}").allowedOrigins("http://localhost:3000");
                 registry.addMapping("/api/services/fetch/{employeeId}/{name}").allowedOrigins("http://localhost:3000");
                 registry.addMapping("/api/register/findUserByName/{userName}/{password}/{name}/{contactEmail}/{contactNumber}").allowedOrigins("http://localhost:3000");
-                registry.addMapping("api/findEmployeeByUsername/{userName}/{password}/{name}/{employeeEmail}/{employeePhone}").allowedOrigins("http://localhost:3000");
+                registry.addMapping("/api/Employee/AllEmployees").allowedOrigins("http://localhost:3000");
             }
                 
         };
