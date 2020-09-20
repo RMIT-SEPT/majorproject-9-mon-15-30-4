@@ -10,7 +10,6 @@ class HoursDisplay extends Component {
             action: "",
             hours: [],
             employeeId: "1",
-            newEntries: [],
             newEntryActive: false
         };
 
@@ -46,9 +45,7 @@ class HoursDisplay extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-
         if (this.state.action === "Submit" && this.validateForm(e.target.id.value, true)) {
-            console.log("Submitting");
             let startTime = e.target.startTime.value.toString().split(":");
             let endTime = e.target.endTime.value.toString().split(":");
             const newHours = {
@@ -61,7 +58,6 @@ class HoursDisplay extends Component {
             }
             workingHoursService.saveHours(newHours).then(response => {
                 this.setState({newEntryActive: false});
-                this.setState({newEntries: []});
                 this.loadHours();
             });
         } else if (this.state.action === "Delete") {
@@ -72,14 +68,11 @@ class HoursDisplay extends Component {
     }
 
     validateForm(id, rt){
-        const form = document.getElementById(id); //Issue retrieving new form
+        const form = document.getElementById(id);
 
-        console.log(id);
-        console.log(form);
-
-        if(form !== null) {
-            if (typeof id !== "undefined"
-                && form.elements[2]["value"] /*start time*/ < form.elements[3]["value"] /*end time*/) {
+        if(form !== null)
+            if (form.elements[2]["value"] /*start time*/ < form.elements[3]["value"] /*end time*/) {
+                form.elements[2].setCustomValidity("");
                 if(rt)
                 return true;
             } else {
@@ -87,7 +80,6 @@ class HoursDisplay extends Component {
                 if(rt)
                 return false;
             }
-        }
     }
 
     confirmTimeslot(date, serviceId, employeeId) {
@@ -165,52 +157,46 @@ class HoursDisplay extends Component {
     }
 
     generateEntryFormNew() {
-        this.setState({
-            newEntryActive:
-                true
-        })
         let id = 0;
-        this.setState({
-            newEntries:
-                <form onSubmit={this.onSubmit} id={id} onChange={this.validateForm(id, false)}>
-                    <h6>New Time Frame</h6>
-                    <h6>Date</h6>
-                    <div className="form-group">
-                        {/*<input type="hidden" name="id" value={id}/>*/}
-                        <input type="date" className="form-control form-control-lg"
-                               name="date"
-                               onChange={this.onChange}
-                               required
-                        />
-                    </div>
-                    <h6>Start Time</h6>
-                    <div className="form-group">
-                        <input type="time" className="form-control form-control-lg"
-                               name="startTime"
-                               step="900"
-                               onChange={this.onChange}
-                               required
-                        />
-                    </div>
-                    <h6>End Time</h6>
-                    <div className="form-group">
-                        <input type="time" className="form-control form-control-lg"
-                               name="endTime"
-                               step="900"
-                               onChange={this.onChange}
-                               required
-                        />
-                    </div>
-                    <input type="submit" className="btn btn-primary btn-block mt-4" name="action" value="Submit"
-                           onClick={() => this.setState({action: "Submit"})}/>
-                    <br/>
-                </form>
-        });
+        return <form onSubmit={this.onSubmit} id={id} onChange={this.validateForm(id, false)}
+                     style={this.state.newEntryActive === false ? {display: "none"} : {display: "block"}}>
+            <h6>New Time Frame</h6>
+            <h6>Date</h6>
+            <div className="form-group">
+                <input type="hidden" name="id" value={id}/>
+                <input type="date" className="form-control form-control-lg"
+                       name="date"
+                       onChange={this.onChange}
+                       required
+                />
+            </div>
+            <h6>Start Time</h6>
+            <div className="form-group">
+                <input type="time" className="form-control form-control-lg"
+                       name="startTime"
+                       step="900"
+                       onChange={this.onChange}
+                       required
+                />
+            </div>
+            <h6>End Time</h6>
+            <div className="form-group">
+                <input type="time" className="form-control form-control-lg"
+                       name="endTime"
+                       step="900"
+                       onChange={this.onChange}
+                       required
+                />
+            </div>
+            <input type="submit" className="btn btn-primary btn-block mt-4" name="action" value="Submit"
+                   onClick={() => this.setState({action: "Submit"})}/>
+            <br/>
+        </form>;
     }
 
     render() {
         let workHours = this.formatWorkHours();
-        let entryForms = [];
+        let entryForms = [this.generateEntryFormNew()];
 
         for (const element of this.state.hours) {
             entryForms = [...entryForms, this.generateEntryForm(element["id"], element["date"],
@@ -226,11 +212,10 @@ class HoursDisplay extends Component {
                             <hr/>
                             <pre>{workHours}</pre>
                             <button type="submit" className="btn btn-primary btn-block mt-4" value="New"
-                                    onClick={() => this.generateEntryFormNew()}
+                                    onClick={() => this.setState({newEntryActive: true})}
                                     disabled={this.state.newEntryActive}
                                     style={this.state.newEntryActive === true ? {display: "none"} : {display: "block"}}>New
                             </button>
-                            {this.state.newEntries}
                             <br/>
                             {entryForms}
                             <br/>
