@@ -35,7 +35,7 @@ class ServiceDataService {
 
     delete(employeeId, name)
     {
-        http.delete("/services/delete/" + employeeId + "/" + name);
+        http.delete(`/services/delete/${employeeId}/${name}`); 
     }
 }
 export default new ServiceDataService();
