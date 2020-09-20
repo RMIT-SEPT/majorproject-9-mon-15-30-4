@@ -19,18 +19,22 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    //Initial pathway for employeeID retrieval
-    @GetMapping("/{userName}")
+    /*  LOGIC::
+            * ENTER front-end variable, 'userName' via Axios
+            * GET front-end variable 'userName', if it matches, AND it exists in employeeService
+     */
+    @GetMapping
     private Employee getEmployeeByUserName(@PathVariable("userName") String userName)
     {
         return employeeService.getEmployeeByUsername(userName);
     }
 
 
-    //Initial pathway to welcome creation of new employee.
-    /*
-        * Assumes that EmployeeService, EmployeeRepository exists
-        * Assumes that Employee is created, and takes in values via Postman/React
+
+
+    /* LOGIC::
+        * ENTER new unit of Employee via Front-EnD
+        * SEND Employee into employeeServices' repository.
      */
     @PostMapping("")
     public ResponseEntity<Employee> createNewEmployee(@RequestBody Employee employeeInput )

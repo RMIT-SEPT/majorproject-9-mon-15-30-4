@@ -5,6 +5,7 @@ import RegisterButton from '../Register/RegisterButton'
 import BookingsButton from "../Bookings/BookingsButton";
 import DashboardButton from "../Dashboard/DashboardButton";
 import AdminDashboardButton from "../AdminDashboard/AdminDashboardButton";
+import RegisterEmployeeButton from '../RegisterEmployee/RegisterEmployeeButton'
 
 
 class Header extends Component {
@@ -72,6 +73,17 @@ class Header extends Component {
                             {this.logButton()}
                         </li>
                     </ul>
+
+                    <ul className="navbar-nav ml-auto">
+                            <li className="nav-item">
+                                <RegisterEmployeeButton/>
+                            </li>
+                        <li className="nav-item">
+                            {this.logButton()}
+                        </li>
+                    </ul>
+
+
                 </div>
             </div>
         </nav>

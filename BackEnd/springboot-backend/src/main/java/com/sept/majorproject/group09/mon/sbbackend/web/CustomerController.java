@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(
-        value = "/api/Customer",
-        method = RequestMethod.GET
+        value = "/api/Customer"
 )
 public class CustomerController
 {

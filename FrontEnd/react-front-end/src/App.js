@@ -11,6 +11,7 @@ import Register from './components/Register/Register';
 import AddBooking from "./components/Bookings/AddBooking";
 import Dashboard from './components/Dashboard/Dashboard';
 import AdminDashboard from './components/AdminDashboard/AdminDashboard';
+import RegisterEmployee from './components/RegisterEmployee/RegisterEmployee';
 
 
 function App() {
@@ -29,6 +30,8 @@ function App() {
         <Route exact path = "/register" component = {Register}/>
         <Route exact path = "/Dashboard" component = {Dashboard}/>
         <Route exact path = "/AdminDashboard" component = {AdminDashboard}/>
+        <Route exact path = "/registerEmployee" component = {RegisterEmployee}/>
+   
         </div>
     </Router>
   );
