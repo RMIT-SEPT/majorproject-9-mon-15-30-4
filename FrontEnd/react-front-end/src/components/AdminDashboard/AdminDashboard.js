@@ -4,6 +4,7 @@ import "./AddEmployee";
 import bookingService from "../../services/bookingService";
 import AddEmployee from './AddEmployee';
 import AddService from './AddService';
+import Service from "../Service/Service"
 
 class AdminDashboard extends Component{
     constructor(props){
@@ -28,7 +29,7 @@ class AdminDashboard extends Component{
                 <div className="container"> 
                     <div className="form-popup">
                         <div className="col-md-8 m-auto">
-                            <AddService/>
+                            <Service/>
                         </div>
                     </div>
                 </div>
