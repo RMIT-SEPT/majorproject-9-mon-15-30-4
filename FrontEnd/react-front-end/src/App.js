@@ -10,6 +10,7 @@ import Customer from "./components/Customer/Customer";
 import Register from './components/Register/Register';
 import AddBooking from "./components/Bookings/AddBooking";
 import Dashboard from './components/Dashboard/Dashboard';
+import AdminDashboard from './components/AdminDashboard/AdminDashboard';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route exact path="/login" component = { Login } />
         <Route exact path = "/register" component = {Register}/>
         <Route exact path = "/Dashboard" component = {Dashboard}/>
+        <Route exact path = "/AdminDashboard" component = {AdminDashboard}/>
         </div>
     </Router>
   );

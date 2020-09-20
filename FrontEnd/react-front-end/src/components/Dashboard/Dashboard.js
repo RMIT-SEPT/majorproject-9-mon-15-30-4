@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import "./Dashboard.css";
+import bookingService from "../../services/bookingService";
 
 class Dashboard extends Component{
-    isLoggedIn = false;
-
-
-
     constructor(props){
         super(props)
         this.state={
-            loggedIn: false
+            loggedIn: false,
+            employeeId: ""
         };
     }
     render(){
