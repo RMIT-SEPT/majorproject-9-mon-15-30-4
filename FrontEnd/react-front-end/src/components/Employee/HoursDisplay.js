@@ -29,6 +29,10 @@ class HoursDisplay extends Component {
         this.setState({hours: []});
         workingHoursService.getById("1").then(response => {
             for (const responseElement of response["data"]) {
+                let today = new Date();
+                let hoursDate = responseElement["date"].toString().split("-");
+                if(parseInt(hoursDate[0]) >= today.getFullYear() && parseInt(hoursDate[1]) >= today.getMonth() + 1
+                    && hoursDate[2] >= today.getDate())
                 this.setState({
                     hours: [...this.state.hours,
                         responseElement]
@@ -60,6 +64,13 @@ class HoursDisplay extends Component {
                 this.setState({newEntryActive: false});
                 this.loadHours();
             });
+
+            if(e.target.id.value === "0"){
+                const form = document.getElementById(e.target.id.value);
+                form["date"].value = null;
+                form.elements[2]["value"] = null;
+                form.elements[3]["value"] = null;
+            }
         } else if (this.state.action === "Delete") {
             workingHoursService.deleteById(e.target.id.value).then(response => {
                 this.loadHours();
