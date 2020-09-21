@@ -9,7 +9,7 @@ class HoursDisplay extends Component {
         this.state = {
             action: "",
             hours: [],
-            employeeId: "1",
+            employeeId: "Jim_User",
             newEntryActive: false
         };
 
@@ -27,7 +27,7 @@ class HoursDisplay extends Component {
 
     loadHours() {
         this.setState({hours: []});
-        workingHoursService.getById("1").then(response => {
+        workingHoursService.getById(this.state.employeeId).then(response => {
             for (const responseElement of response["data"]) {
                 let today = new Date();
                 let hoursDate = responseElement["date"].toString().split("-");

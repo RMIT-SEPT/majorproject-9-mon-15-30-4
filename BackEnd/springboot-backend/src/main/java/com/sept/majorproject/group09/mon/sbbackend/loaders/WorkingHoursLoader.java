@@ -30,10 +30,10 @@ public class WorkingHoursLoader implements CommandLineRunner {
         Calendar date = Calendar.getInstance();
 
         date.set(2020, Calendar.SEPTEMBER, 26);
-        this.repository.save(new WorkingHours("1", 8.3, 10.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
-        this.repository.save(new WorkingHours("1", 12.3, 16.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+        this.repository.save(new WorkingHours("Jim_User", 8.3, 10.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+        this.repository.save(new WorkingHours("Jim_User", 12.3, 16.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
 
         date.set(2020, Calendar.SEPTEMBER, 20);
-        this.repository.save(new WorkingHours("1", 8., 16.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+        this.repository.save(new WorkingHours("Jim_User", 8., 16.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
     }
 }
