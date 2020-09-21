@@ -42,5 +42,9 @@ public class ServiceService {
     public void saveOrUpdate(Service service) {
         serviceRepository.save(service);
     }
+
+    public void delete(Service service) {
+        serviceRepository.delete(service);
+    }
 }
 

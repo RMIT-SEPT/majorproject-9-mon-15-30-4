@@ -5,7 +5,9 @@ class EmployeeDataService {
         return http.get("/Employee/" + userName);
     }
 
-    get
-
+    getAllEmployees()
+    {
+        return http.get("/Employee/AllEmployees");
+    }
 }
 export default new EmployeeDataService();

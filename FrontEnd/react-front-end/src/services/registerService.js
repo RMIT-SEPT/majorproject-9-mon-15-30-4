@@ -1,5 +1,4 @@
 
-import http from "../http-common";
 import Axios from "axios";
 
 class RegisterService 
