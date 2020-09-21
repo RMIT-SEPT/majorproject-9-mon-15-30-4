@@ -123,13 +123,14 @@ class addService extends Component
                     }
             
                     servicesService.create(newService);
+                    window.location.reload(true);
                 });
 
         }).catch(e =>
             {
                 console.log(e);
             });
-            window.location.reload(true);
+            
     }
 
 
