@@ -46,4 +46,17 @@ public class ServiceController {
         serviceService.saveOrUpdate(service);
         return service.getId();
     }
+
+    @DeleteMapping("/delete/{employeeId}/{name}")
+    private boolean deleteServiceEntry(@PathVariable("employeeId") String employeeId, @PathVariable("name") String name)
+    {
+        serviceService.delete(serviceService.getServicesByEmployeeAndName(employeeId, name));
+        return true;
+    }
+
+    @DeleteMapping("/delete")
+    private void deleteServiceEntry(@RequestBody Service service)
+    {
+    	serviceService.delete(service);
+    }
 }

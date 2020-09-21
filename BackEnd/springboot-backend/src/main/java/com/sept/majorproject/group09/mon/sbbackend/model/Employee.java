@@ -47,34 +47,38 @@ public class Employee<WorkingHours> extends Account{
     public Employee(String nameInput, String passwordInput, String userNameInput, int employeePhoneInput, String employeeEmailInput)
     {
         super(nameInput, passwordInput, userNameInput);
-        this.employeePhone = employeePhoneInput;
+
         this.employeeEmail = employeeEmailInput;
+
+        if(AcceptableContactNumberLength(employeePhoneInput) == true)
+        {
+            this.employeePhone = employeePhoneInput;
+        }
+        else
+        {
+            this.employeePhone = 99999999;
+        }
     }
 
-    /// ----! IF ONLY PHONE ENTERED
-    public Employee(String nameInput, String passwordInput, String userNameInput, int employeePhoneInput)
+    //VALIDATORS
+    private boolean AcceptableContactNumberLength(int employee_phone_input)
     {
-        super(nameInput, passwordInput, userNameInput);
-        this.employeePhone = employeePhoneInput;
+        boolean result = false;
+
+        if(Integer.toString(employee_phone_input).length() >= 8 ||Integer.toString(employee_phone_input).length() <= 10 )
+        {
+            result = true;
+        }
+        return result;
     }
 
-    /// ----! IF ONLY EMAIL ENTERED
-    public Employee(String nameInput, String passwordInput, String userNameInput, String employeeEmailInput)
-    {
-        super(nameInput, passwordInput, userNameInput);
-        this.employeeEmail = employeeEmailInput;
-    }
+
+
     //GETTERS
 
     public int getEmployeePhone() {
 
-        int returnPhone = 0;
-
-        if(employeePhone != 0)
-        {
-            returnPhone = this.employeePhone;
-        }
-        return returnPhone;
+        return this.employeePhone;
     }
 
     public String getEmployeeEmail()

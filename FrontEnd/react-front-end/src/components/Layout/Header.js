@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import {Link} from "react-router-dom";
-import LoginService from '../../services/loginService'
 import RegisterButton from '../Register/RegisterButton'
 import BookingsButton from "../Bookings/BookingsButton";
 import BookingsHistoryButton from '../Bookings/BookingHistory/BookingsHistoryButton';
+import DashboardButton from "../Dashboard/DashboardButton";
+import AdminDashboardButton from "../AdminDashboard/AdminDashboardButton";
+import RegisterEmployeeButton from '../RegisterEmployee/RegisterEmployeeButton'
 
 
 class Header extends Component {
@@ -58,6 +60,16 @@ class Header extends Component {
                         <li className="nav-item">
                             <BookingsHistoryButton/>
                         </li>
+                    </ul>        
+                    <ul className="navbar-nav mr-auto">
+                        <li className="nav-item">
+                            <DashboardButton/>
+                        </li>
+                    </ul>
+                    <ul className="navbar-nav mr-auto">
+                        <li className="nav-item">
+                            <AdminDashboardButton/>
+                        </li>
                     </ul>
     
                     <ul className="navbar-nav ml-auto">
@@ -68,6 +80,16 @@ class Header extends Component {
                             {this.logButton()}
                         </li>
                     </ul>
+                    {/* <ul className="navbar-nav ml-auto">
+                            <li className="nav-item">
+                                <RegisterEmployeeButton/>
+                            </li>
+                        <li className="nav-item">
+                            {this.logButton()}
+                        </li>
+                    </ul> */}
+
+
                 </div>
             </div>
         </div>
