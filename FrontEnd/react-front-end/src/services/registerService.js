@@ -1,18 +1,20 @@
 
-import http from "../http-common";
 import Axios from "axios";
 
 class RegisterService 
 {
     
-    //++OUT-GOING METHODS
+    //++OUT-GOING METHODS -- CREATES a customer
     getByUsername(userName,password, name, contactEmail, contactNumber)
     {
-        // return http.get(`register/findUserByName/${userName}/${password}/${name}/${contactEmail}/${contactNumber}`);
+  
         return Axios.get(`http://localhost:8080/api/register/findUserByName/${userName}/${password}/${name}/${contactEmail}/${contactNumber}`);
     }
 
-
+    getByEmployeeUserName(userName, password, name, employeeEmail, employeePhone)
+    {
+        return Axios.get(`http://localhost:8080/api/register/findEmployeeByUsername/${userName}/${password}/${name}/${employeeEmail}/${employeePhone}`);
+    }
 
 
     //++INCOMING METHODS
@@ -23,6 +25,11 @@ class RegisterService
     checkDetails(userName, password, name, contactEmail, contactNumber)
     {
         return this.getByUsername(userName, password, name, contactEmail, contactNumber);
+    }
+
+    checkEmployeeDetails(userName, password, name, employeeEmail, employeePhone)
+    {
+        return this.getByEmployeeUserName(userName, password, name, employeeEmail, employeePhone);
     }
 
 }

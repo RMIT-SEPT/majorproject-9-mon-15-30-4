@@ -46,14 +46,26 @@ public class WorkingHours {
         this.day = day;
     }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     public String getEmployeeId() { return employeeId; }
 
     public double getStartTime() {
         return startTime;
     }
 
+    public void setStartTime(double startTime) {
+        this.startTime = startTime;
+    }
+
     public double getEndTime() {
         return endTime;
+    }
+
+    public void setEndTime(double endTime) {
+        this.endTime = endTime;
     }
 
     public DayOfWeek getDay() {

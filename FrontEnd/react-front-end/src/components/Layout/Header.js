@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
 import {Link} from "react-router-dom";
-import LoginService from '../../services/loginService'
 import RegisterButton from '../Register/RegisterButton'
 import BookingsButton from "../Bookings/BookingsButton";
+<<<<<<< HEAD
 import BookingsHistoryButton from '../Bookings/BookingHistory/BookingsHistoryButton';
+=======
+import DashboardButton from "../Dashboard/DashboardButton";
+import AdminDashboardButton from "../AdminDashboard/AdminDashboardButton";
+import RegisterEmployeeButton from '../RegisterEmployee/RegisterEmployeeButton'
+>>>>>>> f833317643ab1fc4929c3c28d81ee27d120a8357
 
 
 class Header extends Component {
@@ -52,11 +57,22 @@ class Header extends Component {
                             <BookingsButton/>
                         </li>
                     </ul>
+<<<<<<< HEAD
 
                 <div className="collapse navbar-collapse" id="mobile-nav">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
                             <BookingsHistoryButton/>
+=======
+                    <ul className="navbar-nav mr-auto">
+                        <li className="nav-item">
+                            <DashboardButton/>
+                        </li>
+                    </ul>
+                    <ul className="navbar-nav mr-auto">
+                        <li className="nav-item">
+                            <AdminDashboardButton/>
+>>>>>>> f833317643ab1fc4929c3c28d81ee27d120a8357
                         </li>
                     </ul>
     
@@ -68,6 +84,16 @@ class Header extends Component {
                             {this.logButton()}
                         </li>
                     </ul>
+                    {/* <ul className="navbar-nav ml-auto">
+                            <li className="nav-item">
+                                <RegisterEmployeeButton/>
+                            </li>
+                        <li className="nav-item">
+                            {this.logButton()}
+                        </li>
+                    </ul> */}
+
+
                 </div>
             </div>
         </div>

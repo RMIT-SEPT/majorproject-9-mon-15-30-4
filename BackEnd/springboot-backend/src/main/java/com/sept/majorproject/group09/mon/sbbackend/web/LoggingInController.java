@@ -26,7 +26,12 @@ public class LoggingInController
     Account loggedInAccount = null;
 
 
-    //Method assumes password is hashed
+    /**Method assumes password is hashed returns the account if logged in
+     * @deprecated Methods subject to chain when spring security is implemented
+     * @param userName
+     * @param password
+     * @return returns the account if log in is successful
+     */
     @GetMapping("/authentication/{userName}/{password}")
     public ResponseEntity<Account> authenticateUser(@PathVariable("userName") String userName, @PathVariable("password") String password)
     {
@@ -51,6 +56,11 @@ public class LoggingInController
     Account account = null;
     @GetMapping("/findUserByName/{userName}")
     
+    /**
+     * @deprecated Methods subject to chain when spring security is implemented
+     * @param userName
+     * @return returns the account by the username
+     */
     public ResponseEntity<Account> getUserByName(@PathVariable("userName") String userName)
     {
     	account = customerService.getCustomerByUsername(userName);
@@ -64,6 +74,11 @@ public class LoggingInController
     	}
     }
     
+    /**
+     * @deprecated Methods subject to chain when spring security is implemented
+     * @param password
+     * @return returns an account is password is matches
+     */
     @GetMapping("/checkPassword/{password}")
     public ResponseEntity<Account> checkPassword(@PathVariable("password") String password)
     {
@@ -77,6 +92,10 @@ public class LoggingInController
     	}
     }
     
+    /**
+     * @deprecated Methods subject to chain when spring security is implemented
+     * @return returns a boolean if the nuser is logged in
+     */
     @GetMapping("/loggedIn")
     public ResponseEntity<Boolean> isLoggedIn()
     {

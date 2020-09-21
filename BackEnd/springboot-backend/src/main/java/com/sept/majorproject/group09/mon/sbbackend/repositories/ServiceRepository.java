@@ -21,4 +21,5 @@ public interface ServiceRepository extends CrudRepository<Service, Long> {
     @Query(value = "SELECT * FROM Service WHERE employee_id = :employeeId AND name = :name", nativeQuery = true)
     Service findAllByEmployeeAndName(@Param("employeeId") String employeeId,
                                            @Param("name") String name);
+
 }

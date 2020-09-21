@@ -42,12 +42,17 @@ class AddBooking extends Component {
         return self.indexOf(value) === index;
     }
 
-    updateBookingFields() {
+    updateBookingFields() 
+    {
         servicesService.getAll()
-            .then(response => {
-                for (const responseElement of response["data"]) {
-                    servicesService.getById(responseElement["id"]).then(response => {
-                        this.setState({
+            .then(response => 
+            {
+                for (const responseElement of response["data"]) 
+                {
+                    servicesService.getById(responseElement["id"]).then(response => 
+                    {
+                        this.setState(
+                        {
                             services: [...this.state.services,
                                 response["data"]["name"]]
                         });
