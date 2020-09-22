@@ -3,6 +3,8 @@
 * Project Structure
 * How To: Registering A Customer Account
 * How To: Registering An Employee Account
+* How To: Create a Booking
+* How To: Edit Employee's Working Hours
 
 ## Project Structure
 
@@ -54,13 +56,24 @@ Project
         +-src
             +- components
                 +- Bookings
+		    | +- AddBooking.js
+		    | +- BookingsButton.js
                 +- Customer
+		+- Employee
+		    | +- hoursButton.js
+		    | +- HoursDisplay
                 +- Layout
                 +- Login
                 +- Register
 		+- Service
             +- services
-                +- ...
+                +- bookingService.js
+                +- employeeService.js
+                +- http-common.js
+                +- loginService.js
+                +- registerService.js
+                +- servicesService.js
+                +- workingHoursService.js
 ```
 
 ---
@@ -120,4 +133,23 @@ Project
  - press the submit button
  - The Service is now removed from the employee
  --- 
- 
+  ### How To: Create a booking
+ - Assuming both the front-end and back-end is running, then a booking can be created.
+ - Navigate to localhost:3000/Bookings (Found on the header banner)
+ - Select a service
+ - If available select an employee; after which the available times will be displayed
+ - Fill in the form to match a corresponding timeframe
+ - Click submit, if valid, the form will reset and your booking will appear in the backend
+ ---
+ ### How To: Edit an employee's working hours
+ - Assuming both the front-end and back-end is running, then a booking can be created.
+ - navigate to localhost:3000/home/employee/hours (Link on employee dashboard)
+ - Current timetable shown in plain text at the top of the page.
+ - Existing time slots are displayed in forms, edit the form values and click the corresponding submit,
+   the page will be reloaded and the new times will be refelcted.
+ - To create a new timeslot, click the 'new' button at the top of the page, fill out the form and click submit.
+ - Start time must preceed endtime
+ - Time minutes must be :00, :15, :30 or :45
+ - To delete hours, click the delete button under the correpsonding form.
+ - Click submit on the corresponding form, if valid, the page will reload and the new hours will appear in the backend
+ ---  
