@@ -1,42 +1,59 @@
-# Java Gradle CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-java/ for more details
-#
-version: 2
+version: 2.1
+
+orbs:
+  aws-ecr: circleci/aws-ecr@6.12.2
+  aws-ecs: circleci/aws-ecs@1.3.0
+
 jobs:
-  build:
+  back-end-build_and_deploy:
     docker:
-      # specify the version you desire here
       - image: circleci/openjdk:8-jdk
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
-    working_directory: ~/repo
-
     environment:
-      # Customize the JVM maximum heap limit
-      JVM_OPTS: -Xmx3200m
-      TERM: dumb
+      ECR_REPOSITORY_NAME: majorproject-9-mon-15-30-4
+      FULL_IMAGE_NAME: majorproject-9-mon-15-30-4
 
     steps:
       - checkout
+      - setup_remote_docker
+      - restore_cache: 
+          key: circleci-demo-java-spring-{{ checksum "BackEnd/springboot-backend/pom.xml" }}
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "build.gradle" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
-      - run: gradle dependencies
-
-      - save_cache:
+      - run: cd ./BackEnd/springboot-backend && mvn dependency:go-offline
+      - save_cache: 
           paths:
-            - ~/.gradle
-          key: v1-dependencies-{{ checksum "build.gradle" }}
+              - ~/BackEnd/springboot-backend/.m2
+          key: circleci-demo-java-spring-{{ checksum "BackEnd/springboot-backend/pom.xml" }}
 
-      # run tests!
-      - run: gradle test
+      - run: cd ./BackEnd/springboot-backend && mvn package 
+
+      - store_test_results:
+           
+            path: BackEnd/springboot-backend/target/surefire-reports
+
+      - store_artifacts:
+            path: BackEnd/springboot-backend/target/majorproject-9-mon-15-30-4
+
+      # - run:
+      #     name: Install dependencies for AWS
+      #     command: |
+      #       sudo apt-get update
+      #       sudo apt-get -y -qq install awscli
+      #       sudo apt-get install python3-pip
+      #       sudo pip3 install --upgrade awscli
+      # - run:
+      #     name: Build image
+      #     command: |
+      #       cd ./BackEnd && docker build -t $FULL_IMAGE_NAME .
+      # - run:
+      #     name: Push image
+      #     command: |
+      #       cd ./BackEnd/springboot-backend && aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 803415849016.dkr.ecr.us-east-1.amazonaws.com
+      #       docker push $FULL_IMAGE_NAME
+
+workflows:
+  testing_suite:
+    jobs:
+      - back-end-build_and_deploy:
+          filters:
+            branches:
+              only: master
