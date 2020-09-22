@@ -1,0 +1,59 @@
+version: 2.1
+
+orbs:
+  aws-ecr: circleci/aws-ecr@6.12.2
+  aws-ecs: circleci/aws-ecs@1.3.0
+
+jobs:
+  back-end-build_and_deploy:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    environment:
+      ECR_REPOSITORY_NAME: majorproject-9-mon-15-30-4
+      FULL_IMAGE_NAME: majorproject-9-mon-15-30-4
+
+    steps:
+      - checkout
+      - setup_remote_docker
+      - restore_cache: 
+          key: circleci-demo-java-spring-{{ checksum "BackEnd/springboot-backend/pom.xml" }}
+
+      - run: cd ./BackEnd/springboot-backend && mvn dependency:go-offline
+      - save_cache: 
+          paths:
+              - ~/BackEnd/springboot-backend/.m2
+          key: circleci-demo-java-spring-{{ checksum "BackEnd/springboot-backend/pom.xml" }}
+
+      - run: cd ./BackEnd/springboot-backend && mvn package 
+
+      - store_test_results:
+           
+            path: BackEnd/springboot-backend/target/surefire-reports
+
+      - store_artifacts:
+            path: BackEnd/springboot-backend/target/majorproject-9-mon-15-30-4
+
+      # - run:
+      #     name: Install dependencies for AWS
+      #     command: |
+      #       sudo apt-get update
+      #       sudo apt-get -y -qq install awscli
+      #       sudo apt-get install python3-pip
+      #       sudo pip3 install --upgrade awscli
+      # - run:
+      #     name: Build image
+      #     command: |
+      #       cd ./BackEnd && docker build -t $FULL_IMAGE_NAME .
+      # - run:
+      #     name: Push image
+      #     command: |
+      #       cd ./BackEnd/springboot-backend && aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 803415849016.dkr.ecr.us-east-1.amazonaws.com
+      #       docker push $FULL_IMAGE_NAME
+
+workflows:
+  testing_suite:
+    jobs:
+      - back-end-build_and_deploy:
+          filters:
+            branches:
+              only: master
