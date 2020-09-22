@@ -3,6 +3,8 @@
 * Project Structure
 * How To: Registering A Customer Account
 * How To: Registering An Employee Account
+* How To: Add a service to an employee
+* How To: Remove a service from an employee
 * How To: Create a Booking
 * How To: Edit Employee's Working Hours
 
@@ -125,7 +127,7 @@ Project
  --- 
  
  ---
- ### How To: Add a service to an employee
+ ### How To: Remove a service from an employee
  - Assuming both the front-end and back-end is running, then the Admin can edit an employees services.
  - navigate to localhost:3000/ChangeService
  - Under the Remove a service, select the employee from the first dropdown box
