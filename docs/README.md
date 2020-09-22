@@ -151,5 +151,6 @@ Project
  - Start time must preceed endtime
  - Time minutes must be :00, :15, :30 or :45
  - To delete hours, click the delete button under the correpsonding form.
- - Click submit on the corresponding form, if valid, the page will reload and the new hours will appear in the backend
+ - If new or modified hours are submitted successfully they will appear in the backend and be reflect in the
+   plaintext at the top of the page.
  ---  
