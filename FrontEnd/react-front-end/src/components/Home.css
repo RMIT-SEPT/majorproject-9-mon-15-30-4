@@ -1,0 +1,16 @@
+.PImageFrontHeader
+{
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    width: 120%;
+    position: fixed;
+    left: -10px
+
+}
+.CardInfoOntopImage
+{
+    bottom: -80px;
+    left: 80px;
+    position: relative;
+}

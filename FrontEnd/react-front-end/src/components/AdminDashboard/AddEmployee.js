@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import registerService from "../../services/registerService.js";
 
+import { Container, Form, Button, Jumbotron } from "react-bootstrap";
+
 class AddEmployee extends Component{
     constructor(props)
     {
@@ -62,7 +64,104 @@ class AddEmployee extends Component{
     render(){
         return(        
             <div>
+                <Container>
                 <h2 className="display-5 text-center">Add New Employee</h2>
+
+                <Jumbotron>
+                <Form onSubmit ={this.onSubmit}>
+
+                <Form.Group>
+                    <Form.Label>
+                        Username
+                    </Form.Label>
+                    <Form.Control 
+                    type = "Text" 
+                    placeholder = "Username"
+                    name = "userName"
+                    value = {this.state.userName}
+                    onChange = {this.onChange}
+                    />
+                    <Form.Text>
+                        Please enter your username
+                    </Form.Text>
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>
+                        Password
+                    </Form.Label>
+                    <Form.Control 
+                        type = "password"
+                        placeholder = "Password"
+                        name = "password"
+                        value = {this.state.password}
+                        onChange = {this.onChange}
+                        aria-describedby="passwordHelpBlock"
+                    />
+                    <Form.Text id= "passwordHelpBlock" muted>
+                        Enter a password between 5-300 characters long.
+                    </Form.Text>
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>
+                        Name
+                    </Form.Label>
+                    <Form.Control 
+                        type = "text"
+                        placeholder = "Name"
+                        name = "name"
+                        value = {this.state.name}
+                        onChange = {this.onChange}
+                    />
+                    <Form.Text>
+                        Enter a name for us to recognise you.
+                    </Form.Text>
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>
+                        Email
+                    </Form.Label>
+                    <Form.Control 
+                        type = "email"
+                        placeholder = "Example@Email.com"
+                        name = "employeeEmail"
+                        value = {this.state.employeeEmail}
+                        onChange = {this.onChange}
+                    />
+                    <Form.Text>
+                        Enter a name for us to recognise you.
+                    </Form.Text>
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>
+                        Phone Number
+                    </Form.Label>
+                    <Form.Control 
+                        type = "tel"
+                        placeholder = "04 1234566"
+                        name = "employeePhone"
+                        value = {this.state.employeePhone}
+                        onChange = {this.onChange}
+                        
+                    />
+                    <Form.Text>
+                        Please enter a contact number between 8-10 digits.
+                    </Form.Text>
+                </Form.Group>
+
+                <Button type = "Submit" block> Add Employee </Button>
+                </Form>
+                </Jumbotron>
+
+
+                </Container>
+
+
+
+                {/* <h2 className="display-5 text-center">Add New Employee</h2>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <input type="text" className="form-control form-control-lg " 
@@ -114,7 +213,7 @@ class AddEmployee extends Component{
                     <input type="submit" value = "Add Employee" className="btn btn-primary btn-block mt-4" />
 
 
-                </form>
+                </form> */}
             </div>
         )
     }

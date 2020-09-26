@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import {Link} from "react-router-dom";
 import RegisterButton from '../Register/RegisterButton'
 import BookingsButton from "../Bookings/BookingsButton";
-<<<<<<< HEAD
 import BookingsHistoryButton from '../Bookings/BookingHistory/BookingsHistoryButton';
-=======
 import DashboardButton from "../Dashboard/DashboardButton";
 import AdminDashboardButton from "../AdminDashboard/AdminDashboardButton";
-import RegisterEmployeeButton from '../RegisterEmployee/RegisterEmployeeButton'
->>>>>>> f833317643ab1fc4929c3c28d81ee27d120a8357
+
+
+
+import { Nav, Navbar, Button } from "react-bootstrap";
 
 
 class Header extends Component {
@@ -39,67 +39,43 @@ class Header extends Component {
             </React.Fragment>
         )   
     }
+
     render() {
         return (
             <div>
-            <nav className="navbar navbar-expand-sm navbar-dark bg-secondary mb-4">
-            <div className="container">
-                <a className="navbar-brand" href="Home.html">
-                    GymBros
-                </a>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
-                    <span className="navbar-toggler-icon" />
-                </button>
+                  <Navbar bg = "dark" variant = "dark" style ={{color:"#00000"}}> 
+                    <Navbar.Brand href = "Home">
+                        <img
+                        alt = ""
+                        src = "./images/icon_barbell-3.png"
+                        width ="50"
+                        height ="50"
+                        className = "icon-barbell"
+                        color = "#FFFFFF"
+                         />
+                         
+                    </Navbar.Brand>{''}
+
+                    <Nav>
+                        <BookingsButton/>
+                        <BookingsHistoryButton/>
+                        <DashboardButton/>
+                        <AdminDashboardButton/>
+
+                    </Nav>
+
+                    <Nav className ="ml-auto">
+                        <Button variant ="outline -info">{<RegisterButton/>} </Button>
+                        <Button variant ="outline-info" >{this.logButton()}</Button>
+                    </Nav> 
     
-                <div className="collapse navbar-collapse" id="mobile-nav">
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item">
-                            <BookingsButton/>
-                        </li>
-                    </ul>
-<<<<<<< HEAD
-
-                <div className="collapse navbar-collapse" id="mobile-nav">
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item">
-                            <BookingsHistoryButton/>
-=======
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item">
-                            <DashboardButton/>
-                        </li>
-                    </ul>
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item">
-                            <AdminDashboardButton/>
->>>>>>> f833317643ab1fc4929c3c28d81ee27d120a8357
-                        </li>
-                    </ul>
-    
-                    <ul className="navbar-nav ml-auto">
-                            <li className="nav-item">
-                                <RegisterButton/>
-                            </li>
-                        <li className="nav-item">
-                            {this.logButton()}
-                        </li>
-                    </ul>
-                    {/* <ul className="navbar-nav ml-auto">
-                            <li className="nav-item">
-                                <RegisterEmployeeButton/>
-                            </li>
-                        <li className="nav-item">
-                            {this.logButton()}
-                        </li>
-                    </ul> */}
-
-
-                </div>
-            </div>
+                </Navbar>
+            
         </div>
-        </nav>
-            </div>
-        )
+      
+      )
+
+
     }
 }
 

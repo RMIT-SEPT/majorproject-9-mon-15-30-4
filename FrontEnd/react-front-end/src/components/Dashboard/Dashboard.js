@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import "./Dashboard.css";
-import bookingService from "../../services/bookingService";
 import HoursButton from "../Employee/hoursButton";
 
 class Dashboard extends Component{

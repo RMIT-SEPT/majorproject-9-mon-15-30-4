@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import "./Login.css";
 import loginService from "../../services/loginService.js";
-import LoginHeader from './LoginHeader';
 import Header from "../Layout/Header";
+
+import { Form, Container, Button, Jumbotron, Nav } from "react-bootstrap";
 
 class Login extends Component {
     isLoggedIn =false;
@@ -50,28 +51,60 @@ class Login extends Component {
 
         if(!this.state.loggedIn)
         {
-            return (
-                <div className = "form" >
-                    <LoginHeader/>
-                    <form onSubmit = {this.onSubmit}>
-                        <label htmlFor="username">Username:</label>
-                        <input type="text" id="userName" name="userName" placeholder = "eg: buffman123" value = {this.state.userName} onChange = {this.onChange} autoComplete = "username"></input>
-                        <br/>
-                        <label htmlFor="password"> Password:</label>
-                        <input type="password" id="password" name="password" placeholder = "Password" value = {this.state.password} onChange = {this.onChange} autoComplete = "current-password"></input>
-                        <br/>
-                        <input type="submit" value="Submit" className="btn btn-primary btn-block mt-4"></input>
-                    </form>
-                    
+            return(
+                <div>
+                    <Container fluid = "md">
+             
+                        <Jumbotron className ="text-auto">
+                        
+                        <h1> Welcome!</h1>
+                        <p>
+                            Enter your details to log in.
+                        </p>
+
+
+                      
+ 
+                        <Form onSubmit = {this.onSubmit}>
+                            <Form.Group controlId = "formEmail">
+                                <Form.Label>
+                                    Email Address
+                                </Form.Label>
+                                <Form.Control type = "email" placeholder = "Example@Email.com"/>
+                                <Form.Text>
+                                   Please enter your email.
+                                </Form.Text>
+                            </Form.Group>
+
+                            <Form.Group controlId = "formPassword">
+                                <Form.Label>
+                                    Password
+                                </Form.Label>
+                                <Form.Control type ="password" placeholder = "Password" />
+
+                            </Form.Group>
+
+                            <Nav className = "ml-auto">
+                               <Button variant ="secondary" type ="submit"> Login</Button> 
+                            </Nav>
+                            
+                        </Form>
+
+                          </Jumbotron>
+
+                    </Container>
+ 
                 </div>
-    
             )
         }
         else
         {
-            return (
-                <div>Welcome, Login Successful</div>
+            return(
+       
+                <div>Welcome. Login Successful.</div>
+  
             )
+            
         }
         
     }

@@ -3,6 +3,7 @@ import servicesService from "../../services/servicesService";
 import employeeService from "../../services/employeeService";
 
 
+
 class AddService extends Component{
     constructor(props) {
         super(props);
@@ -97,6 +98,7 @@ class AddService extends Component{
         const services = this.state.services
             .filter((v, i, a) => a.indexOf(v) === i)
             .toString().split(",");
+
         let serviceSelect = <select className="form-control form-control-lg "
                                     name="serviceId"
                                     value={this.state.serviceId}
@@ -114,6 +116,7 @@ class AddService extends Component{
             {employees.map(this.makeOption)}</select>;
         return(
             <div>
+
                 <h2 className="display-5 text-center">Assign Service to Employee</h2>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
