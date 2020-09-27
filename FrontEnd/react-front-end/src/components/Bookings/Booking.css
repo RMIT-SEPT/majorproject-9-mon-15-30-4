@@ -39,7 +39,6 @@
 		background-color: #66d9ff;
 		border: 1px solid #0099cc;
 		color: white;
-		/*display: inline-block;*/
 		cursor: pointer;
 		border-radius: 2px;
 		padding-top: 22px;
@@ -66,10 +65,4 @@
 
 	.container.space-between {
 		justify-content: space-between;
-	}
-
-	.tooltip {
-		position: relative;
-		display: inline-block;
-		border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
 	}

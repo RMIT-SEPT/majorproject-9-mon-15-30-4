@@ -72,8 +72,6 @@ class AddBooking extends Component {
     }
 
     onChange(e) {
-        console.log(e.target.name)
-        console.log(e.target.value)
         if(e.target.name !== "timedate")
             this.setState({[e.target.name]: e.target.value});
         else {
@@ -291,7 +289,7 @@ class AddBooking extends Component {
                                                name="timedate"
                                                title={"Start Time: " + date.getHours() + ":"
                                                + (date.getMinutes() === 0 ? "00" : date.getMinutes())
-                                               + ", Duration: " + this.state.serviceDuration + ", With: "
+                                               + ", Duration: " + this.state.serviceDuration + " minutes, With: "
                                                + this.state.employeeId}
                                                value={(date.getHours().toString().length === 1 ? "0" + date.getHours()
                                                     : date.getHours()) + ":" + (date.getMinutes() === 0 ? "00" :
@@ -314,7 +312,7 @@ class AddBooking extends Component {
 
         if(rows.length === 0)
             rows = <tr><th>N/A</th>
-                <th>Select a service, and a preferred employee.</th></tr>;
+                <th>N/A</th></tr>;
         return rows;
     }
 
@@ -337,8 +335,6 @@ class AddBooking extends Component {
                                      disabled={!this.state.serviceSelected}>
             <option default>{this.state.employeePlaceholder}</option>
             {employees.map(this.makeOption)}</Form.Control>;
-
-        let availableTimes = this.formatAvailableTimes();
 
         return (
             <div className="Booking">
