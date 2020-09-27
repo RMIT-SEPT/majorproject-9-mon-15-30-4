@@ -4,7 +4,7 @@ import servicesService from "../../services/servicesService";
 import employeeService from "../../services/employeeService";
 
 import "./Booking.css";
-import {Button, Container, Form, Jumbotron, Nav} from "react-bootstrap";
+import {Container, Form, Jumbotron} from "react-bootstrap";
 
 class AddBooking extends Component {
     constructor(props) {
@@ -72,7 +72,15 @@ class AddBooking extends Component {
     }
 
     onChange(e) {
-        this.setState({[e.target.name]: e.target.value});
+        console.log(e.target.name)
+        console.log(e.target.value)
+        if(e.target.name !== "timedate")
+            this.setState({[e.target.name]: e.target.value});
+        else {
+            this.setState({time: e.target.value.split("#")[0]});
+            this.setState({date: e.target.value.split("#")[1]});
+        }
+
         if (e.target.name === "serviceId") {
             this.updateEmployees(e.target.value);
             servicesService.getByName(e.target.value).then(response => {
@@ -207,7 +215,7 @@ class AddBooking extends Component {
 
         for (let i = 0; i < 1440; i += size) {
             hours = parseInt(i / 60);
-            minutes = i % 60 == 0 ? "00" : i % 60;
+            minutes = i % 60 === 0 ? "00" : i % 60;
             let time = hours + ":" + minutes;
             times = [...times, <div id={time + ":" + i}>{time}</div>];
         }
@@ -221,18 +229,17 @@ class AddBooking extends Component {
             let year = this.state.availableTimes[0][1], month = this.state.availableTimes[0][2],
                 day = this.state.availableTimes[0][3];
             let prevDate = new Date(year, month, day);
-            dates = [...dates, month +  "/" + day, <br/>];
+            dates = [...dates, month +  "/" + day];
 
             for (let i = 0; i < this.state.availableTimes.length; i++) {
                 let year = this.state.availableTimes[i][1], month = this.state.availableTimes[i][2],
                     day = this.state.availableTimes[i][3], hour = this.state.availableTimes[i][4],
-                    minute = this.state.availableTimes[i][5], endHour = this.state.availableTimes[i][6],
-                    endMinute = this.state.availableTimes[i][7];
+                    minute = this.state.availableTimes[i][5];
                 date = new Date(year, month, day, hour, minute);
-                if (date.getFullYear() != prevDate.getFullYear()
+                if (date.getFullYear() !== prevDate.getFullYear()
                     || date.getMonth() !== prevDate.getMonth()
                     || date.getDay() !== prevDate.getDay())
-                    dates = [...dates, month +  "/" + day, <br/>];
+                    dates = [...dates, month +  "/" + day];
                 prevDate = date;
             }
         }
@@ -253,7 +260,7 @@ class AddBooking extends Component {
                 buttons = cBR[0];
 
                 blocks = [...blocks,
-                    <div style={{position : "relative"}}>{buttons}</div>, <br/>];
+                    <div style={{position : "relative"}}>{buttons}</div>];
                 date = cBR[2];
                 i = cBR[1];
             }
@@ -262,7 +269,7 @@ class AddBooking extends Component {
         return blocks;
     }
 
-    createBlockButton(i, prevDate){
+    createBlockButton(i, prevDate) {
         let buttons = [], date, dateEndTime;
 
         for (; i < this.state.availableTimes.length; i++) {
@@ -272,7 +279,7 @@ class AddBooking extends Component {
                 endMinute = this.state.availableTimes[i][7];
             date = new Date(year, month, day, hour, minute);
             dateEndTime = new Date(year, month, day, endHour, endMinute);
-            if(date.getFullYear() != prevDate.getFullYear()
+            if (date.getFullYear() !== prevDate.getFullYear()
                 || date.getMonth() !== prevDate.getMonth()
                 || date.getDay() !== prevDate.getDay())
                 break;
@@ -280,18 +287,42 @@ class AddBooking extends Component {
             do {
                 let position = (date.getHours() * 60 + date.getMinutes()) / 1440 * 100 + "%";
                 let length = this.state.serviceDuration / 1440 * 100 + "%";
-                buttons = [...buttons, <button style={{left: position, width: length}}></button>];
+                buttons = [...buttons, <button style={{left: position, width: length}}
+                                               name="timedate"
+                                               title={"Start Time: " + date.getHours() + ":"
+                                               + (date.getMinutes() === 0 ? "00" : date.getMinutes())
+                                               + ", Duration: " + this.state.serviceDuration + ", With: "
+                                               + this.state.employeeId}
+                                               value={(date.getHours().toString().length === 1 ? "0" + date.getHours()
+                                                    : date.getHours()) + ":" + (date.getMinutes() === 0 ? "00" :
+                                                    date.getMinutes()) + "#" + year + "-"
+                                                    + (month.toString().length === 1 ? "0" + month : month) + "-"
+                                                    + (day.toString().length === 1 ? "0" + day : day)}
+                                               onMouseEnter={this.onChange}
+                                               onClick={this.onSubmit}></button>];
                 date = new Date(date.getTime() + this.state.serviceDuration * 60000);
-            } while(date < dateEndTime);
+            } while (date < dateEndTime);
         }
         return [buttons, i - 1, date];
+    }
+
+    createTimeRows(dates, blocks){
+        let rows = [];
+        for (let i = 0; i < dates.length; i++) {
+            rows = [...rows, <tr><th>{dates[i]}</th><th>{blocks[i]}</th></tr>]
+        }
+
+        if(rows.length === 0)
+            rows = <tr><th>N/A</th>
+                <th>Select a service, and a preferred employee.</th></tr>;
+        return rows;
     }
 
     render() {
         const services = this.state.services
             .filter((v, i, a) => a.indexOf(v) === i)
             .toString().split(",");
-        let serviceSelect = <Form.Control as="select" controlId="serviceId"
+        let serviceSelect = <Form.Control as="select"
                                     name="serviceId"
                                     value={this.state.serviceId}
                                     onChange={this.onChange}>
@@ -319,6 +350,9 @@ class AddBooking extends Component {
                             <p>
                                 Enter your require service, preferred employee and select a available time-block.
                             </p>
+                            <p>
+                                If no times appear, please try another employee.
+                            </p>
 
                             <Form onSubmit = {this.onSubmit}>
                                 <Form.Group controlId = "formBooking">
@@ -335,8 +369,8 @@ class AddBooking extends Component {
                                     <div className="form-group">
                                         {employeeSelect}
                                     </div>
-                                    <label class="label-a-t">Available Times</label>
-                                    <label>Click to book.</label>
+                                    <label className="label-a-t">Available Times</label>
+                                    <span> </span><label>-Hover for details, Click to book.</label>
                                 </Form.Group>
                             </Form>
 
@@ -348,20 +382,17 @@ class AddBooking extends Component {
                                     <col span="1" style={{width : "93%"}}/>
                                 </colgroup>
                                 <thead>
-                                <th style={{backgroundColor: "#343A40", color: "#A6A6A6"}}>Date</th>
-                                <th style={{backgroundColor: "#343A40", color: "#A6A6A6"}}>
-                                    <div className="container space-between" style={{display : "flex"}}>
-                                    {this.generateScheduleTimes(120)}
-                                    </div>
-                                </th>
+                                <tr>
+                                    <th style={{backgroundColor: "#343A40", color: "#A6A6A6"}}>Date</th>
+                                    <th style={{backgroundColor: "#343A40", color: "#A6A6A6"}}>
+                                        <div className="container space-between" style={{display : "flex"}}>
+                                            {this.generateScheduleTimes(120)}
+                                        </div>
+                                    </th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                <th style={{backgroundColor: "#FFFFFF"}}>
-                                    {this.blockTimes()}
-                                </th>
-                                <th style={{backgroundColor: "#FFFFFF"}}>
-                                    {this.createBlocks()}
-                                </th>
+                                {this.createTimeRows(this.blockTimes(), this.createBlocks())}
                                 </tbody>
                             </table>
                             </div>
@@ -369,43 +400,6 @@ class AddBooking extends Component {
                         </Jumbotron>
 
                     </Container>
-
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-8 m-auto">
-                            <h5 className="display-4 text-center">Create Booking</h5>
-                            <hr/>
-                            <form onSubmit={this.onSubmit}>
-                                <div className="form-group">
-                                    {employeeSelect}
-                                </div>
-                                <h6>Date</h6>
-                                <div className="form-group">
-                                    <input type="date" className="form-control form-control-lg"
-                                           name="date"
-                                           value={this.state.date}
-                                           onChange={this.onChange}
-                                           disabled={!this.state.employeeSelected}
-                                    />
-                                </div>
-                                <h6>Time</h6>
-                                <div className="form-group">
-                                    <input type="time" className="form-control form-control-lg"
-                                           name="time"
-                                           value={this.state.time}
-                                           step="900"
-                                           onChange={this.onChange}
-                                           disabled={!this.state.employeeSelected}
-                                    />
-                                </div>
-                                <input type="submit" className="btn btn-primary btn-block mt-4"
-                                       disabled={!this.state.serviceSelected || !this.state.employeeSelected
-                                       || !this.state.dateSelected || !this.state.timeSelected}/>
-                            </form>
-                            <pre>{availableTimes}</pre>
-                        </div>
-                    </div>
-                </div>
             </div>
         )
     }

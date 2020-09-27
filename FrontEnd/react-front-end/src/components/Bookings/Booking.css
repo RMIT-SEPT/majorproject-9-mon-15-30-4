@@ -26,19 +26,26 @@
 		padding: 5px;
 	}
 
+	tr:nth-child(even) {
+		background-color: #FFFFFF;
+	}
+
+	tr:nth-child(odd) {
+		background-color: #F2FFFF;
+	}
+
 	button {
 		position: absolute;
 		background-color: #66d9ff;
 		border: 1px solid #0099cc;
 		color: white;
-		text-align: left;
-		text-decoration: none;
-		display: inline-block;
-		font-size: 16px;
+		/*display: inline-block;*/
 		cursor: pointer;
 		border-radius: 2px;
-		margin-bottom: 20px;
-		padding-top: 15px;
+		padding-top: 22px;
+		top: 50%;
+		-ms-transform: translateY(-50%);
+		transform: translateY(-50%);
 	}
 
 	.label-a-t {
@@ -49,6 +56,20 @@
 		display: inline-block;
 	}
 
+	.label {
+		color: white;
+		background-color: #66d9ff;
+		border-radius: 12px;
+		padding: 1px 7px;
+		display: inline-block;
+	}
+
 	.container.space-between {
 		justify-content: space-between;
+	}
+
+	.tooltip {
+		position: relative;
+		display: inline-block;
+		border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
 	}
