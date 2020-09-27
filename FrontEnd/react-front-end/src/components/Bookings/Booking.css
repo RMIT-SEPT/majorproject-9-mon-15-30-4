@@ -1,0 +1,54 @@
+
+	.form {
+		margin: 0 auto;
+		width: 250px;
+	}
+	.form label{
+		display: inline-block;
+		text-align: right;
+		float: left;
+	}
+	.form input{  
+		display: inline-block;
+		text-align: left;
+		float: right;
+	}
+
+	table, th, td {
+		font-weight: normal;
+		table-layout: fixed;
+		width: 100%;
+		border: 1px solid black;
+		border-collapse: collapse;
+	}
+
+	th, td {
+		padding: 5px;
+	}
+
+	button {
+		position: absolute;
+		background-color: #66d9ff;
+		border: 1px solid #0099cc;
+		color: white;
+		text-align: left;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		cursor: pointer;
+		border-radius: 2px;
+		margin-bottom: 20px;
+		padding-top: 15px;
+	}
+
+	.label-a-t {
+		color: white;
+		background-color: #66d9ff;
+		border-radius: 12px;
+		padding: 1px 7px;
+		display: inline-block;
+	}
+
+	.container.space-between {
+		justify-content: space-between;
+	}
