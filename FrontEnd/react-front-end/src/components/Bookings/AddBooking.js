@@ -290,7 +290,7 @@ class AddBooking extends Component {
                     date.getMinutes()) + "#" + year + "-"
                     + (month.toString().length === 1 ? "0" + month : month) + "-"
                     + (day.toString().length === 1 ? "0" + day : day);
-                buttons = [...buttons, <button style={{left: position, width: length}}
+                buttons = [...buttons, <button className="button-bp" style={{left: position, width: length}}
                                                id={valueId}
                                                name="timedate"
                                                value={valueId}
@@ -313,12 +313,12 @@ class AddBooking extends Component {
     createTimeRows(dates, blocks){
         let rows = [];
         for (let i = 0; i < dates.length; i++) {
-            rows = [...rows, <tr><th>{dates[i]}</th><th>{blocks[i]}</th></tr>]
+            rows = [...rows, <tr className="tr-bp"><th className="th-bp">{dates[i]}</th><th className="th-bp">{blocks[i]}</th></tr>]
         }
 
         if(rows.length === 0)
-            rows = <tr><th>N/A</th>
-                <th>N/A</th></tr>;
+            rows = <tr className="tr-bp"><th className="th-bp">N/A</th>
+                <th className="th-bp">N/A</th></tr>;
         return rows;
     }
 
@@ -382,21 +382,21 @@ class AddBooking extends Component {
                                         {employeeSelect}
                                     </div>
                                     <label className="label-a-t">Available Times</label>
-                                    <span> </span><label>-Hover for details, Click to book.</label>
+                                    <span> </span><label className="label-bp">-Hover for details, Click to book.</label>
                                 </Form.Group>
                             </Form>
 
                             <div>
 
-                            <table id="schedule">
+                            <table className="table-bp" id="schedule">
                                 <colgroup>
                                     <col span="1" style={{width : "7%"}}/>
                                     <col span="1" style={{width : "93%"}}/>
                                 </colgroup>
                                 <thead>
-                                <tr>
-                                    <th style={{backgroundColor: "#343A40", color: "#A6A6A6"}}>Date</th>
-                                    <th style={{backgroundColor: "#343A40", color: "#A6A6A6"}}>
+                                <tr className="tr-bp">
+                                    <th className="th-bp" style={{backgroundColor: "#343A40", color: "#A6A6A6"}}>Date</th>
+                                    <th className="th-bp" style={{backgroundColor: "#343A40", color: "#A6A6A6"}}>
                                         <div className="container space-between" style={{display : "flex"}}>
                                             {this.generateScheduleTimes(120)}
                                         </div>

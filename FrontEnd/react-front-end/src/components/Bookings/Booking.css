@@ -1,20 +1,4 @@
-
-	.form {
-		margin: 0 auto;
-		width: 250px;
-	}
-	.form label{
-		display: inline-block;
-		text-align: right;
-		float: left;
-	}
-	.form input{  
-		display: inline-block;
-		text-align: left;
-		float: right;
-	}
-
-	table, th, td {
+	.table-bp, .th-bp, .td-bp {
 		font-weight: normal;
 		table-layout: fixed;
 		width: 100%;
@@ -22,19 +6,19 @@
 		border-collapse: collapse;
 	}
 
-	th, td {
+	.th-bp, .td-bp {
 		padding: 5px;
 	}
 
-	tr:nth-child(even) {
+	.tr-bp:nth-child(even) {
 		background-color: #FFFFFF;
 	}
 
-	tr:nth-child(odd) {
+	.tr-bp:nth-child(odd) {
 		background-color: #F2FFFF;
 	}
 
-	button {
+	.button-bp {
 		position: absolute;
 		background-color: #66d9ff;
 		border: 1px solid #0099cc;
@@ -75,14 +59,6 @@
 		transform: translate(-50%);
 		color: white;
 		background-color: #10707f;
-		border-radius: 12px;
-		padding: 1px 7px;
-		display: inline-block;
-	}
-
-	.label {
-		color: white;
-		background-color: #66d9ff;
 		border-radius: 12px;
 		padding: 1px 7px;
 		display: inline-block;
