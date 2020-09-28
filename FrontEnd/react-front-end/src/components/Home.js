@@ -2,21 +2,23 @@ import React, { Component } from 'react'
 
 import "bootstrap/dist/css/bootstrap.min.css"
 
-import { Container, Image, Row, Card, Button } from "react-bootstrap";
+import { Container, Image, Row, Card, Button , Jumbotron} from "react-bootstrap";
 import RegisterButton from './Register/RegisterButton'
 import "./Home.css"
+
+
 
 
 
 class Home extends Component {
     render() {
         return (
-            
-                <div>
-                <Container fluid>
-                      <Image src = "./images/image-front-header.jfif" className = "PImageFrontHeader" responsive />
+                <Container className = "noPadding" fluid>
+                  
+                    <Image src = "./images/image-front-header.jfif" className = "PImageFrontHeader" fluid />
+
                       
-                      <Row>
+                      <Row className = "firstRow">
                         <Card 
                             bg = "light"
                             border = "dark"
@@ -38,21 +40,15 @@ class Home extends Component {
                                 </Button>
                             </Card.Body>
                         </Card>
-
-                      
+           
 
                     </Row>
                     <Row>
-                       
+                        <Image src = "./images/image-front-header.jfif" fluid />
                     </Row>
-
-                  
-
+                    
                 </Container>
-                </div>
-
-
-
+  
 
 
 

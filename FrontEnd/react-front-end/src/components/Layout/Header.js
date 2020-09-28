@@ -43,7 +43,7 @@ class Header extends Component {
     render() {
         return (
             <div>
-                  <Navbar bg = "dark" variant = "dark" style ={{color:"#00000"}}> 
+                  <Navbar bg = "dark" variant = "dark" style ={{color:"#00000"}} fixed = 'top'> 
                     <Navbar.Brand href = "Home">
                         <img
                         alt = ""

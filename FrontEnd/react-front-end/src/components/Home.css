@@ -1,16 +1,30 @@
+.noPadding
+{
+    padding-left:  0;
+    margin-left: 0;
+}
+
 .PImageFrontHeader
 {
-    background-position: center center;
+
+    background-position: center center; 
     background-size: cover;
-    background-attachment: fixed;
-    width: 120%;
+    background-attachment: scroll;
+    background-repeat : no-repeat;
+    overflow: hidden;
+    width: 100%;
     position: fixed;
-    left: -10px
+    
 
 }
 .CardInfoOntopImage
 {
-    bottom: -80px;
+    top: 150px;
     left: 80px;
-    position: relative;
+    position: fixed;
+}
+.firstRow
+{
+    background-image: url("./assets/image-front-header.jfif");
+    
 }

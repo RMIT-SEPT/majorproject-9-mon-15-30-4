@@ -53,7 +53,7 @@ class Login extends Component {
         {
             return(
                 <div>
-                    <Container fluid = "md">
+                    <Container fluid = "md" className = "ContainerLogin">
              
                         <Jumbotron className ="text-auto">
                         
@@ -61,10 +61,6 @@ class Login extends Component {
                         <p>
                             Enter your details to log in.
                         </p>
-
-
-                      
- 
                         <Form onSubmit = {this.onSubmit}>
                             <Form.Group controlId = "formEmail">
                                 <Form.Label>

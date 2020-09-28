@@ -14,6 +14,8 @@ import AdminDashboard from './components/AdminDashboard/AdminDashboard';
 import RegisterEmployee from './components/RegisterEmployee/RegisterEmployee';
 import Service from "./components/Service/Service";
 import HoursDisplay from "./components/Employee/HoursDisplay";
+import BookingsHistory from "./components/Bookings/BookingHistory/BookingsHistory"
+
 
 
 function App() {
@@ -28,6 +30,7 @@ function App() {
         <Route exact path="/Customer" component = {Customer}/>
         <Route exact path="/Home" component = {Home}/>
         <Route exact path="/Bookings" component = { AddBooking } />
+        <Route exact path = "/BookingsHistory" component = {BookingsHistory}/>
         <Route exact path="/login" component = { Login } />
         <Route exact path = "/register" component = {Register}/>
         <Route exact path = "/Dashboard" component = {Dashboard}/>

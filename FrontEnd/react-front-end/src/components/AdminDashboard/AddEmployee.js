@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import registerService from "../../services/registerService.js";
 
 import { Container, Form, Button, Jumbotron } from "react-bootstrap";
+// import './AdminDashboard';
 
 class AddEmployee extends Component{
     constructor(props)
@@ -64,7 +65,7 @@ class AddEmployee extends Component{
     render(){
         return(        
             <div>
-                <Container>
+                <Container className = "ContainerAddEmployee">
                 <h2 className="display-5 text-center">Add New Employee</h2>
 
                 <Jumbotron>

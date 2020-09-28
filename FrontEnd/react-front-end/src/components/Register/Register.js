@@ -67,7 +67,7 @@ class Register extends Component {
     render() {
         return (
 
-        <div className="container"> 
+        <div className="containerRegister"> 
             <div className="form-popup">
                 <div className="col-md-8 m-auto">
                     <h5 className="display-4 text-center">Register</h5>
