@@ -3,6 +3,9 @@ import bookingService from "../../services/bookingService";
 import servicesService from "../../services/servicesService";
 import employeeService from "../../services/employeeService";
 
+import "./Booking.css";
+import {Container, Form, Jumbotron} from "react-bootstrap";
+
 class AddBooking extends Component {
     constructor(props) {
         super(props);
@@ -18,6 +21,7 @@ class AddBooking extends Component {
             servicePlaceholder: "Select a service.",
             employeePlaceholder: "Select a employee.",
             serviceSelected: false,
+            serviceDuration: 0,
             employeeSelected: false,
             dateSelected: false,
             timeSelected: false
@@ -68,9 +72,22 @@ class AddBooking extends Component {
     }
 
     onChange(e) {
-        this.setState({[e.target.name]: e.target.value});
-        if (e.target.name === "serviceId")
+        if(e.target.name !== "timedate")
+            this.setState({[e.target.name]: e.target.value});
+        else {
+            this.blockMouseEnter(e);
+            this.setState({time: e.target.value.split("#")[0]});
+            this.setState({date: e.target.value.split("#")[1]});
+        }
+
+        if (e.target.name === "serviceId") {
             this.updateEmployees(e.target.value);
+            servicesService.getByName(e.target.value).then(response => {
+                this.setState({serviceDuration: response["data"][0]["duration"]});
+            }).catch(e => {
+                console.log(e);
+            });
+        }
 
         if (this.state.serviceId !== "")
             if (e.target.name === "employeeId" && e.target.value !== this.state.employeePlaceholder) {
@@ -98,6 +115,7 @@ class AddBooking extends Component {
             this.setState({employeeSelected: false});
             this.setState({employees: []});
             this.setState({serviceSelected: false});
+            this.setState({serviceDuration: 0});
         }
 
         if (e.target.name === "date")
@@ -130,7 +148,6 @@ class AddBooking extends Component {
         this.setState({employeeId: ""});
         this.setState({employeeSelected: false});
         this.setState({availableTimes: []});
-        console.log(this.state.employeeId);
     }
 
     onSubmit(e) {
@@ -168,6 +185,7 @@ class AddBooking extends Component {
         this.setState({date: ""});
         this.setState({time: ""});
         this.setState({serviceSelected: false});
+        this.setState({service: ""});
         this.setState({employeeSelected: false});
         this.setState({dateSelected: false});
         this.setState({timeSelected: false});
@@ -188,69 +206,212 @@ class AddBooking extends Component {
         return formattedString;
     }
 
+    generateScheduleTimes(size) {
+        let times = [];
+        let hours;
+        let minutes;
+
+        for (let i = 0; i < 1440; i += size) {
+            hours = parseInt(i / 60);
+            minutes = i % 60 === 0 ? "00" : i % 60;
+            let time = hours + ":" + minutes;
+            times = [...times, <div id={time + ":" + i}>{time}</div>];
+        }
+
+        return times;
+    }
+
+    blockTimes(){
+        let date, dates = [];
+        if(this.state.availableTimes[0] != null) {
+            let year = this.state.availableTimes[0][1], month = this.state.availableTimes[0][2],
+                day = this.state.availableTimes[0][3];
+            let prevDate = new Date(year, month, day);
+            dates = [...dates, month +  "/" + day];
+
+            for (let i = 0; i < this.state.availableTimes.length; i++) {
+                let year = this.state.availableTimes[i][1], month = this.state.availableTimes[i][2],
+                    day = this.state.availableTimes[i][3], hour = this.state.availableTimes[i][4],
+                    minute = this.state.availableTimes[i][5];
+                date = new Date(year, month, day, hour, minute);
+                if (date.getFullYear() !== prevDate.getFullYear()
+                    || date.getMonth() !== prevDate.getMonth()
+                    || date.getDay() !== prevDate.getDay())
+                    dates = [...dates, month +  "/" + day];
+                prevDate = date;
+            }
+        }
+        return dates;
+    }
+
+    createBlocks(){
+        let blocks = [];
+        if(this.state.availableTimes[0] != null) {
+            let year = this.state.availableTimes[0][1], month = this.state.availableTimes[0][2],
+                day = this.state.availableTimes[0][3];
+            let date = new Date(year, month, day);
+
+            let buttons = [];
+
+            for (let i = 0; i < this.state.availableTimes.length; i++) {
+                let cBR = this.createBlockButton(i, date);
+                buttons = cBR[0];
+
+                blocks = [...blocks,
+                    <div style={{position : "relative"}}>{buttons}</div>];
+                date = cBR[2];
+                i = cBR[1];
+            }
+
+        }
+        return blocks;
+    }
+
+    createBlockButton(i, prevDate) {
+        let buttons = [], date, dateEndTime;
+
+        for (; i < this.state.availableTimes.length; i++) {
+            let year = this.state.availableTimes[i][1], month = this.state.availableTimes[i][2],
+                day = this.state.availableTimes[i][3], hour = this.state.availableTimes[i][4],
+                minute = this.state.availableTimes[i][5], endHour = this.state.availableTimes[i][6],
+                endMinute = this.state.availableTimes[i][7];
+            date = new Date(year, month, day, hour, minute);
+            dateEndTime = new Date(year, month, day, endHour, endMinute);
+            if (date.getFullYear() !== prevDate.getFullYear()
+                || date.getMonth() !== prevDate.getMonth()
+                || date.getDay() !== prevDate.getDay())
+                break;
+
+            while (new Date(date.getTime() + this.state.serviceDuration * 60000) <= dateEndTime) {
+                let position = (date.getHours() * 60 + date.getMinutes()) / 1440 * 100 + "%";
+                let length = this.state.serviceDuration / 1440 * 100 + "%";
+                let valueId = (date.getHours().toString().length === 1 ? "0" + date.getHours()
+                    : date.getHours()) + ":" + (date.getMinutes() === 0 ? "00" :
+                    date.getMinutes()) + "#" + year + "-"
+                    + (month.toString().length === 1 ? "0" + month : month) + "-"
+                    + (day.toString().length === 1 ? "0" + day : day);
+                buttons = [...buttons, <button style={{left: position, width: length}}
+                                               id={valueId}
+                                               name="timedate"
+                                               value={valueId}
+                                               onMouseEnter={this.onChange}
+                                               onMouseOut={this.blockMouseOut}
+                                               onClick={this.onSubmit}></button>,
+                    <div className="triangle-up" style={{left: position, visibility: "hidden"}} id={valueId + "T"}>
+                        <label className="label-b-d" style={{left: position, visibility: "hidden"}}
+                           id={valueId + "D"}>
+                        <i>{"Start Time: "}</i><b>{date.getHours() + ":"
+                    + (date.getMinutes() === 0 ? "00" : date.getMinutes())}</b><br/>
+                        <i>{"Duration: "}</i><b>{this.state.serviceDuration + " minutes"}</b><br/>
+                        <i>{"With: "}</i><b>{this.state.employeeId}</b></label></div>];
+                date = new Date(date.getTime() + this.state.serviceDuration * 60000);
+            }
+        }
+        return [buttons, i - 1, date];
+    }
+
+    createTimeRows(dates, blocks){
+        let rows = [];
+        for (let i = 0; i < dates.length; i++) {
+            rows = [...rows, <tr><th>{dates[i]}</th><th>{blocks[i]}</th></tr>]
+        }
+
+        if(rows.length === 0)
+            rows = <tr><th>N/A</th>
+                <th>N/A</th></tr>;
+        return rows;
+    }
+
+    blockMouseEnter(e){
+        document.getElementById(e.target.value + "D").style.visibility  = "visible";
+        document.getElementById(e.target.value + "T").style.visibility  = "visible";
+    }
+
+    blockMouseOut(e) {
+        document.getElementById(e.target.value + "D").style.visibility  = "hidden";
+        document.getElementById(e.target.value + "T").style.visibility  = "hidden";
+    }
+
     render() {
         const services = this.state.services
             .filter((v, i, a) => a.indexOf(v) === i)
             .toString().split(",");
-        let serviceSelect = <select className="form-control form-control-lg "
+        let serviceSelect = <Form.Control as="select"
                                     name="serviceId"
                                     value={this.state.serviceId}
                                     onChange={this.onChange}>
             <option default>{this.state.servicePlaceholder}</option>
-            {services.map(this.makeOption)}</select>;
+            {services.map(this.makeOption)}</Form.Control>;
 
         const employees = this.state.employees.toString().split(",");
-        let employeeSelect = <select className="form-control form-control-lg "
+        let employeeSelect = <Form.Control as="select"
                                      name="employeeId"
                                      value={this.state.employeeId}
                                      onChange={this.onChange}
                                      disabled={!this.state.serviceSelected}>
             <option default>{this.state.employeePlaceholder}</option>
-            {employees.map(this.makeOption)}</select>;
-
-        let availableTimes = this.formatAvailableTimes();
+            {employees.map(this.makeOption)}</Form.Control>;
 
         return (
             <div className="Booking">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-8 m-auto">
-                            <h5 className="display-4 text-center">Create Booking</h5>
-                            <hr/>
-                            <form onSubmit={this.onSubmit}>
-                                <div className="form-group">
-                                    {serviceSelect}
-                                </div>
-                                <div className="form-group">
-                                    {employeeSelect}
-                                </div>
-                                <h6>Date</h6>
-                                <div className="form-group">
-                                    <input type="date" className="form-control form-control-lg"
-                                           name="date"
-                                           value={this.state.date}
-                                           onChange={this.onChange}
-                                           disabled={!this.state.employeeSelected}
-                                    />
-                                </div>
-                                <h6>Time</h6>
-                                <div className="form-group">
-                                    <input type="time" className="form-control form-control-lg"
-                                           name="time"
-                                           value={this.state.time}
-                                           step="900"
-                                           onChange={this.onChange}
-                                           disabled={!this.state.employeeSelected}
-                                    />
-                                </div>
-                                <input type="submit" className="btn btn-primary btn-block mt-4"
-                                       disabled={!this.state.serviceSelected || !this.state.employeeSelected
-                                       || !this.state.dateSelected || !this.state.timeSelected}/>
-                            </form>
-                            <pre>{availableTimes}</pre>
-                        </div>
-                    </div>
-                </div>
+                    <Container fluid = "md" >
+
+                        <Jumbotron className ="text-auto">
+
+                            <h1>Create Booking</h1>
+                            <p>
+                                Enter your require service, preferred employee and select a available time-block.
+                            </p>
+                            <p>
+                                If no times appear, please try another employee.
+                            </p>
+
+                            <Form onSubmit = {this.onSubmit}>
+                                <Form.Group controlId = "formBooking">
+                                    <Form.Label>
+                                        Service
+                                    </Form.Label>
+                                    <div className="form-group">
+                                        {serviceSelect}
+                                    </div>
+
+                                    <Form.Label>
+                                        Employee
+                                    </Form.Label>
+                                    <div className="form-group">
+                                        {employeeSelect}
+                                    </div>
+                                    <label className="label-a-t">Available Times</label>
+                                    <span> </span><label>-Hover for details, Click to book.</label>
+                                </Form.Group>
+                            </Form>
+
+                            <div>
+
+                            <table id="schedule">
+                                <colgroup>
+                                    <col span="1" style={{width : "7%"}}/>
+                                    <col span="1" style={{width : "93%"}}/>
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th style={{backgroundColor: "#343A40", color: "#A6A6A6"}}>Date</th>
+                                    <th style={{backgroundColor: "#343A40", color: "#A6A6A6"}}>
+                                        <div className="container space-between" style={{display : "flex"}}>
+                                            {this.generateScheduleTimes(120)}
+                                        </div>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {this.createTimeRows(this.blockTimes(), this.createBlocks())}
+                                </tbody>
+                            </table>
+                            </div>
+
+                        </Jumbotron>
+
+                    </Container>
             </div>
         )
     }
