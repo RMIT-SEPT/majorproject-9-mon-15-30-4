@@ -75,6 +75,7 @@ class AddBooking extends Component {
         if(e.target.name !== "timedate")
             this.setState({[e.target.name]: e.target.value});
         else {
+            this.blockMouseEnter(e);
             this.setState({time: e.target.value.split("#")[0]});
             this.setState({date: e.target.value.split("#")[1]});
         }
@@ -284,19 +285,25 @@ class AddBooking extends Component {
             while (new Date(date.getTime() + this.state.serviceDuration * 60000) <= dateEndTime) {
                 let position = (date.getHours() * 60 + date.getMinutes()) / 1440 * 100 + "%";
                 let length = this.state.serviceDuration / 1440 * 100 + "%";
+                let valueId = (date.getHours().toString().length === 1 ? "0" + date.getHours()
+                    : date.getHours()) + ":" + (date.getMinutes() === 0 ? "00" :
+                    date.getMinutes()) + "#" + year + "-"
+                    + (month.toString().length === 1 ? "0" + month : month) + "-"
+                    + (day.toString().length === 1 ? "0" + day : day);
                 buttons = [...buttons, <button style={{left: position, width: length}}
+                                               id={valueId}
                                                name="timedate"
-                                               title={"Start Time: " + date.getHours() + ":"
-                                               + (date.getMinutes() === 0 ? "00" : date.getMinutes())
-                                               + ", Duration: " + this.state.serviceDuration + " minutes, With: "
-                                               + this.state.employeeId}
-                                               value={(date.getHours().toString().length === 1 ? "0" + date.getHours()
-                                                    : date.getHours()) + ":" + (date.getMinutes() === 0 ? "00" :
-                                                    date.getMinutes()) + "#" + year + "-"
-                                                    + (month.toString().length === 1 ? "0" + month : month) + "-"
-                                                    + (day.toString().length === 1 ? "0" + day : day)}
+                                               value={valueId}
                                                onMouseEnter={this.onChange}
-                                               onClick={this.onSubmit}></button>];
+                                               onMouseOut={this.blockMouseOut}
+                                               onClick={this.onSubmit}></button>,
+                    <div className="triangle-up" style={{left: position, visibility: "hidden"}} id={valueId + "T"}>
+                        <label className="label-b-d" style={{left: position, visibility: "hidden"}}
+                           id={valueId + "D"}>
+                        <i>{"Start Time: "}</i><b>{date.getHours() + ":"
+                    + (date.getMinutes() === 0 ? "00" : date.getMinutes())}</b><br/>
+                        <i>{"Duration: "}</i><b>{this.state.serviceDuration + " minutes"}</b><br/>
+                        <i>{"With: "}</i><b>{this.state.employeeId}</b></label></div>];
                 date = new Date(date.getTime() + this.state.serviceDuration * 60000);
             }
         }
@@ -313,6 +320,16 @@ class AddBooking extends Component {
             rows = <tr><th>N/A</th>
                 <th>N/A</th></tr>;
         return rows;
+    }
+
+    blockMouseEnter(e){
+        document.getElementById(e.target.value + "D").style.visibility  = "visible";
+        document.getElementById(e.target.value + "T").style.visibility  = "visible";
+    }
+
+    blockMouseOut(e) {
+        document.getElementById(e.target.value + "D").style.visibility  = "hidden";
+        document.getElementById(e.target.value + "T").style.visibility  = "hidden";
     }
 
     render() {
