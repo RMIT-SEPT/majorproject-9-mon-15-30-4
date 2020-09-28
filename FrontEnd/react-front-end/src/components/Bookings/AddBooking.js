@@ -299,7 +299,7 @@ class AddBooking extends Component {
                                                onMouseEnter={this.onChange}
                                                onClick={this.onSubmit}></button>];
                 date = new Date(date.getTime() + this.state.serviceDuration * 60000);
-            } while (date < dateEndTime);
+            } while (new Date(date.getTime() + this.state.serviceDuration * 60000) < dateEndTime);
         }
         return [buttons, i - 1, date];
     }
