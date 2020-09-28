@@ -14,6 +14,7 @@ import AdminDashboard from './components/AdminDashboard/AdminDashboard';
 import RegisterEmployee from './components/RegisterEmployee/RegisterEmployee';
 import Service from "./components/Service/Service";
 import HoursDisplay from "./components/Employee/HoursDisplay";
+import BookingsHistory from "./components/Bookings/BookingHistory/BookingsHistory";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Route exact path = "/registerEmployee" component = {RegisterEmployee}/>
         <Route exact path = "/ChangeService" component = {Service}/>
         <Route exact path = "/home/employee/hours" component = {HoursDisplay}/>
+        <Route exact path = "/BookingsHistory" component = {BookingsHistory}/>
         </div>
     </Router>
   );
