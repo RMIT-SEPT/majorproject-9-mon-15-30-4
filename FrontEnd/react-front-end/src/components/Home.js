@@ -44,7 +44,7 @@ class Home extends Component {
 
                     </Row>
                     <Row>
-                        <Image src = "./images/image-front-header.jfif" fluid />
+           
                     </Row>
                     
                 </Container>
