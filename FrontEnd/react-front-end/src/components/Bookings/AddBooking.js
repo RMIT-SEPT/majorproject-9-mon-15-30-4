@@ -147,7 +147,6 @@ class AddBooking extends Component {
         this.setState({employeeId: ""});
         this.setState({employeeSelected: false});
         this.setState({availableTimes: []});
-        console.log(this.state.employeeId);
     }
 
     onSubmit(e) {
@@ -282,7 +281,7 @@ class AddBooking extends Component {
                 || date.getDay() !== prevDate.getDay())
                 break;
 
-            do {
+            while (new Date(date.getTime() + this.state.serviceDuration * 60000) <= dateEndTime) {
                 let position = (date.getHours() * 60 + date.getMinutes()) / 1440 * 100 + "%";
                 let length = this.state.serviceDuration / 1440 * 100 + "%";
                 buttons = [...buttons, <button style={{left: position, width: length}}
@@ -299,7 +298,7 @@ class AddBooking extends Component {
                                                onMouseEnter={this.onChange}
                                                onClick={this.onSubmit}></button>];
                 date = new Date(date.getTime() + this.state.serviceDuration * 60000);
-            } while (new Date(date.getTime() + this.state.serviceDuration * 60000) < dateEndTime);
+            }
         }
         return [buttons, i - 1, date];
     }
