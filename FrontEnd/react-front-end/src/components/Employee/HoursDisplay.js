@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 import bookingService from "../../services/bookingService";
 import workingHoursService from "../../services/workingHoursService";
+import {Container, Form, Jumbotron} from "react-bootstrap";
+import "./Hours.css";
+import loginService from "../../services/loginService";
 
 class HoursDisplay extends Component {
     constructor(props) {
@@ -205,6 +208,71 @@ class HoursDisplay extends Component {
         </form>;
     }
 
+    generateScheduleTimes(size) {
+        let times = [];
+        let hours;
+        let minutes;
+
+        for (let i = 0; i < 1440; i += size) {
+            hours = parseInt(i / 60);
+            minutes = i % 60 === 0 ? "00" : i % 60;
+            let time = hours + ":" + minutes;
+            times = [...times, <div id={time + ":" + i}>{time}</div>];
+        }
+
+        return times;
+    }
+
+    createPeriodPairs(){
+        let pair = [];
+
+        for (const element of this.state.hours) {
+            console.log(element["startTime"])
+            let sTS = element["startTime"].toString().split(".");
+            let eTS = element["endTime"].toString().split(".");
+            console.log(sTS[0])
+            console.log(sTS[1])
+
+            let interval = 30, startTime = parseInt(sTS[0]) * 60 + parseInt(sTS[1]),
+                endTime = parseInt(eTS[0]) * 60 + parseInt(eTS[1]), day = 1440;
+            let startWidth = (endTime - interval)/day*100, endWidth = 100 - ((startTime + interval)/day) * 100;
+            pair = [...pair, <tr><th>
+                <pre>{element["date"]}</pre>
+            </th><th>
+                <div>
+                    <input type="range" id={element["date"] + "#start"} min="0" max={endTime - interval} className="slider-eh-left"
+                           defaultValue={startTime} onChange={this.changePeriod} step="30" style={{width: startWidth + "%"}}/>
+                    <input type="range" id={element["date"] + "#end"} min={startTime + interval} max="1440" className="slider-eh-right"
+                           defaultValue={endTime} onChange={this.changePeriod} step="30" style={{width: endWidth + "%"}}/>
+                </div></th></tr>];
+        }
+
+        return pair;
+    }
+
+    changePeriod(e){
+        let period = e.target.id.toString().split("#");
+        let correspondent;
+        console.log(e.target.id)
+
+        if(period[1] === "start"){
+            correspondent = document.getElementById(period[0] + "#end");
+            let interval = 30, startTime = parseInt(e.target.value), day = 1440;
+            let endWidth = 100 - ((startTime + interval)/day) * 100;
+            correspondent.style.width = endWidth + "%";
+            correspondent.min = startTime + interval;
+        } else {
+            correspondent = document.getElementById(period[0] + "#start");
+            let interval = 30, endTime = parseInt(e.target.value), day = 1440;
+            let startWidth = (endTime - interval)/day*100;
+            correspondent.style.width = startWidth + "%";
+            correspondent.max = endTime - interval;
+        }
+
+        console.log("Time:" + (document.getElementById(period[0] + "#start")).value + " - "
+            + (document.getElementById(period[0] + "#end")).value)
+    }
+
     render() {
         let workHours = this.formatWorkHours();
         let entryForms = [this.generateEntryFormNew()];
@@ -215,7 +283,62 @@ class HoursDisplay extends Component {
         }
 
         return (
+
             <div className="WorkingHours">
+                <Container fluid = "md" >
+
+                    <Jumbotron className ="text-auto">
+
+                        <h1>Hours for Employee: {this.state.employeeId}</h1>
+                        <p>
+                            info...
+                        </p>
+
+                        {/*<Form onSubmit = {this.onSubmit}>*/}
+                        {/*    <Form.Group controlId = "formBooking">*/}
+                        {/*        <Form.Label>*/}
+                        {/*            Service*/}
+                        {/*        </Form.Label>*/}
+                        {/*        <div className="form-group">*/}
+                        {/*            {serviceSelect}*/}
+                        {/*        </div>*/}
+
+                        {/*        <Form.Label>*/}
+                        {/*            Employee*/}
+                        {/*        </Form.Label>*/}
+                        {/*        <div className="form-group">*/}
+                        {/*            {employeeSelect}*/}
+                        {/*        </div>*/}
+                        {/*        <label className="label-a-t">Available Times</label>*/}
+                        {/*        <span> </span><label className="label-bp">-Hover for details, Click to book.</label>*/}
+                        {/*    </Form.Group>*/}
+                        {/*</Form>*/}
+
+                        <div>
+                            <table className="table-bp" id="schedule">
+                                <colgroup>
+                                    <col span="1" style={{width : "7%"}}/>
+                                    <col span="1" style={{width : "93%"}}/>
+                                </colgroup>
+                                <thead>
+                                <tr className="tr-bp">
+                                    <th className="th-bp" style={{backgroundColor: "#343A40", color: "#A6A6A6"}}>Date</th>
+                                    <th className="th-bp" style={{backgroundColor: "#343A40", color: "#A6A6A6"}}>
+                                        <div className="container space-between" style={{display : "flex"}}>
+                                            {this.generateScheduleTimes(120)}
+                                        </div>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {this.createPeriodPairs()}
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </Jumbotron>
+
+                </Container>
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
