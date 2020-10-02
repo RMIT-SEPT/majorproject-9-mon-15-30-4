@@ -211,7 +211,7 @@ class AddBooking extends Component {
         let hours;
         let minutes;
 
-        for (let i = 0; i < 1440; i += size) {
+        for (let i = 0; i < 1500; i += size) {
             hours = parseInt(i / 60);
             minutes = i % 60 === 0 ? "00" : i % 60;
             let time = hours + ":" + minutes;
@@ -397,7 +397,7 @@ class AddBooking extends Component {
                                 <tr className="tr-bp">
                                     <th className="th-bp" style={{backgroundColor: "#343A40", color: "#A6A6A6"}}>Date</th>
                                     <th className="th-bp" style={{backgroundColor: "#343A40", color: "#A6A6A6"}}>
-                                        <div className="container space-between" style={{display : "flex"}}>
+                                        <div className="container-t">
                                             {this.generateScheduleTimes(120)}
                                         </div>
                                     </th>
