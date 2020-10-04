@@ -94,10 +94,15 @@ class AddBooking extends Component {
                 this.setState({employeeSelected: true});
                 bookingService.getByEmployee(e.target.value.split("#")[1]).then(response => {
                     for (const responseElement of response["data"]) {
-                        this.setState({
-                            availableTimes: [...this.state.availableTimes,
-                                responseElement]
-                        });
+                        let year = responseElement[1], month = responseElement[2],
+                            day = responseElement[3];
+                        let date = new Date(year, month - 1, day), today = new Date();
+                        if(date >= today) {
+                            this.setState({
+                                availableTimes: [...this.state.availableTimes,
+                                    responseElement]
+                            });
+                        }
                     }
                 }).catch(e => {
                     console.log(e);
