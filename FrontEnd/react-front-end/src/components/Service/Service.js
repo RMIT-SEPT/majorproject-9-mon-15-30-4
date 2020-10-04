@@ -21,7 +21,6 @@ export default class Service extends Component
         return (
             <div>
                 {/* <h1>Assign Services to Employees</h1> */}
-                <h2 className="display-5 text-center">Assign Services to Employees</h2>
                     <AddService employeeId/>
                     <RemoveService employeeId/>
             </div>

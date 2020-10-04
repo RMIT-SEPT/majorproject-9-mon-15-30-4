@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
+import { Jumbotron } from "react-bootstrap";
 import servicesService from "../../services/servicesService";
 import employeeService from "../../services/employeeService";
-
-
 
 class AddService extends Component{
     constructor(props) {
@@ -114,15 +113,18 @@ class AddService extends Component{
                                      disabled={!this.state.serviceSelected}>
             <option default>{this.state.employeePlaceholder}</option>
             {employees.map(this.makeOption)}</select>;
+            
         return(
-            <div>
 
-                <h2 className="display-5 text-center">Assign Service to Employee</h2>
+
+            <div>
+        
                 <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
+                    <div>
                         {serviceSelect}
                     </div>
-                    <div className="form-group">
+
+                    <div>
                         {employeeSelect}
                     </div>
                     

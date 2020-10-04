@@ -67,3 +67,8 @@
 	.container.space-between {
 		justify-content: space-between;
 	}
+
+	.Booking
+	{
+		margin-top: 100px;
+	}

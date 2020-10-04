@@ -66,7 +66,7 @@ class AddEmployee extends Component{
         return(        
             <div>
                 <Container className = "ContainerAddEmployee">
-                <h2 className="display-5 text-center">Add New Employee</h2>
+                <h1 className="display-5 text-center">Add New Employee</h1>
 
                 <Jumbotron>
                 <Form onSubmit ={this.onSubmit}>
@@ -132,7 +132,7 @@ class AddEmployee extends Component{
                         onChange = {this.onChange}
                     />
                     <Form.Text>
-                        Enter a name for us to recognise you.
+                        Enter an email address to recognise you.
                     </Form.Text>
                 </Form.Group>
 
@@ -142,7 +142,7 @@ class AddEmployee extends Component{
                     </Form.Label>
                     <Form.Control 
                         type = "tel"
-                        placeholder = "04 1234566"
+                        placeholder = "12345679"
                         name = "employeePhone"
                         value = {this.state.employeePhone}
                         onChange = {this.onChange}

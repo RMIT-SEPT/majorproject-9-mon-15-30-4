@@ -11,10 +11,12 @@ import Register from './components/Register/Register';
 import AddBooking from "./components/Bookings/AddBooking";
 import Dashboard from './components/Dashboard/Dashboard';
 import AdminDashboard from './components/AdminDashboard/AdminDashboard';
-import RegisterEmployee from './components/RegisterEmployee/RegisterEmployee';
 import Service from "./components/Service/Service";
 import HoursDisplay from "./components/Employee/HoursDisplay";
 import BookingsHistory from "./components/Bookings/BookingHistory/BookingsHistory";
+// import 'semantic-ui-css/semantic.min.css'
+
+// import Layout from "./components/Layout/Layout"
 
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
 
     <Router>
       <div>
+        
         <Header/>
 
         <Route exact path="/Customer" component = {Customer}/>
@@ -34,10 +37,10 @@ function App() {
         <Route exact path = "/register" component = {Register}/>
         <Route exact path = "/Dashboard" component = {Dashboard}/>
         <Route exact path = "/AdminDashboard" component = {AdminDashboard}/>
-        <Route exact path = "/registerEmployee" component = {RegisterEmployee}/>
         <Route exact path = "/ChangeService" component = {Service}/>
         <Route exact path = "/home/employee/hours" component = {HoursDisplay}/>
         <Route exact path = "/BookingsHistory" component = {BookingsHistory}/>
+        
         </div>
     </Router>
   );

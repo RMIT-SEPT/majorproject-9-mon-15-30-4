@@ -54,7 +54,8 @@ class Login extends Component {
             return(
                 <div>
                     <Container fluid = "md" className = "ContainerLogin">
-             
+
+                        <h5 className="display-4 text-center">Sign Up</h5>
                         <Jumbotron className ="text-auto">
                         
                         <h1> Welcome!</h1>
