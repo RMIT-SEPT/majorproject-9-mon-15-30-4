@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CustomerService 
 {
@@ -33,6 +35,33 @@ public class CustomerService
                 return null;
             }
         }
+
+        public Customer getCustomerByUserNameTest(String userName)
+        {
+            try
+            {
+                return customerRepository.findByName(userName);
+            }
+            catch(IndexOutOfBoundsException e)
+            {
+                return null;
+            }
+        }
+
+        public List<Customer> getAllCustomers()
+        {
+            try
+            {
+                return customerRepository.getAllCustomers();
+            }
+            catch (IndexOutOfBoundsException e)
+            {
+                return null;
+            }
+
+        }
+
+
 
 
 

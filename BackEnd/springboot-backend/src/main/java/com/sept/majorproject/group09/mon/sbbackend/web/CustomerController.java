@@ -4,10 +4,13 @@ import com.sept.majorproject.group09.mon.sbbackend.model.Customer;
 import com.sept.majorproject.group09.mon.sbbackend.model.Employee;
 import com.sept.majorproject.group09.mon.sbbackend.repositories.CustomerRepository;
 import com.sept.majorproject.group09.mon.sbbackend.services.CustomerService;
+import org.hibernate.annotations.common.reflection.XMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(
@@ -30,6 +33,12 @@ public class CustomerController
         Customer customer = customerService.saveOrUpdateCustomer(customerInput);
 
         return new ResponseEntity<Customer>(customer, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/Customers")
+    public List<Customer> getAllCustomer()
+    {
+        return customerService.getAllCustomers();
     }
 
 
