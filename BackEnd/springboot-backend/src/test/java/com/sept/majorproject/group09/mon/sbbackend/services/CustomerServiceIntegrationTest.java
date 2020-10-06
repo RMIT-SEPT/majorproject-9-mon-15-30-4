@@ -49,7 +49,6 @@ public class CustomerServiceIntegrationTest {
     {
 
         Customer jones = new Customer("Jones","hunter2","user_jones","jones@email.com", 987654231);
-
         Mockito.when(customerRepository.findByName(jones.getUserName())).thenReturn(jones);
     }
 

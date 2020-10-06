@@ -20,7 +20,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath; //Import for the  mvc.perform(get().xxxx stuff)
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath; //Important for the  mvc.perform(get().xxxx stuff)
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -40,8 +40,6 @@ public class CustomerControllerIntegrationTest {
             * Used to test if 'getAllCustomers()' from CustomerController works.
             * Note:
                 - Controller depends on an existence of CustomerService (hence MockBean)
-                -
-
          */
     @Test
     public void ExpectsCustomerExist_ReturnsCustomerList_IfCorrectDetails() throws Exception
@@ -54,7 +52,7 @@ public class CustomerControllerIntegrationTest {
         given(customerService.getAllCustomers()).willReturn(allCustomers);
         //WHEN & THEN
         mvc.perform(
-                get("/api/Customer/Customers")
+                get("/api/Customer/AllCustomers")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$",hasSize(1)))
