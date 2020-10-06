@@ -1,14 +1,18 @@
 package com.sept.majorproject.group09.mon.sbbackend.web;
 
+import com.sept.majorproject.group09.mon.sbbackend.security.LoginRequest;
+import com.sept.majorproject.group09.mon.sbbackend.services.AccountDetailsService;
+import com.sept.majorproject.group09.mon.sbbackend.tokenization.JwtUtil;
+import com.sept.majorproject.group09.mon.sbbackend.tokenization.LoginResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.*;
 
 import com.sept.majorproject.group09.mon.sbbackend.model.Account;
 import com.sept.majorproject.group09.mon.sbbackend.services.CustomerService;
@@ -109,5 +113,39 @@ public class LoggingInController
     	}
     	
     }
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private AccountDetailsService userDetailsService;
+
+    @Autowired
+    private JwtUtil jwtTokenUtil;
+
+    @PostMapping("/authenticate")
+    public ResponseEntity<?> createAuthenicationToken(@RequestBody LoginRequest loginRequest) throws Exception
+    {
+        try
+        {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
+            );
+        }
+        catch (BadCredentialsException e)
+        {
+            throw new Exception( "Password or Username was incorrect pleas try again", e);
+        }
+
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
+
+        final String jwt = jwtTokenUtil.generateToken(userDetails);
+
+        return ResponseEntity.ok(new LoginResponse("Bearer " + jwt));
+
+
+    }
+
+
 
 }

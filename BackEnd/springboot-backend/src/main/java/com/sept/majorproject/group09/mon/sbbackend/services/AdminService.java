@@ -3,9 +3,11 @@ package com.sept.majorproject.group09.mon.sbbackend.services;
 import com.sept.majorproject.group09.mon.sbbackend.model.Admin;
 import com.sept.majorproject.group09.mon.sbbackend.repositories.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AdminService
 {
     @Autowired
