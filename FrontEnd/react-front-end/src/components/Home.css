@@ -4,31 +4,56 @@
     margin-left: 0;
 }
 
-.PImageFrontHeader
+.main
 {
-
-    background-position: center center; 
-    background-size: cover;
-    background-attachment: scroll;
-    background-repeat : no-repeat;
-    overflow: hidden;
-    width: 100%;
-    position: fixed;
-    
-
+    overflow: auto;
 }
+
 .CardInfoOntopImage
 {
-    top: 150px;
-    left: 80px;
-    position: fixed;
+    /* left: -150px; 
+    position: absolute; */
+    flex: 0 0 50px;
+    margin-right: 20px;
 }
-.firstRow
+
+.ContainerMapOutside
 {
-    background-image: url("./assets/image-front-header.jfif");
-    
+    margin-left: auto;
+    margin-right: auto;
 }
-/* .MainContainer
+
+.ContainerMap
 {
-    margin-top: 100vh;
-} */
+    /* top: 300px;      */
+    /* right: 0px; 
+    position: absolute; */
+    width:400px; 
+    height:445px;
+    margin-left: auto;
+    margin-right: auto;
+   
+}
+
+.HeadersTitleContainer
+{
+    color:white;
+}
+.SubTitleHeaderH3
+{
+    color:beige;
+}
+.PageSectionServices
+{
+    background-image: url('/images/background-dumbellsrow.jpg');
+}
+
+.contents
+{
+    display: flex;
+}
+.footer
+{
+    background-image: url('/images/gray-shades-jpg');
+}
+

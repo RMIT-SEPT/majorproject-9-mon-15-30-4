@@ -117,7 +117,7 @@ class AddService extends Component{
         return(
 
 
-            <div>
+            <div className ="container-fluid">
         
                 <form onSubmit={this.onSubmit}>
                     <div>

@@ -18,11 +18,8 @@ class AdminDashboard extends Component{
     }
     render(){
         return(        
-            <div>
-                <hr />
-                <hr />
-                <hr />
-                <hr />
+            <div className = "container-fluid main">
+
                 <h5 className="display-4 text-center">Admin Dashboard</h5>
                 <hr />
                 <div className="AdminContainerEmployeeRegisteration"> 

@@ -55,12 +55,13 @@ class Login extends Component {
                 <div>
                     <Container fluid = "md" className = "ContainerLogin">
 
-                        <h5 className="display-4 text-center">Sign Up</h5>
+                        <h5 className="display-4 text-center">Welcome Back!</h5>
+                        <hr/>
                         <Jumbotron className ="text-auto">
                         
                         <h1> Welcome!</h1>
                         <p>
-                            Enter your details to log in.
+                            Please enter your details to log in.
                         </p>
                         <Form onSubmit = {this.onSubmit}>
                             <Form.Group controlId = "formEmail">
@@ -68,9 +69,6 @@ class Login extends Component {
                                     Email Address
                                 </Form.Label>
                                 <Form.Control type = "email" placeholder = "Example@Email.com"/>
-                                <Form.Text>
-                                   Please enter your email.
-                                </Form.Text>
                             </Form.Group>
 
                             <Form.Group controlId = "formPassword">
