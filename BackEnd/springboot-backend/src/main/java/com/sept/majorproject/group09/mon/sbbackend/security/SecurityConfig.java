@@ -44,6 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
+                .headers().frameOptions().sameOrigin() //To enable H2 Database
+                .and()
                 .authorizeRequests()
                 //ADMIN ONLY
                 .antMatchers("/api/bookings/all", "/api/services/delete/*/*", "/api/services/delete",

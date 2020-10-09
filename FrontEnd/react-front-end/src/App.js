@@ -15,30 +15,36 @@ import RegisterEmployee from './components/RegisterEmployee/RegisterEmployee';
 import Service from "./components/Service/Service";
 import HoursDisplay from "./components/Employee/HoursDisplay";
 import BookingsHistory from "./components/Bookings/BookingHistory/BookingsHistory";
+import Logout from "./components/Login/Logout"
 
-
-function App() {
+function App() 
+{
   
+
+
   return (
 
 
-    <Router>
-      <div>
-        <Header/>
+      <Router>
+        <div>
+          <Header/>
 
-        <Route exact path="/Customer" component = {Customer}/>
-        <Route exact path="/Home" component = {Home}/>
-        <Route exact path="/Bookings" component = { AddBooking } />
-        <Route exact path="/login" component = { Login } />
-        <Route exact path = "/register" component = {Register}/>
-        <Route exact path = "/Dashboard" component = {Dashboard}/>
-        <Route exact path = "/AdminDashboard" component = {AdminDashboard}/>
-        <Route exact path = "/registerEmployee" component = {RegisterEmployee}/>
-        <Route exact path = "/ChangeService" component = {Service}/>
-        <Route exact path = "/home/employee/hours" component = {HoursDisplay}/>
-        <Route exact path = "/BookingsHistory" component = {BookingsHistory}/>
-        </div>
-    </Router>
+          <Route exact path="/Customer" component = {Customer}/>
+          <Route exact path="/Home" component = {Home}/>
+          <Route exact path="/Bookings" component = { AddBooking } />
+          <Route exact path="/login" component = { Login } />
+          <Route exact path = "/register" component = {Register}/>
+          <Route exact path = "/Dashboard" component = {Dashboard}/>
+          <Route exact path = "/AdminDashboard" component = {AdminDashboard}/>
+          <Route exact path = "/registerEmployee" component = {RegisterEmployee}/>
+          <Route exact path = "/ChangeService" component = {Service}/>
+          <Route exact path = "/home/employee/hours" component = {HoursDisplay}/>
+          <Route exact path = "/BookingsHistory" component = {BookingsHistory}/>
+          <Route exact path = "/logout" component = {Logout}/>
+          </div>
+      </Router>
+
+    
   );
 }
 

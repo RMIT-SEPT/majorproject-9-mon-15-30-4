@@ -19,4 +19,6 @@ public interface BookingRepository extends CrudRepository<Booking, Long> {
 
     @Query(value = "SELECT * FROM Booking WHERE service_id = :serviceId ORDER BY date ASC", nativeQuery = true)
     List<Booking> findAllByService(@Param("serviceId") long serviceId);
+
+
 }

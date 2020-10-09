@@ -13,31 +13,31 @@ import { Nav, Navbar, Button } from "react-bootstrap";
 
 class Header extends Component {
 
-    loggedIn = false;
-    userName = "";
-    login(userName)
-    {
-        console.log("Logging In");
-        this.loggedIn = true;
-        this.userName = userName;
-        console.log(this.loggedIn);
-    }
-
-    logout(userName)
-    {
-        this.loggedIn = false;
-        this.userName = "";
-    }
 
     logButton()
     {
-        return (
-            <React.Fragment>
-                <Link to = "/Login" className="nav-link" >
-                    Login
-                </Link>  
-            </React.Fragment>
-        )   
+        if(localStorage.getItem('isLoggedIn') === "true")
+        {
+            return (
+                <React.Fragment>
+                    <Link to = "/Logout" className="nav-link" >
+                        Logout
+                    </Link>  
+                </React.Fragment>
+                
+            )   
+        }
+        else
+        {
+            return(
+                <React.Fragment>
+                    <Link to = "/Login" className="nav-link" >
+                        Login
+                    </Link>  
+                </React.Fragment>
+            )
+        }
+        
     }
 
     render() {
