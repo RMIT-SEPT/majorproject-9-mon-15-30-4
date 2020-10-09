@@ -7,6 +7,8 @@ import com.sept.majorproject.group09.mon.sbbackend.repositories.ServiceRepositor
 import com.sept.majorproject.group09.mon.sbbackend.repositories.WorkingHoursRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.awt.print.Book;
 import java.util.*;
 
 @Service
@@ -23,6 +25,16 @@ public class BookingService {
     public List<Booking> getBookingsByEmployee(String employeeId) {
         List<Booking> bookings = new ArrayList<>();
         bookingRepository.findAllByEmployee(employeeId).forEach(booking -> bookings.add(booking));
+        return bookings;
+    }
+
+    public  List<Booking> getUnconfirmedBookings(){
+        List<Booking> bookings = new ArrayList<>();
+        for (Booking b: bookingRepository.findAll()) {
+            if(!b.getConfirmed()){
+                bookings.add(b);
+            }
+        }
         return bookings;
     }
 

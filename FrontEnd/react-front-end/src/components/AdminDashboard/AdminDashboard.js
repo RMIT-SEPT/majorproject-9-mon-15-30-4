@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from "react-router-dom"
 import "./AdminDashboard.css";
 import "./AddEmployee";
 import bookingService from "../../services/bookingService";
@@ -32,6 +33,13 @@ class AdminDashboard extends Component{
                             <Service/>
                         </div>
                     </div>
+                </div>
+                <div className="container">
+                    <React.Fragment>
+                        <Link to = "/BookingConfirm" className="nav-link" >
+                            <input type="button" value = "Confirm New Bookings" className="btn btn-primary btn-block mt-4" />
+                        </Link>
+                    </React.Fragment>
                 </div>
             </div>
         )

@@ -20,6 +20,8 @@ public class Booking {
     private String customerId;
     @NotBlank(message = "Must associate a employee")
     private String employeeId;
+    @NotBlank(message = "Must be confirmed or not")
+    private boolean confirmed;
 
     protected Booking() {
 
@@ -31,6 +33,7 @@ public class Booking {
         setServiceId(serviceId);
         setCustomerId(customerId);
         setEmployeeId(employeeId);
+        setConfirmed(false);
     }
 
     public Booking(Date date, long serviceId, String customerId, String employeeId) {
@@ -38,11 +41,13 @@ public class Booking {
         setServiceId(serviceId);
         setCustomerId(customerId);
         setEmployeeId(employeeId);
+        setConfirmed(false);
     }
 
     public Booking(Date date, long serviceId) {
         setDate(date);
         setServiceId(serviceId);
+        setConfirmed(false);
     }
 
     public long getId() {
@@ -84,4 +89,8 @@ public class Booking {
     public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
     }
+
+    public void setConfirmed(boolean confirmed){this.confirmed = confirmed;}
+
+    public boolean getConfirmed(){return confirmed;}
 }

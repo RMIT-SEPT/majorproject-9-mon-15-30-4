@@ -36,6 +36,9 @@ public class BookingController {
         return bookingService.slotAvailable(date, serviceId, employeeId);
     }
 
+    @GetMapping("/unconfirmed")
+    private List<Booking> getUnconfirmedBookings(){return bookingService.getUnconfirmedBookings();}
+
     @PostMapping("")
     private long saveBooking(@RequestBody Booking booking) {
         bookingService.saveOrUpdate(booking);
