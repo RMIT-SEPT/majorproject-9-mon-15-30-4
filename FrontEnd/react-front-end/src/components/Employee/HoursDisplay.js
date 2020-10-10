@@ -180,21 +180,6 @@ class HoursDisplay extends Component {
         }
     }
 
-    formatWorkHours() {
-        let formattedString = "Working Hours: \n";
-        for (const element of this.state.hours) {
-            formattedString += element["day"] + ", " + element["date"] + ", "
-                + this.doubleToTimeString(element["startTime"]) + " - "
-                + this.doubleToTimeString(element["endTime"]) + "\n";
-        }
-        return formattedString;
-    }
-
-    doubleToTimeString(double) {
-        let time = double.toString().split(".");
-        return time[0] + ":" + (time[1] != null ? time[1] + (time[1].length === 1 ? "0" : "") : "00");
-    }
-
     generateEntryFormNew() {
         let id = 0;
         return <form onSubmit={this.onSubmit} id={id} onChange={this.validateForm(id, false)} name="newDay">
