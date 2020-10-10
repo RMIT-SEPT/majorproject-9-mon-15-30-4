@@ -1,6 +1,6 @@
 import http from "./httpCommon";
 import axios from "axios";
-
+import { authHeader } from "../security/authHeader";
 class WorkingHoursDataService {
     getAll() {
         return http.get("working_hours/all");
@@ -19,7 +19,8 @@ class WorkingHoursDataService {
         return axios({
             method: 'put',
             url: "http://localhost:8080/api/working_hours/",
-            data: data
+            data: data,
+            headers: authHeader
         }).catch(e => {
             console.log(e);
         });

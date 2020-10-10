@@ -33,19 +33,19 @@ public class AccountDetailsService implements UserDetailsService
         account = adminService.getAdminByUsername(username);
         if(account != null)
         {
-            return new User(account.getUserName(), account.getPassword(), Arrays.asList(new SimpleGrantedAuthority("ADMIN")));
+            return new User(account.getUserName(), account.getPassword(), Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")));
         }
 
         account = employeeService.getEmployeeByUsername(username);
         if(account != null)
         {
-            return new User(account.getUserName(), account.getPassword(), Arrays.asList(new SimpleGrantedAuthority("EMPLOYEE")));
+            return new User(account.getUserName(), account.getPassword(), Arrays.asList(new SimpleGrantedAuthority("ROLE_EMPLOYEE")));
         }
 
         account = customerService.getCustomerByUsername(username);
         if(account != null)
         {
-            return new User(account.getUserName(), account.getPassword(), Arrays.asList(new SimpleGrantedAuthority("CUSTOMER")));
+            return new User(account.getUserName(), account.getPassword(), Arrays.asList(new SimpleGrantedAuthority("ROLE_CUSTOMER")));
         }
 
 

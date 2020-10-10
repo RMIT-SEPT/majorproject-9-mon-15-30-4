@@ -1,6 +1,6 @@
 import axios from 'axios';
 import http from './httpCommon';
-
+import {authHeader} from '../security/authHeader'
 class LoginService 
 {
     getByUsername(userName)
@@ -20,14 +20,6 @@ class LoginService
 
     authenticateUser(data)
     {
-        // return http.get(`login/authentication/${userName}/${password}`);
-
-        // const newBooking = {
-        //     customerId: "1",
-        //     date: this.state.date + "@" + this.state.time + ":00.000+1000",
-        //     serviceId: response["data"]["id"],
-        //     employeeId: this.state.employeeId.split("#")[1]
-        // }
         
         return axios({
             method: 'post',

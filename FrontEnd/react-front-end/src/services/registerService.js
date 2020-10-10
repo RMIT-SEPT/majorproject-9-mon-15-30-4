@@ -1,5 +1,6 @@
 
 import Axios from "axios";
+import { authHeader } from "../security/authHeader";
 
 class RegisterService 
 {
@@ -13,7 +14,7 @@ class RegisterService
 
     getByEmployeeUserName(userName, password, name, employeeEmail, employeePhone)
     {
-        return Axios.get(`http://localhost:8080/api/register/findEmployeeByUsername/${userName}/${password}/${name}/${employeeEmail}/${employeePhone}`);
+        return Axios.get(`http://localhost:8080/api/register/findEmployeeByUsername/${userName}/${password}/${name}/${employeeEmail}/${employeePhone}`,  null, authHeader);
     }
 
 
