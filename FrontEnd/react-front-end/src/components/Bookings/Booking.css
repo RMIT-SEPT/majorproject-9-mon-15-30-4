@@ -26,6 +26,8 @@
 		cursor: pointer;
 		border-radius: 2px;
 		padding-top: 22px;
+		top: 50%;
+		-ms-transform: translateY(-50%);
 		transform: translateY(-50%);
 	}
 
@@ -62,8 +64,11 @@
 		display: inline-block;
 	}
 
-	.container-t > div {
-		display: inline-block;
-		width: calc(100% / 13);
-		text-align: center;
+	.container.space-between {
+		justify-content: space-between;
+	}
+
+	.Booking
+	{
+		margin-top: 100px;
 	}

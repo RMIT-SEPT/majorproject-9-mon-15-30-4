@@ -17,7 +17,7 @@ class Dashboard extends Component{
             )
         }else{
             return(        
-                <div>
+                <div className = "main">
                 <h5 className="display-4 text-center">Employee Dashboard</h5>
                 <hr></hr>
                 <h1 className="display-9 text-center">Not Logged In. Please log in to see the dashboard</h1>
