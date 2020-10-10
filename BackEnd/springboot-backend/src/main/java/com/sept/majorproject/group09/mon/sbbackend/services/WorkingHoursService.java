@@ -29,25 +29,32 @@ public class WorkingHoursService {
     }
 
     public void saveOrUpdate(WorkingHours[] workingHours) {
-        if(workingHours[0].getStartTime() >= 24) {
-            Calendar shiftDate = Calendar.getInstance();
-            shiftDate.setTime(workingHours[0].getDate());
-            shiftDate.add(Calendar.DAY_OF_MONTH, 1);
+        Calendar shiftDate = Calendar.getInstance();
+        String dateString[] = new String[0];
+        String day = null;
+        if(workingHours[0].getStartTime() == workingHours[0].getEndTime()) {
+            dateString = workingHours[0].getEmployeeId().split("-");
+            shiftDate.set(Integer.parseInt(dateString[0]), Integer.parseInt(dateString[1]) - 1, Integer.parseInt(dateString[2]));
             workingHours[0].setDate(shiftDate.getTime());
+            day = (shiftDate.get(Calendar.YEAR) + "-"
+                    + (Integer.toString(shiftDate.get(Calendar.MONTH) + 1).length() == 1
+                    ? "0" + shiftDate.get(Calendar.MONTH) + 1 : shiftDate.get(Calendar.MONTH) + 1)
+                    + "-" + shiftDate.get(Calendar.DATE));
+            shiftDate.add(Calendar.DAY_OF_MONTH, 1);
         }
 
-        List<WorkingHours> workingHoursList = workingHoursRepository.findAllByEmployee(workingHours[0].getEmployeeId());
-        Calendar existing = Calendar.getInstance(), newHours = Calendar.getInstance();
+        String dayAfter = (shiftDate.get(Calendar.YEAR) + "-"
+                + (Integer.toString(shiftDate.get(Calendar.MONTH) + 1).length() == 1
+                ? "0" + shiftDate.get(Calendar.MONTH) + 1 : shiftDate.get(Calendar.MONTH) + 1)
+                + "-" + shiftDate.get(Calendar.DATE));
+
+        List<WorkingHours> workingHoursList = workingHoursRepository.findAllByEmployeeAndDate(dateString[3],
+                day, dayAfter);
+        Calendar newHours = Calendar.getInstance();
 
         newHours.setTime(workingHours[0].getDate());
-        for (WorkingHours hours : workingHoursList) {
-            existing.setTime(hours.getDate());
-            if (newHours.get(Calendar.YEAR) == existing.get(Calendar.YEAR)
-                    && newHours.get(Calendar.MONTH) == existing.get(Calendar.MONTH)
-                    && newHours.get(Calendar.DAY_OF_MONTH) == existing.get(Calendar.DAY_OF_MONTH)) {
+        for (WorkingHours hours : workingHoursList)
                 workingHoursRepository.deleteById(hours.getId());
-            }
-        }
 
         for (WorkingHours hour : workingHours)
             hour.setDate(workingHours[0].getDate());

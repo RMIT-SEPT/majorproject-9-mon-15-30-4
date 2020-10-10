@@ -63,12 +63,11 @@ class HoursDisplay extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-        console.log(e.target.name)
         if (e.target.name == "newDay") {
             const form = document.getElementById("0");
             let newDay = new Date(form.elements[1].value);
             newDay = new Date(newDay.getTime() - 1440 * 60000);
-            console.log(newDay);
+
             let insertHours = [{
                 day: 0,
                 date: newDay,
@@ -100,11 +99,10 @@ class HoursDisplay extends Component {
         dateEndTime.setHours(24);
         dateEndTime.setMinutes(0);
 
-        while (new Date(date.getTime() + interval * 60000) <= new Date(dateEndTime.getTime() + interval * 60000)) {
+        while (date.getTime() + interval * 60000 <= dateEndTime.getTime()) {
             let valueId = (date.getHours().toString().length === 1 ? "0" + date.getHours()
                 : date.getHours()) + ":" + (date.getMinutes() === 0 ? "00" :
                 date.getMinutes()) + valueEnd, block = document.getElementById(valueId);
-
             if(block.style.backgroundColor === "rgb(97, 255, 95)") {
                 blockCluster = [...blockCluster, block];
             } else {
@@ -117,18 +115,23 @@ class HoursDisplay extends Component {
             date = new Date(date.getTime() + interval * 60000);
         }
 
-        date.setHours(0);
+        if(blockCluster.length > 0)
+            blocks = [...blocks, blockCluster];
+
         date.setFullYear(parseInt(dateString[0]));
         date.setMonth(parseInt(dateString[1]) - 1);
         date.setDate(parseInt(dateString[2]));
+        date.setHours(0);
+
         let insertHours = [{
             day: 0,
             date: date,
-            employeeId: this.state.employeeId,
-            startTime: 30,
-            endTime: 30
+            employeeId: date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + "-" + this.state.employeeId,
+            startTime: 0,
+            endTime: 0
         }];
-        if(blocks.length != 0) {
+
+        if(blocks.length > 0) {
             dashSplit = blocks[0][0].value.toString().split("-");
             id = dashSplit[dashSplit.length - 1];
             dateString = valueEnd.substring(1, valueEnd.length).split("-");
@@ -315,7 +318,7 @@ class HoursDisplay extends Component {
                            id={valueId + "D"}>
                         <i>{"Start Time: "}</i><b>{date.getHours() + ":"
                     + (date.getMinutes() === 0 ? "00" : date.getMinutes())}</b><br/>
-                        <i>{"End Time: "}</i><b>{date2.getHours() + ":"
+                        <i>{"End Time: "}</i><b>{valueId + "#" + date2.getHours() + ":"
                     + (date2.getMinutes() === 0 ? "00" : date2.getMinutes())}</b></label></div>];
             date = new Date(date.getTime() + interval * 60000);
         }

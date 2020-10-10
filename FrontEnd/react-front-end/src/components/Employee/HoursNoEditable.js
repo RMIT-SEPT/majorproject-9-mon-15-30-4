@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import workingHoursService from "../../services/workingHoursService";
 import {Container, Jumbotron} from "react-bootstrap";
 import "./Hours.css";
+import {Link} from "react-router-dom";
 
 class HoursNotEditable extends Component {
     constructor(props) {
@@ -75,7 +76,7 @@ class HoursNotEditable extends Component {
 
         if(rows.length === 0)
             rows = <tr className="tr-eh"><th className="th-eh">N/A</th>
-                <th className="th-eh">N/A</th></tr>;
+                <th className="th-eh">Nothing Scheduled</th></tr>;
         return rows;
     }
 
@@ -237,6 +238,12 @@ class HoursNotEditable extends Component {
                         <label className="label-u-t">Not Scheduled</label>
                         <span> </span>
                         <label>-Hover for details.</label>
+                        <span> </span>
+                        <React.Fragment>
+                            <Link to = "/home/employee/hours">
+                                Edit Employee Hours
+                            </Link>
+                        </React.Fragment>
                         <div>
 
                             <table className="table-eh" id="schedule">
