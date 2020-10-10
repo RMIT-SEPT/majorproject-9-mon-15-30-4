@@ -241,7 +241,7 @@ class AddBooking extends Component {
                 date = new Date(year, month, day, hour, minute);
                 if (date.getFullYear() !== prevDate.getFullYear()
                     || date.getMonth() !== prevDate.getMonth()
-                    || date.getDay() !== prevDate.getDay())
+                    || date.getDate() !== prevDate.getDate())
                     dates = [...dates, month +  "/" + day];
                 prevDate = date;
             }
@@ -284,7 +284,7 @@ class AddBooking extends Component {
             dateEndTime = new Date(year, month, day, endHour, endMinute);
             if (date.getFullYear() !== prevDate.getFullYear()
                 || date.getMonth() !== prevDate.getMonth()
-                || date.getDay() !== prevDate.getDay())
+                || date.getDate() !== prevDate.getDate())
                 break;
 
             while (new Date(date.getTime() + this.state.serviceDuration * 60000) <= dateEndTime) {

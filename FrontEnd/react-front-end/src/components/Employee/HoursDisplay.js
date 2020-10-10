@@ -33,9 +33,11 @@ class HoursDisplay extends Component {
         workingHoursService.getById(this.state.employeeId).then(response => {
             for (const responseElement of response["data"]) {
                 let today = new Date();
+                today.setHours(0);
+                today.setMinutes(0);
                 let hoursDate = responseElement["date"].toString().split("-");
-                if(parseInt(hoursDate[0]) >= today.getFullYear() && parseInt(hoursDate[1]) >= today.getMonth() + 1
-                    && hoursDate[2] >= today.getDate())
+                let newDay = new Date(hoursDate[0], hoursDate[1] - 1, hoursDate[2]);
+                if(newDay >= today)
                 this.setState({
                     hours: [...this.state.hours,
                         responseElement]
@@ -58,6 +60,34 @@ class HoursDisplay extends Component {
 
     onSubmit(e) {
         e.preventDefault();
+
+        console.log(e.target.name)
+        if (e.target.name == "newDay") {
+            const form = document.getElementById("0");
+            let newDay = new Date(form.elements[1].value);
+            newDay = new Date(newDay.getTime() - 1440 * 60000);
+            console.log(newDay);
+            let insertHours = [{
+                day: 0,
+                date: newDay,
+                employeeId: this.state.employeeId,
+                startTime: 30,
+                endTime: 30
+            }];
+            insertHours = [...insertHours, {
+                day: 0,
+                date: newDay,
+                employeeId: this.state.employeeId,
+                startTime: 8.3,
+                endTime: 10.3
+            }];
+            workingHoursService.saveHours(insertHours).then(response => {
+                this.loadHours();
+            });
+
+            return;
+        }
+
         let blocks = [], blockCluster = [];
         let date = new Date(), dateEndTime = new Date(), interval = 30,
             valueEnd = e.target.value.toString().substring(5, e.target.value.toString().length);
@@ -139,23 +169,15 @@ class HoursDisplay extends Component {
         }
     }
 
-    validateForm(id, rt){
+    validateForm(id){
         const form = document.getElementById(id);
 
-        if(form !== null)
-            if (form.elements[2]["value"] /*start time*/ < form.elements[3]["value"] /*end time*/) {
-                form.elements[2].setCustomValidity("");
-                if(rt)
-                return true;
-            } else {
-                form.elements[2].setCustomValidity("Start time must preceed end time,");
-                if(rt)
-                return false;
-            }
-    }
-
-    confirmTimeslot(date, serviceId, employeeId) {
-        return bookingService.checkAvailable(date, serviceId, employeeId);
+        if(form !== null) {
+            let minDate = new Date();
+            form.elements[1].min = minDate.getFullYear() + "-" +
+                ((minDate.getMonth() + 1).toString().length == 1 ? "0" + (minDate.getMonth() + 1) : (minDate.getMonth() + 1)) + "-" +
+                (minDate.getDate().toString().length == 1 ? "0" + minDate.getDate() : minDate.getDate());
+        }
     }
 
     formatWorkHours() {
@@ -173,67 +195,11 @@ class HoursDisplay extends Component {
         return time[0] + ":" + (time[1] != null ? time[1] + (time[1].length === 1 ? "0" : "") : "00");
     }
 
-    formatAvailableTimes() {
-        let formattedString = "Available Times: \n";
-        for (const element of this.state.hours) {
-            formattedString += element[3] + "/" + element[2] + "/" + element[1] + ", "
-                + element[4] + ":" + element[5] + " - " + element[6] + ":" + element[7]
-                + "\n";
-        }
-        return formattedString;
-    }
-
-    generateEntryForm(id, date, startTime, endTime) {
-        let sTime = startTime.toString().split(".");
-        let eTime = endTime.toString().split(".");
-
-        return <form onSubmit={this.onSubmit} key={id} id={id} onChange={this.validateForm(id, false)}>
-            <h6>Date</h6>
-            <div className="form-group">
-                <input type="hidden" name="id" value={id}/>
-                <input type="date" className="form-control form-control-lg"
-                       name="date"
-                       defaultValue={date}
-                       onChange={this.onChange}
-                       required
-                />
-            </div>
-            <h6>Start Time</h6>
-            <div className="form-group">
-                <input type="time" className="form-control form-control-lg"
-                       name="startTime"
-                       defaultValue={(sTime[0].length === 1 ? "0" + sTime[0] : sTime[0]) + ":" + (sTime[1] != null ? sTime[1]
-                           + (sTime[1].length === 1 ? "0" : "") : "00")}
-                       step="900"
-                       onChange={this.onChange}
-                       required
-                />
-            </div>
-            <h6>End Time</h6>
-            <div className="form-group">
-                <input type="time" className="form-control form-control-lg"
-                       name="endTime"
-                       defaultValue={(eTime[0].length === 1 ? "0" + eTime[0] : eTime[0]) + ":" + (eTime[1] != null ? eTime[1]
-                           + (eTime[1].length === 1 ? "0" : "") : "00")}
-                       step="900"
-                       onChange={this.onChange}
-                       required
-                />
-            </div>
-            <input type="submit" className="btn btn-primary btn-block mt-4" name="action" value="Submit"
-                   onClick={() => this.setState({action: "Submit"})}/>
-            <input type="submit" className="btn btn-primary btn-block mt-4" value="Delete"
-                   onClick={() => this.setState({action: "Delete"})}/>
-            <br/>
-        </form>;
-    }
-
     generateEntryFormNew() {
         let id = 0;
-        return <form onSubmit={this.onSubmit} id={id} onChange={this.validateForm(id, false)}
-                     style={this.state.newEntryActive === false ? {display: "none"} : {display: "block"}}>
-            <h6>New Time Frame</h6>
-            <h6>Date</h6>
+        return <form onSubmit={this.onSubmit} id={id} onChange={this.validateForm(id, false)} name="newDay">
+            <br/>
+            <h6>New Day</h6>
             <div className="form-group">
                 <input type="hidden" name="id" value={id}/>
                 <input type="date" className="form-control form-control-lg"
@@ -242,26 +208,8 @@ class HoursDisplay extends Component {
                        required
                 />
             </div>
-            <h6>Start Time</h6>
-            <div className="form-group">
-                <input type="time" className="form-control form-control-lg"
-                       name="startTime"
-                       step="900"
-                       onChange={this.onChange}
-                       required
-                />
-            </div>
-            <h6>End Time</h6>
-            <div className="form-group">
-                <input type="time" className="form-control form-control-lg"
-                       name="endTime"
-                       step="900"
-                       onChange={this.onChange}
-                       required
-                />
-            </div>
-            <input type="submit" className="btn btn-primary btn-block mt-4" name="action" value="Submit"
-                   onClick={() => this.setState({action: "Submit"})}/>
+
+            <input type="submit" className="btn btn-primary btn-block mt-4" name="action" value="Submit"/>
             <br/>
         </form>;
     }
@@ -310,7 +258,7 @@ class HoursDisplay extends Component {
                 date = new Date(year, month, day);
                 if (date.getFullYear() !== prevDate.getFullYear()
                     || date.getMonth() !== prevDate.getMonth()
-                    || date.getDay() !== prevDate.getDay())
+                    || date.getDate() !== prevDate.getDate())
                     dates = [...dates, month +  "/" + day];
                 prevDate = date;
             }
@@ -338,6 +286,7 @@ class HoursDisplay extends Component {
             }
 
         }
+
         return blocks;
     }
 
@@ -402,7 +351,7 @@ class HoursDisplay extends Component {
 
             if (date.getFullYear() !== prevDate.getFullYear()
                 || date.getMonth() !== prevDate.getMonth()
-                || date.getDay() !== prevDate.getDay())
+                || date.getDate() !== prevDate.getDate())
                 break;
 
             do {
@@ -456,15 +405,7 @@ class HoursDisplay extends Component {
     }
 
     render() {
-        let workHours = this.formatWorkHours();
-        let entryForms = [this.generateEntryFormNew()];
-
-        for (const element of this.state.hours) {
-            entryForms = [...entryForms, this.generateEntryForm(element["id"], element["date"],
-                element["startTime"], element["endTime"])];
-        }
-
-        return (
+       return (
 
             <div className="WorkingHours">
                 <Container fluid = "md" >
@@ -499,6 +440,8 @@ class HoursDisplay extends Component {
                                 </tbody>
                             </table>
                         </div>
+
+                        {this.generateEntryFormNew()}
 
                     </Jumbotron>
 
