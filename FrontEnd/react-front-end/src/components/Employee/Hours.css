@@ -1,4 +1,9 @@
-	.table-bp, .th-bp, .td-bp {
+	.WorkingHours
+	{
+		margin-top: 100px;
+	}
+
+	.table-eh, .th-eh, .td-eh {
 		font-weight: normal;
 		table-layout: fixed;
 		width: 100%;
@@ -6,22 +11,24 @@
 		border-collapse: collapse;
 	}
 
-	.th-bp, .td-bp {
+	.th-eh, .td-eh {
 		padding: 5px;
 	}
 
-	.tr-bp:nth-child(even) {
+	.tr-eh:nth-child(even) {
 		background-color: #FFFFFF;
 	}
 
-	.tr-bp:nth-child(odd) {
+	.tr-eh:nth-child(odd) {
 		background-color: #F2FFFF;
 	}
 
-	.button-bp {
+	.button-eh {
 		position: absolute;
-		background-color: #66d9ff;
-		border: 1px solid #0099cc;
+		background-color: #FF4F67;
+		border: 1px solid #C70039;
+		/*background-color: #61FF5F;*/
+		/*border: 1px solid #4AB848;*/
 		color: white;
 		cursor: pointer;
 		border-radius: 2px;
@@ -31,7 +38,7 @@
 		transform: translateY(-50%);
 	}
 
-	.label-a-t {
+	.label-e-h-t {
 		color: white;
 		background-color: #66d9ff;
 		border-radius: 12px;
@@ -39,7 +46,7 @@
 		display: inline-block;
 	}
 
-	.triangle-up {
+	.triangle-up-eh {
 		position: absolute;
 		z-index: 6;
 		width: 0;
@@ -51,7 +58,7 @@
 		border-bottom: 50px solid #10707f;;
 	}
 
-	.label-b-d {
+	.label-e-h {
 		position: absolute;
 		z-index: 5;
 		top: 20px;
@@ -64,13 +71,18 @@
 		display: inline-block;
 	}
 
-	.container-t > div {
+	.label-s-t {
+		color: darkslategrey;
+		background-color: #61FF5F;
+		border-radius: 12px;
+		padding: 1px 7px;
 		display: inline-block;
-		width: calc(100% / 13);
-		text-align: center;
 	}
 
-	.Booking
-	{
-		margin-top: 100px;
+	.label-u-t {
+		color: white;
+		background-color: #FF4F67;
+		border-radius: 12px;
+		padding: 1px 7px;
+		display: inline-block;
 	}

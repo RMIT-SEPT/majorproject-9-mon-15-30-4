@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,9 +25,9 @@ public class WorkingHoursController {
     }
 
     @PostMapping("")
-    private long saveWorkingHours(@RequestBody WorkingHours workingHours) {
+    private long saveWorkingHours(@RequestBody WorkingHours[] workingHours) {
         workingHoursService.saveOrUpdate(workingHours);
-        return workingHours.getId();
+        return workingHours[0].getId();
     }
 
     @GetMapping("/{id}")
@@ -35,18 +36,10 @@ public class WorkingHoursController {
     }
 
     @PutMapping("")
-    public void updateTimeFrame(@RequestBody WorkingHours newHours) {
-        workingHoursService.findById(newHours.getId())
-                .map(hours -> {
-                    hours.setDate(newHours.getDate());
-                    hours.setStartTime(newHours.getStartTime());
-                    hours.setEndTime(newHours.getEndTime());
-                    workingHoursService.saveOrUpdate(hours);
-                    return null;
-                }).orElseGet(() -> {
+    public void updateTimeFrame(@RequestBody WorkingHours[] newHours) {
+
                     workingHoursService.saveOrUpdate(newHours);
-                    return null;
-                });
+
     }
 
     @DeleteMapping("/{id}")
