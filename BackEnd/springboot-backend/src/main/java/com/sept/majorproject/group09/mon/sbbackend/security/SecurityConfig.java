@@ -47,9 +47,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .headers().frameOptions().sameOrigin() //To enable H2 Database
                 .and()
                 .authorizeRequests()
+                //CUSTOMER ONLY
+                .antMatchers("/api/login/isCustomer", "/api/Customer/token/*").hasRole("CUSTOMER")
+                //EMPLOYEE ONLY
+                .antMatchers("/api/login/isEmployee", "/api/Employee/token/*").hasRole("EMPLOYEE")
                 //ADMIN ONLY
                 .antMatchers("/api/bookings/all", "/api/services/delete/*/*", "/api/services/delete",
-                        "api/Employee", "api/register/findEmployeeByUsername/*/*/*/*/*", "h2-console/**")
+                        "api/Employee", "api/register/findEmployeeByUsername/*/*/*/*/*", "h2-console/**", "/api/login/isAdmin",
+                        "/api/Admin/token/*")
                 .hasRole("ADMIN")
                 //ADMIN AND EMPLOYEE
                 .antMatchers("/api/bookings/*")

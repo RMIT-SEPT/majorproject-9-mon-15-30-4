@@ -2,6 +2,8 @@ package com.sept.majorproject.group09.mon.sbbackend.web;
 
 import com.sept.majorproject.group09.mon.sbbackend.security.LoginRequest;
 import com.sept.majorproject.group09.mon.sbbackend.services.AccountDetailsService;
+import com.sept.majorproject.group09.mon.sbbackend.services.AdminService;
+import com.sept.majorproject.group09.mon.sbbackend.services.EmployeeService;
 import com.sept.majorproject.group09.mon.sbbackend.tokenization.JwtUtil;
 import com.sept.majorproject.group09.mon.sbbackend.tokenization.LoginResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -143,9 +145,57 @@ public class LoggingInController
 
         return ResponseEntity.ok(new LoginResponse("Bearer " + jwt));
 
-
     }
 
+    @Autowired
+    JwtUtil jwtUtil;
 
+    @GetMapping("/isCustomer/{token}")
+    public ResponseEntity<?> isCustomer(@PathVariable("token") String jwtToken)
+    {
+        String username = jwtUtil.extractUsername(jwtToken);
+        boolean customer = false;
+
+        if(customerService.getCustomerByUsername(username) != null)
+        {
+            customer = true;
+        }
+
+        return ResponseEntity.ok(customer);
+    }
+
+    @Autowired
+    EmployeeService employeeService;
+
+    @GetMapping("/isEmployee/{token}")
+    public ResponseEntity<?> isEmployee(@PathVariable("token") String jwtToken)
+    {
+        String username = jwtUtil.extractUsername(jwtToken);
+        boolean employee = false;
+
+        if(employeeService.getEmployeeByUsername(username) != null)
+        {
+            employee = true;
+        }
+
+        return ResponseEntity.ok(employee);
+    }
+
+    @Autowired
+    AdminService adminService;
+
+    @GetMapping("/isAdmin/{token}")
+    public ResponseEntity<?> isAdmin(@PathVariable("token") String jwtToken)
+    {
+        String username = jwtUtil.extractUsername(jwtToken);
+        boolean admin = false;
+
+        if(adminService.getAdminByUsername(username) != null)
+        {
+            admin = true;
+        }
+
+        return ResponseEntity.ok(admin);
+    }
 
 }

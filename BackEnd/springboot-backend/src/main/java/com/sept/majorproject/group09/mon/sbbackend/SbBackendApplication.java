@@ -19,8 +19,6 @@ public class SbBackendApplication {
         ConfigurableApplicationContext configurableApplicationContext =
                 SpringApplication.run(SbBackendApplication.class, args);
 
-//        AccountRepository customerRepository = configurableApplicationContext.getBean(CustomerRepository.class);
-//        customerRepository.save(new Customer("Name", "Password", "Username", "Email", 0404));
 
     }
 

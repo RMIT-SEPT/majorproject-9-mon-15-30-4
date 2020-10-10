@@ -1,6 +1,6 @@
 import axios from 'axios';
 import http from './httpCommon';
-import {authHeader} from '../security/authHeader'
+
 class LoginService 
 {
     getByUsername(userName)
@@ -33,6 +33,21 @@ class LoginService
     isLoggedIn()
     {
         return http.get(`login/loggedIn`);
+    }
+
+    isCustomer()
+    {
+        return http.get(`login/isCustomer/${localStorage.getItem('login')}`)
+    }
+
+    isEmployee()
+    {
+        return http.get(`login/isEmployee/${localStorage.getItem('login')}`)
+    }
+    
+    isAdmin()
+    {
+        return http.get(`login/isAdmin/${localStorage.getItem('login')}`)
     }
 
 }

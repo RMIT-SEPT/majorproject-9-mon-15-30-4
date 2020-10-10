@@ -1,9 +1,9 @@
 package com.sept.majorproject.group09.mon.sbbackend.web;
 
 import com.sept.majorproject.group09.mon.sbbackend.model.Customer;
-import com.sept.majorproject.group09.mon.sbbackend.model.Employee;
-import com.sept.majorproject.group09.mon.sbbackend.repositories.CustomerRepository;
+
 import com.sept.majorproject.group09.mon.sbbackend.services.CustomerService;
+import com.sept.majorproject.group09.mon.sbbackend.tokenization.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +32,19 @@ public class CustomerController
         return new ResponseEntity<Customer>(customer, HttpStatus.CREATED);
     }
 
+
+    @Autowired
+    JwtUtil jwtUtil;
+
+
+    @GetMapping("/token/{jwt}")
+    public ResponseEntity<?> getCustomerFromToken(@PathVariable("jwt") String jwtToken)
+    {
+        String username = jwtUtil.extractUsername(jwtToken);
+
+        Customer customer  =  customerService.getCustomerByUsername(username);
+
+        return ResponseEntity.ok(customer);
+    }
 
 }

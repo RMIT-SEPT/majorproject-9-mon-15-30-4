@@ -16,5 +16,6 @@ public class AdminLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         this.repository.save(new Admin("defaultAdmin", "password", "admin"));
+        this.repository.save(new Admin("businessOwner", "password", "businessOwner"));
     }
 }

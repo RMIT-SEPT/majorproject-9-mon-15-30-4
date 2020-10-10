@@ -8,22 +8,3 @@ export default axios.create({
 
   }
 });
-
-
-// const apiUrl = 'http://localhost:8080/api';
-// axios.interceptors.request.use(
-//   config => {
-//     const { origin } = new URL(config.url);
-//     const allowedOrigins = [apiUrl];
-//     const token = localStorage.getItem('token');
-//     if (allowedOrigins.includes(origin)) {
-//       config.headers.authorization = `${token}`;
-//     }
-//     return config;
-//   },
-//   error => {
-//     return Promise.reject(error);
-//   }
-
-
-// );

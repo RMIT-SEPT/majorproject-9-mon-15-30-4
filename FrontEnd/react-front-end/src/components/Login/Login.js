@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import "./Login.css";
 import loginService from "../../services/loginService.js";
-import Header from "../Layout/Header";
-
 import { Form, Container, Button, Jumbotron, Nav } from "react-bootstrap";
 
 class Login extends Component {
