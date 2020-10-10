@@ -128,8 +128,10 @@ class Home extends Component {
                                         <ul>
                                             <li> 047700783</li>
                                         </ul>
-                                        <Card.Subtitle>OPEN 24/7 TO MEMBERS</Card.Subtitle>
-                                        <ul></ul>
+                                        <Card.Subtitle>EMAIL</Card.Subtitle>
+                                        <ul>
+                                            <li>CustomerService@GymBros.com.au</li>
+                                        </ul>
                                         <Card.Subtitle>STAFFED HOURS</Card.Subtitle>
                                         <ul>
                                             <li>MONDAY: 10:30am - 7:00pm</li>
