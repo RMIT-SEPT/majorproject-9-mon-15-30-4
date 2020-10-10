@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import "./Employee.css";
 import { Jumbotron, Image, Row } from "react-bootstrap";
+import HoursNotEditable from "./HoursNoEditable";
 
 
 class Employee extends Component {
@@ -54,6 +55,7 @@ class Employee extends Component {
                     </div>
                 </section>
 
+                <HoursNotEditable/>
                 {/* PLACE CUSTOMER BOOKING SCHEDULING HERE */}
                 {/* MOST LIKELY FROM /BOOKINGS Sections */}
                 <section className = "SectionEmployeeBooking">
