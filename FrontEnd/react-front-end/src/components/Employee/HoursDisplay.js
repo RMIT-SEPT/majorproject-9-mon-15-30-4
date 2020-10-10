@@ -283,7 +283,7 @@ class HoursDisplay extends Component {
             endHour = this.state.hours[i]["endTime"].toString().split(".")[0],
             endMinute = this.state.hours[i]["endTime"].toString().split(".")[1],
             date = new Date(prevDate.getTime()), dateEndTime = new Date(prevDate.getTime()),
-            id = this.state.hours[i]["id"], valueId;
+            date2, id = this.state.hours[i]["id"], valueId;
         date.setHours(0);
         date.setMinutes(0);
         dateEndTime.setHours(24);
@@ -298,6 +298,8 @@ class HoursDisplay extends Component {
 
             let position = (date.getHours() * 60 + date.getMinutes()) / 1440 * 100 + "%";
             let length = interval / 1440 * 100 + "%";
+
+            date2 = new Date(date.getTime() + interval * 60000);
             buttons = [...buttons, <button className="button-eh" style={{left: position, width: length}}
                                            id={valueId}
                                            name="timedate"
@@ -311,7 +313,8 @@ class HoursDisplay extends Component {
                            id={valueId + "D"}>
                         <i>{"Start Time: "}</i><b>{date.getHours() + ":"
                     + (date.getMinutes() === 0 ? "00" : date.getMinutes())}</b><br/>
-                        <i>{"Id: "}</i><b>{valueId}</b></label></div>];
+                        <i>{"End Time: "}</i><b>{date2.getHours() + ":"
+                    + (date2.getMinutes() === 0 ? "00" : date2.getMinutes())}</b></label></div>];
             date = new Date(date.getTime() + interval * 60000);
         }
 
