@@ -38,7 +38,7 @@ class BookingsHistory extends React.Component {
     render() {
         return(
             <div>
-            
+
             <ReactBootStrap.Table striped bordered hover size="sm" id="table1">
                 <thead>
                     <tr>
