@@ -46,22 +46,24 @@ class BookingsHistory extends React.Component {
 
     render() {
         return(
-    <div>
-    <ReactBootStrap.Table striped bordered hover size="sm" id="table1">
-        <thead>
-            <tr>
-            <th>ID</th>
-            <th>Date</th>
-            <th>CustomerID</th>
-            <th>EmployeeID</th>
-            <th>ServiceID</th>
-            </tr>
-        </thead>
-    <tbody>
-        {this.state.bookings} 
-    </tbody>
-    </ReactBootStrap.Table>
-    </div>
+            <div>
+
+            <ReactBootStrap.Table striped bordered hover size="sm" id="table1">
+                <thead>
+                    <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>CustomerID</th>
+                    <th>EmployeeID</th>
+                    <th>ServiceID</th>
+                    </tr>
+                </thead>
+            <tbody>
+                {this.state.bookings} 
+            </tbody>
+            </ReactBootStrap.Table>
+        
+            </div>
         )
     }
 }

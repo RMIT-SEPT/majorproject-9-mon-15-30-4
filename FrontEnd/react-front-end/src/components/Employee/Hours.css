@@ -1,0 +1,88 @@
+	.WorkingHours
+	{
+		margin-top: 100px;
+	}
+
+	.table-eh, .th-eh, .td-eh {
+		font-weight: normal;
+		table-layout: fixed;
+		width: 100%;
+		border: 1px solid black;
+		border-collapse: collapse;
+	}
+
+	.th-eh, .td-eh {
+		padding: 5px;
+	}
+
+	.tr-eh:nth-child(even) {
+		background-color: #FFFFFF;
+	}
+
+	.tr-eh:nth-child(odd) {
+		background-color: #F2FFFF;
+	}
+
+	.button-eh {
+		position: absolute;
+		background-color: #FF4F67;
+		border: 1px solid #C70039;
+		/*background-color: #61FF5F;*/
+		/*border: 1px solid #4AB848;*/
+		color: white;
+		cursor: pointer;
+		border-radius: 2px;
+		padding-top: 22px;
+		top: 50%;
+		-ms-transform: translateY(-50%);
+		transform: translateY(-50%);
+	}
+
+	.label-e-h-t {
+		color: white;
+		background-color: #66d9ff;
+		border-radius: 12px;
+		padding: 1px 7px;
+		display: inline-block;
+	}
+
+	.triangle-up-eh {
+		position: absolute;
+		z-index: 6;
+		width: 0;
+		height: 0;
+		top: 16px;
+		transform: translate(-25%);
+		border-left: 25px solid transparent;
+		border-right: 25px solid transparent;
+		border-bottom: 50px solid #10707f;;
+	}
+
+	.label-e-h {
+		position: absolute;
+		z-index: 5;
+		top: 20px;
+		width: 170px;
+		transform: translate(-50%);
+		color: white;
+		background-color: #10707f;
+		border-radius: 12px;
+		padding: 1px 7px;
+		display: inline-block;
+	}
+
+	.label-s-t {
+		color: darkslategrey;
+		background-color: #61FF5F;
+		border-radius: 12px;
+		padding: 1px 7px;
+		display: inline-block;
+	}
+
+	.label-u-t {
+		color: white;
+		background-color: #FF4F67;
+		border-radius: 12px;
+		padding: 1px 7px;
+		display: inline-block;
+	}

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import {Jumbotron  } from "react-bootstrap";
 import "./AdminDashboard.css";
 import "./AddEmployee";
-
 import AddEmployee from './AddEmployee';
-
 import Service from "../Service/Service"
+
+
 
 
 
@@ -17,21 +18,27 @@ class AdminDashboard extends Component{
     }
     render(){
         return(        
-            <div>
+            <div className = "container-fluid main">
+
                 <h5 className="display-4 text-center">Admin Dashboard</h5>
                 <hr />
-                <div className="container"> 
-                    <div className="form-popup">
+                <div className="AdminContainerEmployeeRegisteration"> 
+                    <div>
                         <div className="col-md-8 m-auto">
                             <AddEmployee/>
                         </div>
                     </div>
                 </div>
+
                 <hr />
-                <div className="container"> 
-                    <div className="form-popup">
+                {/* Section to Assign Services to Employees */}
+                <div className="AdminContainerEmployeeServiceAssignment"> 
+                    <div>
                         <div className="col-md-8 m-auto">
+                        <h2 className="display-5 text-center">Assign Services to Employee</h2>
+                        <Jumbotron>
                             <Service/>
+                        </Jumbotron>
                         </div>
                     </div>
                 </div>

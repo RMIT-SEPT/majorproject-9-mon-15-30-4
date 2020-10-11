@@ -29,7 +29,7 @@ public class WorkingHoursLoader implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         Calendar date = Calendar.getInstance();
 
-        date.set(2020, Calendar.SEPTEMBER, 26);
+        date.set(2020, Calendar.OCTOBER, 26);
         this.repository.save(new WorkingHours("Jim_User", 8.3, 10.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
         this.repository.save(new WorkingHours("Jim_User", 12.3, 16.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
 

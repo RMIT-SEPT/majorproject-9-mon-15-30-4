@@ -1,15 +1,16 @@
+.display-4 text-center
+{
+	margin-top: auto;
+}
 
-	.form {
-		margin: 0 auto;
-		width: 250px;
-	}
-	.form label{
-		display: inline-block;
-		text-align: right;
-		float: left;
-	}
-	.form input{  
-		display: inline-block;
-		text-align: left;
-		float: right;
-	}
+.AdminContainerEmployeeRegisteration{
+	margin-top: auto;
+}
+
+.AdminContainerEmployeeServiceAssignment{
+	margin-top: auto;
+}
+.main
+{
+	margin-top: 100px;
+}

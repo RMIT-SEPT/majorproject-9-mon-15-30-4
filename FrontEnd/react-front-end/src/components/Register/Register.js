@@ -67,7 +67,7 @@ class Register extends Component {
     render() {
         return (
 
-        <div className="container"> 
+        <div className="containerRegister"> 
             <div className="form-popup">
                 <div className="col-md-8 m-auto">
                     <h5 className="display-4 text-center">Register</h5>
@@ -136,7 +136,7 @@ class Register extends Component {
                             onChange = {this.onChange}
                         />
                         <Form.Text>
-                            Enter a name for us to recognise you.
+                            Enter an email address to recognise you.
                         </Form.Text>
                     </Form.Group>
 
@@ -146,7 +146,7 @@ class Register extends Component {
                         </Form.Label>
                         <Form.Control 
                             type = "tel"
-                            placeholder = "04 1234566"
+                            placeholder = "123456789"
                             name = "contactNumber"
                             value = {this.state.contactNumber}
                             onChange = {this.onChange}
@@ -159,61 +159,6 @@ class Register extends Component {
 
                     <Button type = "Submit"> Register</Button>
 
-
-
-                    {/* <form onSubmit={this.onSubmit}>
-
-                        <div className="form-group">
-                            <input type="text" className="form-control form-control-lg " 
-                            placeholder="Username" 
-                            name="userName"
-                            value= {this.state.userName}
-                            onChange = {this.onChange}
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <input type="password" className="form-control form-control-lg " 
-                            placeholder="Enter Password" 
-                            name="password"
-                            value= {this.state.password}
-                            onChange = {this.onChange}
-                            />
-                        </div>
-
-
-                        <div className="form-group">
-                            <input type="text" className="form-control form-control-lg " 
-                            placeholder="Name" 
-                            name="name"
-                            value= {this.state.name}
-                            onChange = {this.onChange}
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <input type="text" className="form-control form-control-lg " 
-                            placeholder="Email" 
-                            name="contactEmail"
-                            value= {this.state.contactEmail}
-                            onChange = {this.onChange}
-                            />
-                        </div>
-
-     
-                        <div className="form-group">
-                            <input type="number" className="form-control form-control-lg" 
-                            placeholder="Phone Number"
-                            name="contactNumber"
-                            value= {this.state.contactNumber}
-                            onChange = {this.onChange}
-                            />
-                        </div>
-                    
-                        <input type="submit" value = "Register" className="btn btn-primary btn-block mt-4" />
-
-
-                    </form> */}
                     </Form>
                     </Jumbotron>
 

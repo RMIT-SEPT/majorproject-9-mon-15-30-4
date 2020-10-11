@@ -14,4 +14,7 @@ public interface WorkingHoursRepository extends CrudRepository<WorkingHours, Lon
     @Query(value = "SELECT * FROM Working_Hours WHERE employee_id = :employeeId ORDER BY date ASC", nativeQuery = true)
     List<WorkingHours> findAllByEmployee(@Param("employeeId") String employeeId);
 
+    @Query(value = "SELECT * FROM Working_Hours WHERE employee_id = :employeeId AND date > :date AND date < :nextDate ORDER BY date ASC", nativeQuery = true)
+    List<WorkingHours> findAllByEmployeeAndDate(@Param("employeeId") String employeeId, @Param("date") String date, @Param("nextDate") String nextDate);
+
 }

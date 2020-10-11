@@ -7,8 +7,8 @@ import DashboardButton from "../Dashboard/DashboardButton";
 import AdminDashboardButton from "../AdminDashboard/AdminDashboardButton";
 
 
-
-import { Nav, Navbar, Button } from "react-bootstrap";
+import "./Header.css"
+import { Nav, Navbar, Button} from "react-bootstrap";
 
 
 class Header extends Component {
@@ -42,9 +42,9 @@ class Header extends Component {
 
     render() {
         return (
-            <div>
-                  <Navbar bg = "dark" variant = "dark" style ={{color:"#00000"}}> 
-                    <Navbar.Brand href = "Home">
+            <div className = "fixed-top">
+                  <Navbar bg = "dark" variant = "dark" style ={{color:"#00000"}} fixed = 'top'> 
+                    <Navbar.Brand href = "/">
                         <img
                         alt = ""
                         src = "./images/icon_barbell-3.png"

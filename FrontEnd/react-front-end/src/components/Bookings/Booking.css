@@ -64,6 +64,13 @@
 		display: inline-block;
 	}
 
-	.container.space-between {
-		justify-content: space-between;
+	.container-t > div {
+		display: inline-block;
+		width: calc(100% / 13);
+		text-align: center;
+	}
+
+	.Booking
+	{
+		margin-top: 100px;
 	}
