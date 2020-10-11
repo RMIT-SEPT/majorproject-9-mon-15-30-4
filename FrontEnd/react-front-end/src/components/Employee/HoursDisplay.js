@@ -66,14 +66,14 @@ class HoursDisplay extends Component {
         if (e.target.name == "newDay") {
             const form = document.getElementById("0");
             let newDay = new Date(form.elements[1].value);
-            newDay = new Date(newDay.getTime() - 1440 * 60000);
+            newDay = new Date(newDay.getTime());
 
             let insertHours = [{
                 day: 0,
                 date: newDay,
-                employeeId: this.state.employeeId,
-                startTime: 30,
-                endTime: 30
+                employeeId: newDay.getFullYear() + "-" + (newDay.getMonth() + 1) + "-" + newDay.getDate() + "-" + this.state.employeeId,
+                startTime: 0,
+                endTime: 0
             }];
             insertHours = [...insertHours, {
                 day: 0,

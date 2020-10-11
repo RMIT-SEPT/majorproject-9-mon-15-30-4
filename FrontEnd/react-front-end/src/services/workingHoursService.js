@@ -15,11 +15,11 @@ class WorkingHoursDataService {
     }
 
     saveHours(data){
+        console.log(data)
         return axios({
             method: 'put',
             url: "http://localhost:8080/api/working_hours/",
             data: data,
-            headers: authHeader
         }).catch(e => {
             console.log(e);
         });

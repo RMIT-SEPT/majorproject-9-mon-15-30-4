@@ -11,7 +11,7 @@ import AdminDashboard from './components/AdminDashboard/AdminDashboard';
 import Service from "./components/Service/Service";
 import HoursDisplay from "./components/Employee/HoursDisplay";
 import BookingsHistory from "./components/Bookings/BookingHistory/BookingsHistory";
-
+import Logout from "./components/Login/Logout"
 
 import "./BaseRoutes.css";
 
@@ -20,7 +20,6 @@ export const BaseRoutes = () => (
             <Route exact path="/" component = {Home}/>
             <Route exact path="/Customer" component = {Customer}/>
             <Route exact path="/Employee" component={Employee}/>
-            
             <Route exact path="/Bookings" component = { AddBooking } />
             <Route exact path = "/BookingsHistory" component = {BookingsHistory}/>
             <Route exact path="/login" component = { Login } />
@@ -30,6 +29,6 @@ export const BaseRoutes = () => (
             <Route exact path = "/ChangeService" component = {Service}/>
             <Route exact path = "/home/employee/hours" component = {HoursDisplay}/>
             <Route exact path = "/BookingsHistory" component = {BookingsHistory}/>
-       
+            <Route exact path = "/logout" component = {Logout}/>
     </div>
 );

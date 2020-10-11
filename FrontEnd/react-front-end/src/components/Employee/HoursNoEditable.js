@@ -3,6 +3,8 @@ import workingHoursService from "../../services/workingHoursService";
 import {Container, Jumbotron} from "react-bootstrap";
 import "./Hours.css";
 import {Link} from "react-router-dom";
+import loginService from "../../services/loginService";
+import employeeService from "../../services/employeeService";
 
 class HoursNotEditable extends Component {
     constructor(props) {
@@ -11,7 +13,7 @@ class HoursNotEditable extends Component {
         this.state = {
             action: "",
             hours: [],
-            employeeId: "Jim_User",
+            employeeId: "",
         };
 
         this.loadHours = this.loadHours.bind(this);
@@ -24,22 +26,27 @@ class HoursNotEditable extends Component {
     }
 
     loadHours() {
-        this.setState({hours: []});
-        workingHoursService.getById(this.state.employeeId).then(response => {
-            for (const responseElement of response["data"]) {
-                let today = new Date();
-                today.setHours(0);
-                today.setMinutes(0);
-                today.setSeconds(0);
-                today = new Date(today.getTime() - 1440 * 60000)
-                let hoursDate = responseElement["date"].toString().split("-");
-                let newDay = new Date(hoursDate[0], hoursDate[1] - 1, hoursDate[2]);
-                if(newDay > today && newDay <= new Date(today.getTime() + 7 * 1440 * 60000))
-                    this.setState({
-                        hours: [...this.state.hours,
-                            responseElement]
-                    });
-            }
+        employeeService.getByToken().then(response => {
+            this.setState({employeeId: response["data"]["userName"]});
+            this.setState({hours: []});
+            workingHoursService.getById(this.state.employeeId).then(response => {
+                for (const responseElement of response["data"]) {
+                    let today = new Date();
+                    today.setHours(0);
+                    today.setMinutes(0);
+                    today.setSeconds(0);
+                    today = new Date(today.getTime() - 1440 * 60000)
+                    let hoursDate = responseElement["date"].toString().split("-");
+                    let newDay = new Date(hoursDate[0], hoursDate[1] - 1, hoursDate[2]);
+                    if(newDay > today && newDay <= new Date(today.getTime() + 7 * 1440 * 60000))
+                        this.setState({
+                            hours: [...this.state.hours,
+                                responseElement]
+                        });
+                }
+            }).catch(e => {
+                console.log(e);
+            });
         }).catch(e => {
             console.log(e);
         });
@@ -224,6 +231,24 @@ class HoursNotEditable extends Component {
         document.getElementById(e.target.value + "T").style.visibility  = "visible";
     }
 
+    editHoursRender(){
+        if(localStorage.getItem('isLoggedIn') === "true")
+        {
+            loginService.isAdmin().then(response => {
+                if(response["data"])
+                    return (
+                        <React.Fragment>
+                            <Link to = "/home/employee/hours">
+                                Edit Employee Hours
+                            </Link>
+                        </React.Fragment>
+                    )
+            }).catch(e => {
+                console.log(e);
+            });
+        }
+    }
+
     render() {
         return (
 
@@ -239,11 +264,8 @@ class HoursNotEditable extends Component {
                         <span> </span>
                         <label>-Hover for details.</label>
                         <span> </span>
-                        <React.Fragment>
-                            <Link to = "/home/employee/hours">
-                                Edit Employee Hours
-                            </Link>
-                        </React.Fragment>
+
+                        {this.editHoursRender()}
                         <div>
 
                             <table className="table-eh" id="schedule">

@@ -37,17 +37,17 @@ class LoginService
 
     isCustomer()
     {
-        return http.get(`login/isCustomer/${localStorage.getItem('login')}`)
+        return http.get(`login/isCustomer/${localStorage.getItem('login').split("Bearer ")[1]}`)
     }
 
     isEmployee()
     {
-        return http.get(`login/isEmployee/${localStorage.getItem('login')}`)
+        return http.get(`login/isEmployee/${localStorage.getItem('login').split("Bearer ")[1]}`)
     }
     
     isAdmin()
     {
-        return http.get(`login/isAdmin/${localStorage.getItem('login')}`)
+        return http.get(`login/isAdmin/${localStorage.getItem('login').split("Bearer ")[1]}`)
     }
 
 }
