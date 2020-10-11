@@ -49,6 +49,11 @@ public abstract class Account
         return userName;
     }
 
+    public String getPassword()
+    {
+        return password;
+    }
+
 
     //Returns true if the passwords match.
     // The password should never be passed up the chain hence the need to check it in the class

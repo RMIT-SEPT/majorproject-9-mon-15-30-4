@@ -1,6 +1,6 @@
 import http from "./httpCommon";
 import axios from "axios";
-
+import { authHeader } from "../security/authHeader";
 class ServiceDataService {
     getAll() {
         return http.get("/services/all");
@@ -27,7 +27,8 @@ class ServiceDataService {
         axios({
             method: 'post',
             url: "http://localhost:8080/api/services",
-            data: data
+            data: data,
+            headers: authHeader
         }).catch(e => {
             console.log(e);
         });

@@ -26,18 +26,18 @@ public class BookingLoader implements CommandLineRunner {
         date.setTimeZone(TimeZone.getTimeZone("GMT+0"));
 
         date.set(2020, Calendar.AUGUST, 17, 8, 30);
-        this.repository.save(new Booking(date.getTime(), 1, "1", "Jim_User"));
+        this.repository.save(new Booking(date.getTime(), 1, "John_Customer", "Jim_User"));
 
         date.set(2020, Calendar.AUGUST, 17, 8, 30);
-        this.repository.save(new Booking(date.getTime(), 1, "2", "Frank_User"));
+        this.repository.save(new Booking(date.getTime(), 1, "Fred_Customer", "Frank_User"));
 
         date.set(2020, Calendar.AUGUST, 17, 14, 0);
-        this.repository.save(new Booking(date.getTime(), 2, "3", "Jim_User"));
+        this.repository.save(new Booking(date.getTime(), 2, "George_Customer", "Jim_User"));
 
         date.set(2020, Calendar.AUGUST, 19, 8, 30);
-        this.repository.save(new Booking(date.getTime(), 2, "4", "Jim_User"));
+        this.repository.save(new Booking(date.getTime(), 2, "Harry_Customer", "Jim_User"));
 
         date.set(2020, Calendar.AUGUST, 19, 18, 0);
-        this.repository.save(new Booking(date.getTime(), 2, "1", "Frank_User"));
+        this.repository.save(new Booking(date.getTime(), 2, "John_Customer", "Frank_User"));
     }
 }

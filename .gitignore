@@ -10,3 +10,5 @@ tmp/
 node_modules/
 .vscode/
 *.class
+FrontEnd/package-lock.json
+FrontEnd/react-front-end/debug.log

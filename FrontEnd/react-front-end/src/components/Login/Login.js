@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import "./Login.css";
 import loginService from "../../services/loginService.js";
-import Header from "../Layout/Header";
-
 import { Form, Container, Button, Jumbotron, Nav } from "react-bootstrap";
 
 class Login extends Component {
@@ -12,7 +10,7 @@ class Login extends Component {
         super(props);
         this.state= 
         {
-            userName: "",
+            username: "",
             password: "",
             loggedIn: false
         };
@@ -30,15 +28,18 @@ class Login extends Component {
 
     onSubmit(e)
     {
-
-        loginService.authenticateUser(this.state.userName, this.state.password)
+        const loginRequest = {
+            username: this.state.username,
+            password: this.state.password
+        }
+        loginService.authenticateUser(loginRequest)
             .then(response => {
-  
-                this.setState({
-                    userName: response['data']['userName'],
-                    loggedIn: true
-                })
-                Header.Login();
+                console.log(`Response =`);
+                console.log(response['data']);
+                localStorage.setItem('login', response['data'].jwt);
+                localStorage.setItem('isLoggedIn', true)
+                console.log(`LocalStorage.login: ${localStorage.getItem('login')}`);
+                console.log(`LocalStorage.isLoggedIn: ${localStorage.getItem('isLoggedIn')}`);
             })
             .catch( e => {
                 console.log(e);
@@ -53,29 +54,34 @@ class Login extends Component {
         {
             return(
                 <div>
-                    <Container fluid = "md" className = "ContainerLogin">
-
-                        <h5 className="display-4 text-center">Welcome Back!</h5>
-                        <hr/>
+                    <Container fluid = "md">
+             
                         <Jumbotron className ="text-auto">
                         
                         <h1> Welcome!</h1>
                         <p>
-                            Please enter your details to log in.
+                            Enter your details to log in.
                         </p>
+
+
+                      
+ 
                         <Form onSubmit = {this.onSubmit}>
-                            <Form.Group controlId = "formEmail">
+                            <Form.Group controlId = "username">
                                 <Form.Label>
-                                    Email Address
+                                    Username
                                 </Form.Label>
-                                <Form.Control type = "email" placeholder = "Example@Email.com"/>
+                                <Form.Control type = "text" placeholder = "Example@Email.com" name = "username" value = {this.state.username} onChange = {this.onChange}/>
+                                <Form.Text>
+                                   Please enter your username.
+                                </Form.Text>
                             </Form.Group>
 
-                            <Form.Group controlId = "formPassword">
+                            <Form.Group controlId = "password">
                                 <Form.Label>
                                     Password
                                 </Form.Label>
-                                <Form.Control type ="password" placeholder = "Password" />
+                                <Form.Control type ="password" placeholder = "password" name = "password" value = {this.state.password} onChange = {this.onChange} />
 
                             </Form.Group>
 
