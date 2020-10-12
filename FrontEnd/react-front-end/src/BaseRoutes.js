@@ -12,6 +12,8 @@ import Service from "./components/Service/Service";
 import HoursDisplay from "./components/Employee/HoursDisplay";
 import BookingsHistory from "./components/Bookings/BookingHistory/BookingsHistory";
 import Logout from "./components/Login/Logout"
+import BookingConfirm from "./components/BookingConfirm/BookingConfirm"
+
 
 import "./BaseRoutes.css";
 
@@ -30,5 +32,7 @@ export const BaseRoutes = () => (
             <Route exact path = "/home/employee/hours" component = {HoursDisplay}/>
             <Route exact path = "/BookingsHistory" component = {BookingsHistory}/>
             <Route exact path = "/logout" component = {Logout}/>
+            <Route exact path = "/BookingConfirm" component = {BookingConfirm}/>
+            
     </div>
 );

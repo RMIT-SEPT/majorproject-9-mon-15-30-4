@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+
 import {Jumbotron  } from "react-bootstrap";
+import {Link} from "react-router-dom"
 import "./AdminDashboard.css";
 import "./AddEmployee";
 import AddEmployee from './AddEmployee';
 import Service from "../Service/Service"
-import {Link} from "react-router-dom";
+
 
 
 
@@ -49,6 +51,13 @@ class AdminDashboard extends Component{
                             </Jumbotron>
                         </div>
                     </div>
+                </div>
+                <div className="container">
+                    <React.Fragment>
+                        <Link to = "/BookingConfirm" className="nav-link" >
+                            <input type="button" value = "Confirm New Bookings" className="btn btn-primary btn-block mt-4" />
+                        </Link>
+                    </React.Fragment>
                 </div>
 
             </div>
