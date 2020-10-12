@@ -54,24 +54,22 @@ class Login extends Component {
         {
             return(
                 <div>
-                    <Container fluid = "md">
-             
+                    <Container fluid = "md" className = "ContainerLogin">
+
+                        <h5 className="display-4 text-center">Welcome Back!</h5>
+                        <hr/>
                         <Jumbotron className ="text-auto">
                         
                         <h1> Welcome!</h1>
                         <p>
-                            Enter your details to log in.
+                            Please enter your details to log in.
                         </p>
-
-
-                      
- 
                         <Form onSubmit = {this.onSubmit}>
                             <Form.Group controlId = "username">
                                 <Form.Label>
                                     Username
                                 </Form.Label>
-                                <Form.Control type = "text" placeholder = "Example@Email.com" name = "username" value = {this.state.username} onChange = {this.onChange}/>
+                                <Form.Control type = "text" placeholder = "Please enter your username" name = "username" value = {this.state.username} onChange = {this.onChange}/>
                                 <Form.Text>
                                    Please enter your username.
                                 </Form.Text>
@@ -81,7 +79,7 @@ class Login extends Component {
                                 <Form.Label>
                                     Password
                                 </Form.Label>
-                                <Form.Control type ="password" placeholder = "password" name = "password" value = {this.state.password} onChange = {this.onChange} />
+                                <Form.Control type ="password" placeholder = "Please enter your password" name = "password" value = {this.state.password} onChange = {this.onChange} />
 
                             </Form.Group>
 
@@ -100,6 +98,7 @@ class Login extends Component {
         }
         else
         {
+        
             return(
        
                 <div>Welcome. Login Successful.</div>

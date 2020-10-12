@@ -62,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 //ANY LOGGED IN USER
                 .antMatchers("/api/bookings","/api/bookings/available/*", "/api/bookings/available/time/*/*/*",
                         "/api/services/all", "/api/services/*", "/api/services/employee/*", "/api/services/name/*", "/api/services/fetch/**", "/api/services",
-                        "api/Employee/*", "api/Employee/AllEmployees")
+                        "api/Employee/*", "api/Employee/AllEmployees","api/Customer/*", "api/Customer/AllCustomers")
                 .hasAnyRole("ADMIN", "EMPLOYEE", "CUSTOMER")
                 //ANY USER
                 .antMatchers("api/register/findUserByName/*/*/*/*/*", "/api/login/authenticate").permitAll()

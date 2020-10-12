@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface AdminRepository extends AccountRepository
 {
-    @Query( value = "SELECT * FROM Admin WHERE USER_NAME= :userName", nativeQuery = true)
+    @Query( value = "SELECT * FROM ADMIN WHERE USER_NAME= :userName", nativeQuery = true)
         //@Query(value =  "SELECT u FROM CUSTOMER u WHERE u.userName = ?1", nativeQuery = true)
     List<Admin> adminByUsername(@Param("userName") String userName);
 

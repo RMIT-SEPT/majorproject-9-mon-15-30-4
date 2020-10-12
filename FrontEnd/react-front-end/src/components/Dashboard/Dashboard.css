@@ -1,18 +1,4 @@
 
-	.form {
-		margin: 0 auto;
-		width: 250px;
-	}
-	.form label{
-		display: inline-block;
-		text-align: right;
-		float: left;
-	}
-	.form input{  
-		display: inline-block;
-		text-align: left;
-		float: right;
-	}
 .main
 {
 	margin-top: 100px;
