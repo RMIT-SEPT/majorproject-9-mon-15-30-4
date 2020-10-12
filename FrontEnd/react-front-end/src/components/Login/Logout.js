@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from "react-router";
 
 class Logout extends Component 
 {
@@ -17,6 +18,7 @@ class Logout extends Component
         return (
             <div>
                 You are now Logged Out Have a Nice Day :D
+                <Redirect to="/Login"/>
             </div>
         )
     }
