@@ -342,7 +342,7 @@ class HoursDisplay extends Component {
                            id={valueId + "D"}>
                         <i>{"Start Time: "}</i><b>{date.getHours() + ":"
                     + (date.getMinutes() === 0 ? "00" : date.getMinutes())}</b><br/>
-                        <i>{"End Time: "}</i><b>{valueId + "#" + date2.getHours() + ":"
+                        <i>{"End Time: "}</i><b>{date2.getHours() + ":"
                     + (date2.getMinutes() === 0 ? "00" : date2.getMinutes())}</b></label></div>];
             date = new Date(date.getTime() + interval * 60000);
         }
