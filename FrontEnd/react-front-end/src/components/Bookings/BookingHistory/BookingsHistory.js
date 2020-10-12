@@ -23,11 +23,6 @@ class BookingsHistory extends React.Component {
                 bookings: data.map(this.renderBookings)
             })
         })
-        // const url = "http://localhost:8080/api/bookings/all";
-        // const response = await fetch(url);
-        // let data = await response.json();
-        // data = Array.isArray(data) ? data : [data];
-        // console.dir(data);
 
         
     }

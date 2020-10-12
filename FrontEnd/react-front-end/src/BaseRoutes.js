@@ -30,7 +30,6 @@ export const BaseRoutes = () => (
             <Route exact path = "/Admin" component = {AdminDashboard}/>
             <Route exact path = "/ChangeService" component = {Service}/>
             <Route exact path = "/home/employee/hours" component = {HoursDisplay}/>
-            <Route exact path = "/BookingsHistory" component = {BookingsHistory}/>
             <Route exact path = "/logout" component = {Logout}/>
             <Route exact path = "/BookingConfirm" component = {BookingConfirm}/>
             
