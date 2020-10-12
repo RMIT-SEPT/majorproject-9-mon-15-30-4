@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "./BookingConfirm.css";
 import * as ReactBootStrap from "react-bootstrap";
-
+import bookingService from "../../services/bookingService";
 
 
 class BookingConfirm extends Component{
@@ -13,15 +13,26 @@ class BookingConfirm extends Component{
     }
 
     async componentDidMount(){
-        const url = "http://localhost:8080/api/bookings/all";
-        const response = await fetch(url);
-        let data = await response.json();
-        data = Array.isArray(data) ? data : [data];
-        console.dir(data);
 
-        this.setState({
-            bookings: data.map(this.renderBookings)
+        bookingService.getAll().then(response => {
+
+            let data = response['data'];
+            data = Array.isArray(response['data']) ? data : [data];
+            console.dir(data);
+
+            this.setState({
+                bookings: data.map(this.renderBookings)
+            })
         })
+        // const url = "http://localhost:8080/api/bookings/all";
+        // const response = await fetch(url);
+        // let data = await response.json();
+        // data = Array.isArray(data) ? data : [data];
+        // console.dir(data);
+
+        // this.setState({
+        //     bookings: data.map(this.renderBookings)
+        // })
     }
 
     renderBookings(booking, index) {
