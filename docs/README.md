@@ -82,13 +82,13 @@ Project
 
 ## Quick Start Guide
 - To quickly start the project, do the following activities:
-    - BUILD: In IntelliJ, 'Build' SbBackendApplication under root -->Backend --> springboot-backend -->  src --> main --> ... --> SbBackendApplication
-    - RUN BACKEND: Run SbBackendApplication. This will create an instance of the Back-end servers, running on H2-Embedded Database. 
-        - The website can be accessed on http:/localhost:8080/h2-console
+    - **BUILD**: In IntelliJ, 'Build' SbBackendApplication under root -->Backend --> springboot-backend -->  src --> main --> ... --> SbBackendApplication
+    - **RUN BACKEND**: Run SbBackendApplication. This will create an instance of the Back-end servers, running on H2-Embedded Database. 
+        - The contents of the backend can be accessed on http:/localhost:8080/h2-console
         - On the website, the specific 'url' should match 'spring.datasource.url' found in  Backend --> springboot-backend
             --> src --> main --> resources --> application.properties.
             
-     - RUN FRONTEND: Access the Front End folders, and then open the folder, react-front-end.
+     - **RUN FRONTEND**: Access the Front End folders, and then open the folder, react-front-end.
         - When the user is within react-front-end, open the terminal and type 'npm start'
         - This command will begin an instance of the front-end.
 
@@ -102,7 +102,7 @@ Project
         - Note: Password must be at least 5 characters or more
         - Note: Phone number should be between 8-10 characters
     - Submit, to successfully create your account.
- - You can now log in!
+ - You should now be redirected to your dashboard.
  ---
  ### How To: Registering An Employee Account
  - Assuming both the front-end and back-end is running, then the Admin can register an account for an employee.
@@ -113,7 +113,7 @@ Project
         - Note: Password must be at least 5 characters or more
         - Note: Phone number should be between 8-10 characters. 
     - Submit, to successfully create their account!
- - Your employee can now log in!
+ - You should now be redirected to your dashboard.
  --- 
     
  ---
@@ -145,7 +145,7 @@ Project
  ---
  ### How To: Edit an employee's working hours
  - Assuming both the front-end and back-end is running, then a booking can be created.
- - navigate to localhost:3000/home/employee/hours (Link on employee dashboard)
+ - Navigate to localhost:3000/home/employee/hours (Link on employee dashboard)
  - Current timetable shown in plain text at the top of the page.
  - Existing time slots are displayed in forms, edit the form values and click the corresponding submit,
    the page will be reloaded and the new times will be refelcted.
