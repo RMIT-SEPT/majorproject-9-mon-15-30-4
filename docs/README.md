@@ -63,7 +63,8 @@ Project
                 +- Customer
 		+- Employee
 		    | +- hoursButton.js
-		    | +- HoursDisplay
+		    | +- HoursDisplay.js
+		    | +- HoursNoEditable.js
                 +- Layout
                 +- Login
                 +- Register
@@ -140,19 +141,16 @@ Project
  - Navigate to localhost:3000/Bookings (Found on the header banner)
  - Select a service
  - If available select an employee; after which the available times will be displayed
- - Fill in the form to match a corresponding timeframe
- - Click submit, if valid, the form will reset and your booking will appear in the backend
+ - Hover over a time block to see the details
+ - Click on a time block to submit the booking
  ---
  ### How To: Edit an employee's working hours
  - Assuming both the front-end and back-end is running, then a booking can be created.
- - Navigate to localhost:3000/home/employee/hours (Link on employee dashboard)
- - Current timetable shown in plain text at the top of the page.
- - Existing time slots are displayed in forms, edit the form values and click the corresponding submit,
-   the page will be reloaded and the new times will be refelcted.
- - To create a new timeslot, click the 'new' button at the top of the page, fill out the form and click submit.
- - Start time must preceed endtime
- - Time minutes must be :00, :15, :30 or :45
- - To delete hours, click the delete button under the correpsonding form.
- - If new or modified hours are submitted successfully they will appear in the backend and be reflect in the
-   plaintext at the top of the page.
+ - Navigate to localhost:3000/Admin (Link on to edit provided on page)
+ - Select an employee from the dropdown box.
+ - Time blocks will be displayed in half hour increments. Greeb are scheduled, red are unscheduled.
+ - Click and or drag to toggle a timeblock. (When the mouse leaves a block or is released on one the toggle with execute)
+ - Toggled time blocks are automatically saved.
+ - To delete hours, toggle all time blocks to red.
+ - To add new hours select a date and press submit. A default time of 8:30 to 10:30 will be added to the desired day.
  ---  
