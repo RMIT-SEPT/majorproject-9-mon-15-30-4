@@ -50,7 +50,7 @@ class Home extends Component {
                     <header className="masthead">
                         <div className="container">
                             <div className="intro-text">
-                                <div className="intro-lead-in">BULK UP & DES&TROY</div>
+                                <div className="intro-lead-in">BULK UP DES&TROY</div>
                                 <div className="intro-heading text-uppercase">TRAIN YOUR WAY</div>
                             </div>
                         </div>
