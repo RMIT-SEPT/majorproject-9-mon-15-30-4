@@ -265,7 +265,6 @@ class HoursNotEditable extends Component {
                         <label>-Hover for details.</label>
                         <span> </span>
 
-                        {this.editHoursRender()}
                         <div>
 
                             <table className="table-eh" id="schedule">

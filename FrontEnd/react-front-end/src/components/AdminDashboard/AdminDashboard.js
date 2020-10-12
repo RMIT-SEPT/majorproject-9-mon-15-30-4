@@ -4,6 +4,7 @@ import "./AdminDashboard.css";
 import "./AddEmployee";
 import AddEmployee from './AddEmployee';
 import Service from "../Service/Service"
+import {Link} from "react-router-dom";
 
 
 
@@ -39,6 +40,13 @@ class AdminDashboard extends Component{
                         <Jumbotron>
                             <Service/>
                         </Jumbotron>
+                            <Jumbotron>
+                                <React.Fragment>
+                                    <Link to = "/home/employee/hours">
+                                        Edit Employee Hours
+                                    </Link>
+                                </React.Fragment>
+                            </Jumbotron>
                         </div>
                     </div>
                 </div>
