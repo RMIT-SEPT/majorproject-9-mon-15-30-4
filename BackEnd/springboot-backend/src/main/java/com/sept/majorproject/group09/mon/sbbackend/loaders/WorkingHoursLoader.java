@@ -29,11 +29,48 @@ public class WorkingHoursLoader implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         Calendar date = Calendar.getInstance();
 
-        date.set(2020, Calendar.OCTOBER, 26);
         this.repository.save(new WorkingHours("Jim_User", 8.3, 10.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
         this.repository.save(new WorkingHours("Jim_User", 12.3, 16.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
 
-        date.set(2020, Calendar.SEPTEMBER, 20);
-        this.repository.save(new WorkingHours("Jim_User", 8., 16.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+        this.repository.save(new WorkingHours("Frank_User", 8.3, 12.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+        this.repository.save(new WorkingHours("Frank_User", 13.3, 18.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+
+        this.repository.save(new WorkingHours("Bill_User", 8.3, 10.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+        this.repository.save(new WorkingHours("Bill_User", 12.3, 16.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+
+        date.add(Calendar.DATE, 1);
+        this.repository.save(new WorkingHours("Jim_User", 4.0, 18.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+
+        this.repository.save(new WorkingHours("Bill_User", 10.3, 12.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+        this.repository.save(new WorkingHours("Bill_User", 13.0, 17.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+
+        date.add(Calendar.DATE, 1);
+        this.repository.save(new WorkingHours("Jim_User", 6.3, 10.0, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+        this.repository.save(new WorkingHours("Jim_User", 10.3, 16.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+
+        this.repository.save(new WorkingHours("Frank_User", 9.0, 13.0, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+
+        this.repository.save(new WorkingHours("Bill_User", 9.0, 13.0, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+        this.repository.save(new WorkingHours("Bill_User", 13.3, 16.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+
+        date.add(Calendar.DATE, 3);
+        this.repository.save(new WorkingHours("Jim_User", 6.3, 10.0, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+        this.repository.save(new WorkingHours("Jim_User", 15.0, 21.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+
+        this.repository.save(new WorkingHours("Frank_User", 21.0, 23.0, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+        this.repository.save(new WorkingHours("Frank_User", 15.0, 20.0, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+
+        this.repository.save(new WorkingHours("Bill_User", 9.0, 13.0, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+        this.repository.save(new WorkingHours("Bill_User", 13.3, 16.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+
+        date.add(Calendar.DATE, 1);
+        this.repository.save(new WorkingHours("Jim_User", 8.3, 10.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+        this.repository.save(new WorkingHours("Jim_User", 12.3, 16.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+
+        this.repository.save(new WorkingHours("Frank_User", 8.3, 12.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+        this.repository.save(new WorkingHours("Frank_User", 13.3, 18.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+
+        this.repository.save(new WorkingHours("Bill_User", 8.3, 10.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
+        this.repository.save(new WorkingHours("Bill_User", 12.3, 16.3, date.getTime(), WorkingHours.DayOfWeek.MONDAY));
     }
 }

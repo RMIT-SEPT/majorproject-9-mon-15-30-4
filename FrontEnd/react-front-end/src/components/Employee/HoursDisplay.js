@@ -4,6 +4,8 @@ import workingHoursService from "../../services/workingHoursService";
 import {Container, Form, Jumbotron} from "react-bootstrap";
 import "./Hours.css";
 import loginService from "../../services/loginService";
+import servicesService from "../../services/servicesService";
+import employeeService from "../../services/employeeService";
 
 class HoursDisplay extends Component {
     constructor(props) {
@@ -12,11 +14,14 @@ class HoursDisplay extends Component {
         this.state = {
             action: "",
             hours: [],
-            employeeId: "Jim_User",
+            employees: [],
+            employeeId: "",
+            employeePlaceholder: "Select employee",
             newEntryActive: false,
             mouseDown: false
         };
 
+        this.loadEmployees = this.loadEmployees.bind(this);
         this.loadHours = this.loadHours.bind(this);
         this.toggleActive = this.toggleActive.bind(this);
         this.mouseDownToggle = this.mouseDownToggle.bind(this);
@@ -25,7 +30,7 @@ class HoursDisplay extends Component {
     }
 
     componentDidMount() {
-        this.loadHours();
+        this.loadEmployees();
     }
 
     loadHours() {
@@ -50,6 +55,22 @@ class HoursDisplay extends Component {
         });
     }
 
+    loadEmployees() {
+        this.setState({employees: []});
+        employeeService.getAllEmployees()
+            .then(response => {
+                for (let i = 0; i < response["data"].length; i++) {
+                    this.setState({
+                        employees: [...this.state.employees,
+                            response["data"][i]["userName"]]
+                    });
+                }
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
     onChange(e) {
         if(e.target.name !== "timedate")
             this.setState({[e.target.name]: e.target.value});
@@ -58,6 +79,9 @@ class HoursDisplay extends Component {
             this.setState({time: e.target.value.split("#")[0]});
             this.setState({date: e.target.value.split("#")[1]});
         }
+
+        if(e.target.name === "employeeId")
+            this.setState({employeeId: e.target.value}, this.loadHours);
     }
 
     onSubmit(e) {
@@ -393,7 +417,19 @@ class HoursDisplay extends Component {
         document.getElementById(e.target.value + "T").style.visibility  = "visible";
     }
 
+    makeOption = function (X) {
+        return <option key={"itemId" + X}>{X}</option>;
+    };
+
     render() {
+        const employees = this.state.employees.toString().split(",");
+        let employeeSelect = <Form.Control as="select"
+                                           name="employeeId"
+                                           value={this.state.employeeId}
+                                           onChange={this.onChange}>
+            <option default>{this.state.employeePlaceholder}</option>
+            {employees.map(this.makeOption)}</Form.Control>;
+
        return (
 
             <div className="WorkingHours">
@@ -401,7 +437,10 @@ class HoursDisplay extends Component {
 
                     <Jumbotron className ="text-auto">
 
-                        <h1>Hours for Employee: {this.state.employeeId}</h1>
+                        <h1>Hours for Employee: </h1>
+                        <div className="form-group">
+                            {employeeSelect}
+                        </div>
                         <label className="label-s-t">Scheduled</label>
                         <span> </span>
                         <label className="label-u-t">Not Scheduled</label>

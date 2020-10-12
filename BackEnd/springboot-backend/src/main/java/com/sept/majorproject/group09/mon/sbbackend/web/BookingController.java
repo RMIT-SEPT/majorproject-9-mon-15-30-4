@@ -5,6 +5,7 @@ import com.sept.majorproject.group09.mon.sbbackend.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Calendar;
 import java.util.List;
 
 @RestController
@@ -38,6 +39,10 @@ public class BookingController {
 
     @PostMapping("")
     private long saveBooking(@RequestBody Booking booking) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(booking.getDate());
+        cal.add(Calendar.HOUR, -1);
+        booking.setDate(cal.getTime());
         bookingService.saveOrUpdate(booking);
         return booking.getId();
     }
