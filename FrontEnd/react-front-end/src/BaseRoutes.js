@@ -26,7 +26,7 @@ export const BaseRoutes = () => (
             <Route exact path="/login" component = { Login } />
             <Route exact path = "/register" component = {Register}/>
             <Route exact path = "/Dashboard" component = {Dashboard}/>
-            <Route exact path = "/AdminDashboard" component = {AdminDashboard}/>
+            <Route exact path = "/Admin" component = {AdminDashboard}/>
             <Route exact path = "/ChangeService" component = {Service}/>
             <Route exact path = "/home/employee/hours" component = {HoursDisplay}/>
             <Route exact path = "/BookingsHistory" component = {BookingsHistory}/>

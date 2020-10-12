@@ -69,7 +69,7 @@ class Login extends Component {
                                 <Form.Label>
                                     Username
                                 </Form.Label>
-                                <Form.Control type = "text" placeholder = "Example@Email.com" name = "username" value = {this.state.username} onChange = {this.onChange}/>
+                                <Form.Control type = "text" placeholder = "Please enter your username" name = "username" value = {this.state.username} onChange = {this.onChange}/>
                                 <Form.Text>
                                    Please enter your username.
                                 </Form.Text>
@@ -79,7 +79,7 @@ class Login extends Component {
                                 <Form.Label>
                                     Password
                                 </Form.Label>
-                                <Form.Control type ="password" placeholder = "password" name = "password" value = {this.state.password} onChange = {this.onChange} />
+                                <Form.Control type ="password" placeholder = "Please enter your password" name = "password" value = {this.state.password} onChange = {this.onChange} />
 
                             </Form.Group>
 
@@ -98,6 +98,7 @@ class Login extends Component {
         }
         else
         {
+        
             return(
        
                 <div>Welcome. Login Successful.</div>

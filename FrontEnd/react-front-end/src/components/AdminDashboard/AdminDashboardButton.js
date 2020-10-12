@@ -4,7 +4,7 @@ import {Link} from "react-router-dom"
 const AdminDashboardButton=() => {
     return (
         <React.Fragment>
-            <Link to = "/AdminDashboard" className="nav-link" >
+            <Link to = "/Admin" className="nav-link" >
                 Admin Dashboard
             </Link>
         </React.Fragment>

@@ -2,65 +2,83 @@ import React, { Component } from 'react';
 import "./Employee.css";
 import { Jumbotron, Image, Row } from "react-bootstrap";
 import HoursNotEditable from "./HoursNoEditable";
+import employeeService from "../../services/employeeService";
 
+//Assumptions -- The user is already logged in.
 
 class Employee extends Component {
 
-    constructor()
-    {
+    constructor() {
         super();
         this.state =
         {
-            userName:"",
-            password:"",
-            name:"",
-            contactEmail:"",
-            contactNumber:""
+            userName: "",
+            password: "",
+            name: "",
+            contactEmail: "",
+            contactNumber: ""
         };
-    }
+
+        // this.checkLogin(this);
+        this.getEmployeeInfo(this);
+
+        // console.log("The results for isEmployee is: " + this.state.isEmployee);
+    };
 
 
-    // renderCustomerDetails()
-    // {
-    //     return(
+    getEmployeeInfo() {
+        console.log();
 
-    //     );
-    // }
+
+        employeeService.getByToken().then(response => {
+            console.log(response);
+            console.log(response["data"]["userName"]);
+            this.setState(
+                {
+                    userName: response["data"]["userName"],
+                    name: response["data"]["name"],
+                    contactEmail: response["data"]["employeeEmail"],
+                    contactNumber: response["data"]["employeePhone"]
+
+
+                }
+            )
+        });
+
+    };
 
     render() {
         return (
 
-        
-            <div className = "Content-Main">
-                
-                <section className = "SectionEmployeeDetails">
-                    <div className = "container">
-                            
-                            <Jumbotron className = "EmployeeJumbo">
-                                <Row className = "EmployeeSection">
-                                <div className = "EmployeePortrait">
-                                    <Image width = "200" src = "./images/employee-1.png"></Image>
+            <div className="Content-Main">
+
+                <section className="SectionEmployeeDetails">
+                    <div className="container">
+
+                        <Jumbotron className="EmployeeJumbo">
+                            <Row className="EmployeeSection">
+                                <div className="EmployeePortrait">
+                                    <Image width="200" src="./images/employee-1.png"></Image>
                                 </div>
-                                
-                                <div className ="EmployeeDetails">
-                                    <h3>Welcome,</h3>
-                                    <h3> NAME </h3>
-                                    <h5> EMAIL </h5>
-                                    <h5> PHONE NUMBER </h5>
-                                    <h6>Member since 2019</h6>
+
+                                <div className="EmployeeDetails">
+                                    <h3>Welcome, {this.state.name}</h3>
+                                    <h5> EMAIL: {this.state.contactEmail} </h5>
+                                    <h5> PHONE NUMBER: {this.state.contactNumber} </h5>
+                                    <h6>Remember to have a good day!</h6>
                                 </div>
-                                </Row>
-                            </Jumbotron>
-                
+                            </Row>
+                        </Jumbotron>
+
                     </div>
                 </section>
 
-                <HoursNotEditable/>
+                <HoursNotEditable />
                 {/* PLACE CUSTOMER BOOKING SCHEDULING HERE */}
                 {/* MOST LIKELY FROM /BOOKINGS Sections */}
-                <section className = "SectionEmployeeBooking">
-                    <div className = "container">
-                        <div className = "row">
+                <section className="SectionEmployeeBooking">
+                    <div className="container">
+                        <div className="row">
 
                         </div>
                     </div>
