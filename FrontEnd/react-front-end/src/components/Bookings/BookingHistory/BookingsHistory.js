@@ -1,6 +1,6 @@
 import React from 'react'
 import * as ReactBootStrap from "react-bootstrap";
-import './BookingsHistoryCSS.css'
+import './BookingsHistory.css'
 import bookingService from '../../../services/bookingService'
 class BookingsHistory extends React.Component {
     
