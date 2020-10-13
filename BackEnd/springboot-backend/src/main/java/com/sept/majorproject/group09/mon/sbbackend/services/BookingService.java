@@ -190,4 +190,16 @@ public class BookingService{
         System.out.println(booking.getDate());
         bookingRepository.save(booking);
     }
+
+
+    public void delete(Booking booking) {
+        bookingRepository.delete(booking);
+    }
+
+
+    public Booking getBookingById(Long id)
+    {
+        return bookingRepository.findBookingById(id);
+    }
+
 }

@@ -5,7 +5,10 @@ import com.sept.majorproject.group09.mon.sbbackend.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
+
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -49,4 +52,35 @@ public class BookingController {
         bookingService.saveOrUpdate(booking);
         return booking.getId();
     }
+
+    @DeleteMapping("/delete/{bookingId}")
+    public boolean deleteBooking(@PathVariable("bookingId") long bookingId)
+    {
+        Booking booking =  bookingService.getBookingById(bookingId);
+        boolean canDelete = checkIfDelete(booking);
+        if(canDelete)
+        {
+            bookingService.delete(booking);
+        }
+        return canDelete;
+    }
+
+    @GetMapping("/canDelete/{bookingId}")
+    public boolean canDeleteBooking(@PathVariable("bookingId") long bookingId)
+    {
+
+        return checkIfDelete(bookingService.getBookingById(bookingId));
+    }
+
+    private boolean checkIfDelete(Booking booking)
+    {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 2);
+        if(booking.getDate().after(cal.getTime()))
+        {
+            return true;
+        }
+        return false;
+    }
+
 }
