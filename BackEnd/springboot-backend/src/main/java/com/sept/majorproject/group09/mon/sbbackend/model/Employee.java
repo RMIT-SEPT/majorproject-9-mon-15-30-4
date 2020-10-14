@@ -83,13 +83,8 @@ public class Employee<WorkingHours> extends Account{
 
     public String getEmployeeEmail()
     {
-        String returnEmail = "";
-        if(employeeEmail != "" || employeeEmail != null)
-        {
-            returnEmail = this.employeeEmail;
-        }
 
-        return employeeEmail;
+        return this.employeeEmail;
     }
 
 

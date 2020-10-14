@@ -7,6 +7,7 @@ import com.sept.majorproject.group09.mon.sbbackend.services.EmployeeService;
 
 import java.util.List;
 
+import com.sept.majorproject.group09.mon.sbbackend.tokenization.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,5 +55,19 @@ public class EmployeeController {
     {
     	List<Employee> employ = employeeService.getAllEmployees();
     	return employ;
+    }
+
+
+    @Autowired
+    JwtUtil jwtUtil;
+
+    @GetMapping("/token/{jwt}")
+    public ResponseEntity<?> getEmployeeFromToken(@PathVariable("jwt") String jwtToken)
+    {
+        String username = jwtUtil.extractUsername(jwtToken);
+
+        Employee employee  =  employeeService.getEmployeeByUsername(username);
+
+        return ResponseEntity.ok(employee);
     }
 }

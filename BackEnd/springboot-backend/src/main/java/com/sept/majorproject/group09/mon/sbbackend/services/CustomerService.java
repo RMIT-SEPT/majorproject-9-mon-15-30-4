@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CustomerService 
+public class CustomerService
 {
         @Autowired
         private CustomerRepository customerRepository;
@@ -35,6 +35,7 @@ public class CustomerService
                 return null;
             }
         }
+
 
         public Customer getCustomerByUserNameTest(String userName)
         {
@@ -61,7 +62,10 @@ public class CustomerService
 
         }
 
-
+        public List<Customer> getAllCustomers()
+        {
+            return customerRepository.allCustomers();
+        }
 
 
 

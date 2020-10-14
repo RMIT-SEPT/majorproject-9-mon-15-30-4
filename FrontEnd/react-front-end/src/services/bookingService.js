@@ -1,5 +1,6 @@
 import http from "./httpCommon";
 import axios from "axios";
+import { authHeader } from "../security/authHeader";
 
 class BookingDataService {
     getAll() {
@@ -14,7 +15,8 @@ class BookingDataService {
         axios({
             method: 'post',
             url: "http://localhost:8080/api/bookings",
-            data: data
+            data: data,
+            headers: { Authorization: localStorage.getItem('login') }
         }).catch(e => {
             console.log(e);
         });

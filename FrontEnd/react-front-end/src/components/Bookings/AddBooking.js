@@ -94,10 +94,15 @@ class AddBooking extends Component {
                 this.setState({employeeSelected: true});
                 bookingService.getByEmployee(e.target.value.split("#")[1]).then(response => {
                     for (const responseElement of response["data"]) {
-                        this.setState({
-                            availableTimes: [...this.state.availableTimes,
-                                responseElement]
-                        });
+                        let year = responseElement[1], month = responseElement[2],
+                            day = responseElement[3];
+                        let date = new Date(year, month - 1, day), today = new Date();
+                        if(date >= today) {
+                            this.setState({
+                                availableTimes: [...this.state.availableTimes,
+                                    responseElement]
+                            });
+                        }
                     }
                 }).catch(e => {
                     console.log(e);
@@ -211,7 +216,7 @@ class AddBooking extends Component {
         let hours;
         let minutes;
 
-        for (let i = 0; i < 1440; i += size) {
+        for (let i = 0; i < 1500; i += size) {
             hours = parseInt(i / 60);
             minutes = i % 60 === 0 ? "00" : i % 60;
             let time = hours + ":" + minutes;
@@ -236,7 +241,7 @@ class AddBooking extends Component {
                 date = new Date(year, month, day, hour, minute);
                 if (date.getFullYear() !== prevDate.getFullYear()
                     || date.getMonth() !== prevDate.getMonth()
-                    || date.getDay() !== prevDate.getDay())
+                    || date.getDate() !== prevDate.getDate())
                     dates = [...dates, month +  "/" + day];
                 prevDate = date;
             }
@@ -279,7 +284,7 @@ class AddBooking extends Component {
             dateEndTime = new Date(year, month, day, endHour, endMinute);
             if (date.getFullYear() !== prevDate.getFullYear()
                 || date.getMonth() !== prevDate.getMonth()
-                || date.getDay() !== prevDate.getDay())
+                || date.getDate() !== prevDate.getDate())
                 break;
 
             while (new Date(date.getTime() + this.state.serviceDuration * 60000) <= dateEndTime) {
@@ -397,7 +402,7 @@ class AddBooking extends Component {
                                 <tr className="tr-bp">
                                     <th className="th-bp" style={{backgroundColor: "#343A40", color: "#A6A6A6"}}>Date</th>
                                     <th className="th-bp" style={{backgroundColor: "#343A40", color: "#A6A6A6"}}>
-                                        <div className="container space-between" style={{display : "flex"}}>
+                                        <div className="container-t">
                                             {this.generateScheduleTimes(120)}
                                         </div>
                                     </th>

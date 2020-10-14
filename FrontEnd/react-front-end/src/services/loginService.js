@@ -1,3 +1,4 @@
+import axios from 'axios';
 import http from './httpCommon';
 
 class LoginService 
@@ -17,14 +18,36 @@ class LoginService
         return this.getByUsername(userName) && this.getByPassword(password)
     }
 
-    authenticateUser(userName, password)
+    authenticateUser(data)
     {
-        return http.get(`login/authentication/${userName}/${password}`);
+        
+        return axios({
+            method: 'post',
+            url: "http://localhost:8080/api/login/authenticate",
+            data: data
+        }).catch(e => {
+            console.log(e);
+        });
     }
 
     isLoggedIn()
     {
         return http.get(`login/loggedIn`);
+    }
+
+    isCustomer()
+    {
+        return http.get(`login/isCustomer/${localStorage.getItem('login').split("Bearer ")[1]}`)
+    }
+
+    isEmployee()
+    {
+        return http.get(`login/isEmployee/${localStorage.getItem('login').split("Bearer ")[1]}`)
+    }
+    
+    isAdmin()
+    {
+        return http.get(`login/isAdmin/${localStorage.getItem('login').split("Bearer ")[1]}`)
     }
 
 }

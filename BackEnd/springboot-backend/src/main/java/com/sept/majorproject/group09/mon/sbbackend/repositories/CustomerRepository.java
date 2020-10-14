@@ -2,6 +2,7 @@ package com.sept.majorproject.group09.mon.sbbackend.repositories;
 
 
 import com.sept.majorproject.group09.mon.sbbackend.model.Account;
+import com.sept.majorproject.group09.mon.sbbackend.model.Admin;
 import com.sept.majorproject.group09.mon.sbbackend.model.Customer;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -24,11 +25,15 @@ public interface CustomerRepository extends AccountRepository
     @Query( value = "SELECT * FROM CUSTOMER WHERE USER_NAME= :userName", nativeQuery = true)
     List<Customer> customerUsername(@Param("userName") String userName);
 
+
     @Query( value = "SELECT * FROM CUSTOMER WHERE USER_NAME= :userName", nativeQuery = true)
     public Customer findByName(@Param("userName") String userName);
 
     @Query(value = "SELECT * FROM CUSTOMER",nativeQuery = true)
     List<Customer> getAllCustomers();
+  //Will need to rename the above, or point towards this one
+    @Query( value = "SELECT * FROM CUSTOMER", nativeQuery = true)
+    List<Customer> allCustomers();
 
 
 

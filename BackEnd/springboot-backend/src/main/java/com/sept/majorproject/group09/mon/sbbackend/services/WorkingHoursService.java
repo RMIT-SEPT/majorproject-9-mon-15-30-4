@@ -28,60 +28,40 @@ public class WorkingHoursService {
         return hours;
     }
 
-    public void saveOrUpdate(WorkingHours workingHours) {
-        List<WorkingHours> workingHoursList = workingHoursRepository.findAllByEmployee(workingHours.getEmployeeId()),
-                overlap = new ArrayList<>();
-        Calendar existing = Calendar.getInstance(), newHours = Calendar.getInstance();
-        newHours.setTime(workingHours.getDate());
-
-        for (WorkingHours hours : workingHoursList) {
-            System.out.println("E: " + hours.getId());
-            existing.setTime(hours.getDate());
-
-            if (newHours.get(Calendar.YEAR) == existing.get(Calendar.YEAR)
-                    && newHours.get(Calendar.MONTH) == existing.get(Calendar.MONTH)
-                    && newHours.get(Calendar.DAY_OF_MONTH) == existing.get(Calendar.DAY_OF_MONTH)) {
-
-                if (workingHours.getStartTime() >= hours.getStartTime()
-                        && workingHours.getStartTime() <= hours.getEndTime()) // Starts overlap
-                    overlap.add(hours);
-                else if (workingHours.getEndTime() >= hours.getStartTime()
-                        && workingHours.getEndTime() <= hours.getEndTime()) // Ends overlap
-                    overlap.add(hours);
-                else if(workingHours.getStartTime() <= hours.getStartTime()
-                        && workingHours.getEndTime() >= hours.getEndTime()) // Inclusive overlap
-                    overlap.add(hours);
-
-            }
+    public void saveOrUpdate(WorkingHours[] workingHours) {
+        Calendar shiftDate = Calendar.getInstance();
+        String dateString[] = new String[0];
+        String day = null;
+        if(workingHours[0].getStartTime() == workingHours[0].getEndTime()) {
+            dateString = workingHours[0].getEmployeeId().split("-");
+            shiftDate.set(Integer.parseInt(dateString[0]), Integer.parseInt(dateString[1]) - 1, Integer.parseInt(dateString[2]));
+            workingHours[0].setDate(shiftDate.getTime());
+            day = (shiftDate.get(Calendar.YEAR) + "-"
+                    + (Integer.toString(shiftDate.get(Calendar.MONTH) + 1).length() == 1
+                    ? "0" + shiftDate.get(Calendar.MONTH) + 1 : shiftDate.get(Calendar.MONTH) + 1)
+                    + "-" + shiftDate.get(Calendar.DATE));
+            shiftDate.add(Calendar.DAY_OF_MONTH, 1);
         }
 
-        Calendar earliestDate = Calendar.getInstance(), latestDate = Calendar.getInstance();
-        earliestDate.setTime(workingHours.getDate());
-        latestDate.setTime(workingHours.getDate());
-        double earliestTime = workingHours.getStartTime(), latestTime = workingHours.getEndTime();
+        String dayAfter = (shiftDate.get(Calendar.YEAR) + "-"
+                + (Integer.toString(shiftDate.get(Calendar.MONTH) + 1).length() == 1
+                ? "0" + shiftDate.get(Calendar.MONTH) + 1 : shiftDate.get(Calendar.MONTH) + 1)
+                + "-" + shiftDate.get(Calendar.DATE));
 
-        for (WorkingHours hours : overlap) {
-            System.out.println(hours.getId());
-           if (hours.getStartTime() < earliestTime) {
-                earliestDate.setTime(hours.getDate());
-                earliestTime = hours.getStartTime();
-            }
-            if (hours.getEndTime() > latestTime) {
-                latestDate.setTime(hours.getDate());
-                latestTime = hours.getEndTime();
-            }
-        }
+        List<WorkingHours> workingHoursList = workingHoursRepository.findAllByEmployeeAndDate(dateString[3],
+                day, dayAfter);
+        Calendar newHours = Calendar.getInstance();
 
-        for (WorkingHours hours : overlap) {
-            System.out.println(hours.getId());
-            workingHoursRepository.deleteById(hours.getId());
-        }
+        newHours.setTime(workingHours[0].getDate());
+        for (WorkingHours hours : workingHoursList)
+                workingHoursRepository.deleteById(hours.getId());
 
-        WorkingHours insertHours;
-        newHours.setTime(earliestDate.getTime());
-        insertHours = new WorkingHours(workingHours.getEmployeeId(), earliestTime, latestTime, newHours.getTime(),
-                workingHours.getDay());
-        workingHoursRepository.save(insertHours);
+        for (WorkingHours hour : workingHours)
+            hour.setDate(workingHours[0].getDate());
+
+        if(workingHours.length > 1)
+            for (int i = 1; i < workingHours.length; i++)
+                workingHoursRepository.save(workingHours[i]);
     }
 
 

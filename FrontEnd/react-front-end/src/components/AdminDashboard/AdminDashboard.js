@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+
 import {Jumbotron  } from "react-bootstrap";
+import {Link} from "react-router-dom"
 import "./AdminDashboard.css";
 import "./AddEmployee";
 import AddEmployee from './AddEmployee';
 import Service from "../Service/Service"
+
 
 
 
@@ -18,11 +21,8 @@ class AdminDashboard extends Component{
     }
     render(){
         return(        
-            <div>
-                <hr />
-                <hr />
-                <hr />
-                <hr />
+            <div className = "container-fluid main">
+
                 <h5 className="display-4 text-center">Admin Dashboard</h5>
                 <hr />
                 <div className="AdminContainerEmployeeRegisteration"> 
@@ -42,8 +42,22 @@ class AdminDashboard extends Component{
                         <Jumbotron>
                             <Service/>
                         </Jumbotron>
+                            <Jumbotron>
+                                <React.Fragment>
+                                    <Link to = "/home/employee/hours">
+                                        Edit Employee Hours
+                                    </Link>
+                                </React.Fragment>
+                            </Jumbotron>
                         </div>
                     </div>
+                </div>
+                <div className="container">
+                    <React.Fragment>
+                        <Link to = "/BookingConfirm" className="nav-link" >
+                            <input type="button" value = "Confirm New Bookings" className="btn btn-primary btn-block mt-4" />
+                        </Link>
+                    </React.Fragment>
                 </div>
 
             </div>

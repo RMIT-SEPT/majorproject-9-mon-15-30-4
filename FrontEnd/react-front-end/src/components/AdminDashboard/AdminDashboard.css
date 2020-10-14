@@ -1,12 +1,16 @@
 .display-4 text-center
 {
-	margin-top: 10px;
+	margin-top: auto;
 }
 
 .AdminContainerEmployeeRegisteration{
-	margin-top: 15px;
+	margin-top: auto;
 }
 
 .AdminContainerEmployeeServiceAssignment{
-	margin-top: 15px;
+	margin-top: auto;
+}
+.main
+{
+	margin-top: 100px;
 }

@@ -64,14 +64,14 @@ class AddEmployee extends Component{
 
     render(){
         return(        
-            <div>
+            <div className = "container-fluid">
                 <Container className = "ContainerAddEmployee">
                 <h1 className="display-5 text-center">Add New Employee</h1>
 
                 <Jumbotron>
                 <Form onSubmit ={this.onSubmit}>
 
-                <Form.Group>
+                <Form.Group fluid>
                     <Form.Label>
                         Username
                     </Form.Label>
