@@ -2,7 +2,7 @@ package com.sept.majorproject.group09.mon.sbbackend.services;
 
 import com.sept.majorproject.group09.mon.sbbackend.model.WorkingHours;
 import com.sept.majorproject.group09.mon.sbbackend.repositories.WorkingHoursRepository;
-import org.hibernate.jdbc.Work;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
