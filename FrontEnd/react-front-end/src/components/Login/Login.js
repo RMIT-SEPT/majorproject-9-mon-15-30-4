@@ -40,8 +40,6 @@ class Login extends Component {
                 localStorage.setItem('isLoggedIn', true);
                 this.setState({ loggedIn: true });
 
-                this.forceUpdate();
-
             })
             .catch(e => {
                 console.log(e);

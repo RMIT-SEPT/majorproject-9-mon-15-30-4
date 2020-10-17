@@ -4,7 +4,8 @@ import {Link} from "react-router-dom"
 import "./AdminDashboard.css";
 import "./AddEmployee";
 import AddEmployee from './AddEmployee';
-import Service from "../Service/Service"
+import Service from "../Service/Service";
+import BookingHistory from "../Bookings/BookingHistory/BookingsHistory"
 
 /**ADMIN DASHBOARD COMPONENTS
  *      HAS TWO FEATURES: ADD EMPLOYEES and ASSIGNMENT of JOBS TO EMPLOYEES
@@ -59,7 +60,13 @@ class AdminDashboard extends Component{
                         </Link>
                     </React.Fragment>
                 </div>
-
+                <div className="container">
+                    <React.Fragment>
+                        <Link to = "/BookingsHistory" className="nav-link" >
+                            <input type="button" value = "View Booking History" className="btn btn-primary btn-block mt-4" />
+                        </Link>
+                    </React.Fragment>
+                </div>
             </div>
         )
     }
