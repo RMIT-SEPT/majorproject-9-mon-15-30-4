@@ -37,7 +37,7 @@ class Login extends Component {
         loginService.authenticateUser(loginRequest)
             .then(response => {
                 localStorage.setItem('login', response['data'].jwt);
-                localStorage.setItem('isLoggedIn', true)
+                localStorage.setItem('isLoggedIn', true);
                 this.setState({ loggedIn: true });
 
                 this.forceUpdate();

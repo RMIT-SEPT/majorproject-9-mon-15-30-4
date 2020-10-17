@@ -49,6 +49,7 @@ class AddEmployee extends Component {
                 console.log(response);
                 console.log(e);
                 console.log();
+                this.forceUpdate();
             })
             .catch(e => {
                 console.log(e);

@@ -9,6 +9,7 @@ import com.sept.majorproject.group09.mon.sbbackend.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -26,6 +27,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/register")
 @CrossOrigin
 public class RegisterController {
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Autowired
     private CustomerService customerService;
@@ -59,7 +63,7 @@ public class RegisterController {
         if(account == null)
         {
 
-            Customer customerInput = new Customer(name, password, userName,contactEmail,contactPhone);
+            Customer customerInput = new Customer(name, passwordEncoder.encode(password), userName,contactEmail,contactPhone);
             Customer newCustomer = customerService.saveOrUpdateCustomer(customerInput);
             return new ResponseEntity<Customer>(newCustomer, HttpStatus.CREATED);
         }
@@ -93,7 +97,7 @@ public class RegisterController {
         //2. CREATE (employee) account if account it does not exist
         if (account == null) {
             //Create new Employee
-            Employee employeeInput = new Employee(name, password, name, employeePhone, employeeEmail);
+            Employee employeeInput = new Employee(name, passwordEncoder.encode(password), userName, employeePhone, employeeEmail);
             //Add new Employee into repository
             Employee newEmployee = employeeService.saveOrUpdateEmployee(employeeInput);
             //Return response to front-end

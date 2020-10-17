@@ -25,7 +25,9 @@ class LoginService
         return axios({
             method: 'post',
             url: "http://localhost:8080/api/login/authenticate",
-            data: data
+            data: data,
+            dataType: "json",
+            contentType:  "application/json"
         }).catch(e => {
             console.log(e);
         });

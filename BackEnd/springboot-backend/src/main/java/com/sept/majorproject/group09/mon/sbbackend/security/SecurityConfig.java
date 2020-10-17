@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -89,9 +90,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     @Bean
     public PasswordEncoder getPasswordEncoder()
     {
-        //Returns Password encoder being Used NOTE NoOpPasswordEncoder to not be used for final release as it is work around for using plane text
-        //TODO Change password encoder to anything but NoOpPasswordEncoder
-        return NoOpPasswordEncoder.getInstance();
+        //Returns Password encoder being Used BCryptPasswordEncoder
+        return new BCryptPasswordEncoder();
     }
 
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import "./Dashboard.css";
 import loginService from "../../services/loginService.js";
 
-import { BrowserRouter as Router, Redirect } from "react-router-dom"
+import {Redirect} from "react-router-dom"
 
 
 class Dashboard extends Component {
