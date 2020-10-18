@@ -17,8 +17,10 @@ import BookingConfirm from "./components/BookingConfirm/BookingConfirm"
 
 import "./BaseRoutes.css";
 
+//FUNCTION AS A GATEWAY TO ALL non-HEADER and FOOTER links
 export const BaseRoutes = () => (
     <div className = "ContainerAll">
+            {/* ROUTE all the existing paths */}
             <Route exact path="/" component = {Home}/>
             <Route exact path="/Customer" component = {Customer}/>
             <Route exact path="/Employee" component={Employee}/>

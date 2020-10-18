@@ -26,20 +26,19 @@ class Login extends Component {
 
     }
 
+    // WHEN USER PRESSES "SUBMIT" ON THE LOG IN PAGE, CHECK DATABASE AND VALIDATE TOKEN.
+        // LOG IN THE USER
     onSubmit(e) {
         const loginRequest = {
             username: this.state.username,
             password: this.state.password
         }
+        //CALL BACK END, IF RESPONSE FROM BACKEND, UPDATE CURRENT LOG IN IINFORMATION
         loginService.authenticateUser(loginRequest)
             .then(response => {
-                console.log(`Response =`);
-                console.log(response['data']);
                 localStorage.setItem('login', response['data'].jwt);
                 localStorage.setItem('isLoggedIn', true)
-                console.log(`LocalStorage.login: ${localStorage.getItem('login')}`);
-                console.log(`LocalStorage.isLoggedIn: ${localStorage.getItem('isLoggedIn')}`);
-                this.setState({loggedIn:true});
+                this.setState({ loggedIn: true });
 
                 this.forceUpdate();
 
@@ -47,50 +46,53 @@ class Login extends Component {
             .catch(e => {
                 console.log(e);
             })
-        
+
 
     }
 
 
     render() {
-        console.log("STATE OF LOGGED IN" + localStorage.getItem('isLoggedIn') );
+        // IF USER IS NOT LOGGED IN, SHOW LOG IN PAGE
         if (localStorage.getItem('isLoggedIn') !== "true") {
             return (
                 <div>
                     <Container fluid="md" className="ContainerLogin">
-
+                        {/* TEXT COMPONENT */}
                         <h5 className="display-4 text-center">Welcome Back!</h5>
                         <hr />
                         <Jumbotron className="text-auto">
-
+                            {/* HEADER AND TEXT */}
                             <h1> Welcome!</h1>
                             <p>
                                 Please enter your details to log in.
-                        </p>
+                            </p>
+
+                            {/* LOG IN FORM */}
                             <Form onSubmit={this.onSubmit}>
+                                {/* USER NAME COMPONENT */}
                                 <Form.Group controlId="username">
                                     <Form.Label>
                                         Username
-                                </Form.Label>
+                                    </Form.Label>
+
                                     <Form.Control type="text" placeholder="Please enter your username" name="username" value={this.state.username} onChange={this.onChange} />
                                     <Form.Text>
                                         Please enter your username.
-                                </Form.Text>
+                                    </Form.Text>
                                 </Form.Group>
-
+                                {/* PASSWORD COMPONENT */}
                                 <Form.Group controlId="password">
                                     <Form.Label>
                                         Password
-                                </Form.Label>
+                                    </Form.Label>
                                     <Form.Control type="password" placeholder="Please enter your password" name="password" value={this.state.password} onChange={this.onChange} />
-
                                 </Form.Group>
-
+                                {/* BUTTONGS */}
                                 <Nav className="ml-auto">
                                     <Button variant="secondary" type="submit"> Login</Button>
                                 </Nav>
 
-                         
+
 
                             </Form>
 
@@ -101,14 +103,14 @@ class Login extends Component {
                 </div>
             )
         }
-        else if (localStorage.getItem('isLoggedIn') === "true")
-        {
-            return(
+        // IF USER IS LOGGED IN, REDIRECT THEM TO THEIR SPECIFIC DASHBOARD
+        else if (localStorage.getItem('isLoggedIn') === "true") {
+            return (
                 <div>
-                   <Redirect to="/Dashboard" /> 
+                    <Redirect to="/Dashboard" />
                 </div>
             )
-            
+
         }
 
     }

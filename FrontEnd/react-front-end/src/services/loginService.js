@@ -1,6 +1,7 @@
 import axios from 'axios';
 import http from './httpCommon';
 
+//COMMUNICATES with the BACKEND via LoggingInController
 class LoginService 
 {
     getByUsername(userName)
@@ -17,7 +18,7 @@ class LoginService
     {
         return this.getByUsername(userName) && this.getByPassword(password)
     }
-
+    //FOR SECURITY PURPOSES
     authenticateUser(data)
     {
         

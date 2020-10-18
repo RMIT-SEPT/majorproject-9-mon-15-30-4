@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import "./Dashboard.css";
-import HoursButton from "../Employee/hoursButton";
 import loginService from "../../services/loginService.js";
 
 import { BrowserRouter as Router, Redirect } from "react-router-dom"
@@ -43,12 +42,15 @@ class Dashboard extends Component {
     };
 
 
-
+    /** IF LOGGED IN, CHECK ACCOUNT TYPE
+     *  IF the user is logged in
+     *  CHECK what TYPE of account they are
+     *  SET their account type to TRUE
+     */
     checkAccountType() {
-        // console.log("In checkAccountType()!!");
+
         if (localStorage.getItem('isLoggedIn') === "true") {
-            //CHECK if type of account isAdmin
-            // console.log("Check if is admin!");
+            //IF there is a valid data is TRUE, then account type is ADMIN
             loginService.isAdmin()
                 .then(
                     response => {
@@ -64,8 +66,8 @@ class Dashboard extends Component {
                     console.log();
                 }
                 );
-            //CHECK if type of account isEmployee
-
+            
+            //IF there is a valid data is TRUE, then account type is EMPLOYEE
             loginService.isEmployee()
                 .then(response => {
                     console.log(response);
@@ -82,8 +84,7 @@ class Dashboard extends Component {
                 }
                 );
 
-            //Check if type of Account isCustomer
-
+            //IF the data response is TRUE< then the account type is CUSTOMER
             loginService.isCustomer()
                 .then(response => {
                     if (response['data'] === true) {
@@ -102,6 +103,14 @@ class Dashboard extends Component {
 
     }
 
+    /** SHOW DASHBOARD BASED ON ACCOUNT TYPE AND IS LOGGED IN
+     * IF the user is logged in
+     *      CHECK the account type
+     *          REDIRECT the user to the specific account-tyoe dashboard
+     * ELSE
+     *      GIVE non-logged in state
+     * END IF
+     */
     render() {
         if (localStorage.getItem('isLoggedIn') !== "true") {
             return (
@@ -137,6 +146,8 @@ class Dashboard extends Component {
                 )
             }
             else {
+
+                //A VERY UNLIKELY SCENARIO - IN CASE user attempts to access a dashboard through illegal means.
                 return (
                     <div className="main">
                         <h5 className="display-4 text-center">Account Dashboard</h5>
@@ -146,11 +157,6 @@ class Dashboard extends Component {
                     </div>
                 )
             }
-
-
-
-
-
     }
 }
 export default Dashboard;

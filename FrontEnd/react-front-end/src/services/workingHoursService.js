@@ -1,6 +1,5 @@
 import http from "./httpCommon";
 import axios from "axios";
-import { authHeader } from "../security/authHeader";
 class WorkingHoursDataService {
     getAll() {
         return http.get("working_hours/all");

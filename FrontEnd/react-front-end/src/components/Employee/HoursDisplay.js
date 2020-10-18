@@ -1,10 +1,7 @@
 import React, {Component} from "react";
-import bookingService from "../../services/bookingService";
 import workingHoursService from "../../services/workingHoursService";
 import {Container, Form, Jumbotron} from "react-bootstrap";
 import "./Hours.css";
-import loginService from "../../services/loginService";
-import servicesService from "../../services/servicesService";
 import employeeService from "../../services/employeeService";
 
 class HoursDisplay extends Component {
@@ -87,7 +84,7 @@ class HoursDisplay extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-        if (e.target.name == "newDay") {
+        if (e.target.name === "newDay") {
             const form = document.getElementById("0");
             let newDay = new Date(form.elements[1].value);
             newDay = new Date(newDay.getTime());
@@ -176,7 +173,7 @@ class HoursDisplay extends Component {
                 date.setMinutes(parseInt(timeString[1]));
                 date = new Date(date.getTime() + interval * 60000);
                 endTime = parseFloat(date.getHours() + "." + date.getMinutes());
-                if (endTime == 0)
+                if (endTime === 0)
                     endTime = 24.0;
 
                 const insert = {
@@ -191,7 +188,7 @@ class HoursDisplay extends Component {
             }
         }
 
-        if (e.target.name == "timedate") {
+        if (e.target.name === "timedate") {
                 workingHoursService.saveHours(insertHours).then(response => {
                     this.loadHours();
                 });
@@ -204,8 +201,8 @@ class HoursDisplay extends Component {
         if(form !== null) {
             let minDate = new Date();
             form.elements[1].min = minDate.getFullYear() + "-" +
-                ((minDate.getMonth() + 1).toString().length == 1 ? "0" + (minDate.getMonth() + 1) : (minDate.getMonth() + 1)) + "-" +
-                (minDate.getDate().toString().length == 1 ? "0" + minDate.getDate() : minDate.getDate());
+                ((minDate.getMonth() + 1).toString().length === 1 ? "0" + (minDate.getMonth() + 1) : (minDate.getMonth() + 1)) + "-" +
+                (minDate.getDate().toString().length === 1 ? "0" + minDate.getDate() : minDate.getDate());
         }
     }
 

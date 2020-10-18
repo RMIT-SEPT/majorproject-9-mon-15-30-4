@@ -1,6 +1,0 @@
-The front-end design utilised additional packages to enable the creation of the overall system:
-- react-boostrap
-    install via "npm install react-bootstrap"
-    * NOTE: bootstrap =/= react-bootstrap; react-bootstrap is a single API that combines bootstrap w/ react styles.
-
-     <Image src = "./images/image-front-header.jfif" className = "PImageFrontHeader" fluid />

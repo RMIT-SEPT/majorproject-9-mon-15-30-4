@@ -25,14 +25,14 @@ class Employee extends Component {
         // console.log("The results for isEmployee is: " + this.state.isEmployee);
     };
 
-
+    /** GET CURRENT EMPLOYEE INFORMATION & UPDATE DASHBOARD
+     *      ASSUMING the employee IS LOGGED IN
+     *      ASSUMING the employee EXISTS in the database
+     *      GET the employee from the backend
+     *      UPDATE the current information
+     */
     getEmployeeInfo() {
-        console.log();
-
-
         employeeService.getByToken().then(response => {
-            console.log(response);
-            console.log(response["data"]["userName"]);
             this.setState(
                 {
                     userName: response["data"]["userName"],
@@ -47,20 +47,23 @@ class Employee extends Component {
 
     };
 
+    //SHOW CASE the CURRENT EMPLOYEE's information
     render() {
         return (
 
             <div className="Content-Main">
-
+                
+                {/* SECTION for current employee's information */}
                 <section className="SectionEmployeeDetails">
                     <div className="container">
 
                         <Jumbotron className="EmployeeJumbo">
                             <Row className="EmployeeSection">
+                                {/* SECTION for EMPLOYEE"S PORTRAIT */}
                                 <div className="EmployeePortrait">
                                     <Image width="200" src="./images/employee-1.png"></Image>
                                 </div>
-
+                                {/* SECTION FOR EMPLOYEE"S DETAILS */}
                                 <div className="EmployeeDetails">
                                     <h3>Welcome, {this.state.name}</h3>
                                     <h5> EMAIL: {this.state.contactEmail} </h5>

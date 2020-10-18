@@ -10,7 +10,7 @@ class BookingsHistory extends React.Component {
             bookings: []
         };
     }
-
+    //LINK BACK-END INFORMATION to the GIVEN FRONT-END
     async componentDidMount(){
 
         bookingService.getAll().then(response => {
@@ -26,7 +26,9 @@ class BookingsHistory extends React.Component {
 
         
     }
-   
+
+    //RENDER INFORMATION under the respective table/rows/columns
+        //WHENEVER function is called/updated from the database, they information appears within the front-end
     renderBookings(booking, index) {
         return(
             <tr key={index}>
@@ -39,10 +41,12 @@ class BookingsHistory extends React.Component {
         )
     }
 
+    //SHOW INDIVIDUAL TABLE
     render() {
         return(
             <div>
-
+            
+            {/* HEADERS AND TITLES FOR THE BOOKING HISTORY TABLE */}
             <ReactBootStrap.Table striped bordered hover size="sm" id="table1">
                 <thead>
                     <tr>
@@ -53,6 +57,7 @@ class BookingsHistory extends React.Component {
                     <th>ServiceID</th>
                     </tr>
                 </thead>
+            {/* INFORMATION FOR BOOKING IS RENDERED/SEEN HERE */}
             <tbody>
                 {this.state.bookings} 
             </tbody>

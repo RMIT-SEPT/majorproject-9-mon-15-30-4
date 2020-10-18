@@ -3,7 +3,9 @@ import "./BookingConfirm.css";
 import * as ReactBootStrap from "react-bootstrap";
 import bookingService from "../../services/bookingService";
 
-
+/** BOOKING CONFIRMATION SYSTEM
+ * INFORMATION for the booking information can be confirmed and made in this section
+ */
 class BookingConfirm extends Component{
     constructor(){
         super();

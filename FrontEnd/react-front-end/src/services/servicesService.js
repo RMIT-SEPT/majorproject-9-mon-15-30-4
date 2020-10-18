@@ -1,6 +1,9 @@
 import http from "./httpCommon";
 import axios from "axios";
 import { authHeader } from "../security/authHeader";
+
+//COMMUNICATES WITH THE BACKEND, VIA ServiceController
+    //RETRIEVES SPECIFIC INFORMATION, DEPENDING ON THE SITUATION + REQUEST
 class ServiceDataService {
     getAll() {
         return http.get("/services/all");

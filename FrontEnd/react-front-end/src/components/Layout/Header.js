@@ -5,10 +5,6 @@ import BookingsButton from "../Bookings/BookingsButton";
 import BookingsHistoryButton from '../Bookings/BookingHistory/BookingsHistoryButton';
 import DashboardButton from "../Dashboard/DashboardButton";
 
-
-
-
-
 import "./Header.css"
 import { Nav, Navbar, Button} from "react-bootstrap";
 
@@ -45,7 +41,8 @@ class Header extends Component {
     render() {
         return (
             <div className = "fixed-top">
-                  <Navbar bg = "dark" variant = "dark" style ={{color:"#00000"}} fixed = 'top'> 
+                  <Navbar bg = "dark" variant = "dark" style ={{color:"#00000"}} fixed = 'top'>
+                       {/*LOGO for nav-bar  */}
                     <Navbar.Brand href = "/">
                         <img
                         alt = ""
@@ -55,18 +52,16 @@ class Header extends Component {
                         className = "icon-barbell"
                         color = "#FFFFFF"
                          />
-                         
                     </Navbar.Brand>{''}
-
+                    {/* LINKS FOR THE NAV-BAR, MUST BE BUTTONS */}
                     <Nav>
                         <BookingsButton/>
                         <BookingsHistoryButton/>
                         <DashboardButton/>
-
-
                     </Nav>
-
+                    {/* LINK on the RIGHT HAND SIDE */}
                     <Nav className ="ml-auto">
+                                {/* A NECESSARY EVIL TO GET REGISTER TO ALIGN ITSELF WITH LOGIN */}
                         <Button variant ="outline -info">{<RegisterButton/>} </Button>
                         <Button variant ="outline-info" >{this.logButton()}</Button>
                     </Nav> 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import {Jumbotron  } from "react-bootstrap";
 import {Link} from "react-router-dom"
 import "./AdminDashboard.css";
@@ -7,11 +6,9 @@ import "./AddEmployee";
 import AddEmployee from './AddEmployee';
 import Service from "../Service/Service"
 
-
-
-
-
-
+/**ADMIN DASHBOARD COMPONENTS
+ *      HAS TWO FEATURES: ADD EMPLOYEES and ASSIGNMENT of JOBS TO EMPLOYEES
+ */
 class AdminDashboard extends Component{
     constructor(props){
         super(props)
@@ -25,6 +22,8 @@ class AdminDashboard extends Component{
 
                 <h5 className="display-4 text-center">Admin Dashboard</h5>
                 <hr />
+
+                {/* SECTION to Add Employee to the database */}
                 <div className="AdminContainerEmployeeRegisteration"> 
                     <div>
                         <div className="col-md-8 m-auto">
@@ -52,6 +51,7 @@ class AdminDashboard extends Component{
                         </div>
                     </div>
                 </div>
+                {/* SUB SECTION to services - confirm button */}
                 <div className="container">
                     <React.Fragment>
                         <Link to = "/BookingConfirm" className="nav-link" >

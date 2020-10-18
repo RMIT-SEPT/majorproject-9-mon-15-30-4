@@ -20,6 +20,12 @@ class Customer extends Component {
         this.getCustomerInfo(this);
     }
 
+    /** GET SPECIFIC CUSTOMER INFORMATION, & UPDATE
+     *      ASSUMING that the customer IS LOGGED IN
+     *      ASSUMING that the customer EXISTS within the database
+     *      RETRIEVE the customer's token
+     *      UPDATE the 'current' information from the customers TOKEN
+     */
     getCustomerInfo() {
 
         customerService.getByToken().then(
@@ -35,18 +41,18 @@ class Customer extends Component {
     }
 
 
-
+    //RENDER CUSTOMER SPECIFIC INFORMATION
     render() {
         return (
-
-
             <div className="Content-Main">
 
                 <section className="SectionCustomerDetails">
                     <div className="container">
 
+                    {/* SECTION for CUSTOMER INFORMATION */}
                         <Jumbotron className="CustomerJumbo">
                             <Row className="CustomerSection">
+                                {/* FOR CUSTOMER PORTRAITS */}
                                 <div className="CustomerPortrait">
                                     <Image width="200" src="./images/customer-1.png"></Image>
                                 </div>
