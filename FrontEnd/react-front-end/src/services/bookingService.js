@@ -27,6 +27,4 @@ class BookingDataService {
     }
 
 }
-//Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjIiwiZXhwIjoxNjAyNjgzMDg5LCJpYXQiOjE2MDI2Njg2ODl9.XJTLJoFimnO45bKQ9diLEyXWrEy1Jwci4c9sW3It8Lc
-//Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjIiwiZXhwIjoxNjAyNjgzNjQwLCJpYXQiOjE2MDI2NjkyNDB9.75df0T6TGkILbMpICzXTpjnePEp63s7QVkO7Cb6Yy6o
 export default new BookingDataService();
