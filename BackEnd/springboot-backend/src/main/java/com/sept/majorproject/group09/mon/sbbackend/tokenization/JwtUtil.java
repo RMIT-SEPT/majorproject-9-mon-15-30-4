@@ -4,7 +4,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.cglib.core.internal.Function;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -38,11 +37,13 @@ public class JwtUtil
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
     }
 
+    //CHECK IF TOKEN IS EXPIRED
     private boolean isTokenExpired(String token)
     {
         return extractExpiration(token).before(new Date());
     }
 
+        //CREATE TOKEN BASED ON HASHMAP
     public String generateToken(UserDetails userDetails)
     {
 
@@ -53,7 +54,7 @@ public class JwtUtil
     }
 
 
-    //Something wrong in here...
+    //CREATE TOKEN, FOR A SET AMOUNT OF TIME (in miliseconds)
     private String createToken(Map<String, Object> claims, String subject)
     {
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
@@ -63,6 +64,7 @@ public class JwtUtil
 
     }
 
+    //VALIDATE TOKEN to ENSURE INTEGRITY
     public boolean validateToken(String token, UserDetails userDetails)
     {
         final String username = extractUsername(token);

@@ -1,8 +1,6 @@
 package com.sept.majorproject.group09.mon.sbbackend.web;
 
 import com.sept.majorproject.group09.mon.sbbackend.model.Customer;
-
-import com.sept.majorproject.group09.mon.sbbackend.model.Employee;
 import com.sept.majorproject.group09.mon.sbbackend.services.CustomerService;
 import com.sept.majorproject.group09.mon.sbbackend.tokenization.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +20,14 @@ public class CustomerController
     @Autowired
     CustomerService customerService;
 
+    //GET the customer by username when needed in the front-end
     @GetMapping
     private Customer getCustomerByUserName(@PathVariable("userName") String userName)
     {
         return customerService.getCustomerByUsername(userName);
     }
 
+    //CREATE a new customer when the user presses 'submit' in the front-end.
     @PostMapping("")
     public ResponseEntity<Customer> createNewCustomer(@RequestBody Customer customerInput )
     {
@@ -40,7 +40,8 @@ public class CustomerController
     @Autowired
     JwtUtil jwtUtil;
 
-
+    //RETRIEVE CUSTOMER INFORMATION FROM the GIVEN TOKEN
+        //IS CALLED SPECIFICALLY FROM THE FRONT-END
     @GetMapping("/token/{jwt}")
     public ResponseEntity<?> getCustomerFromToken(@PathVariable("jwt") String jwtToken)
     {

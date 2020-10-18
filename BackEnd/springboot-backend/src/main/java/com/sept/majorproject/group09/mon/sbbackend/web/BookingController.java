@@ -15,21 +15,25 @@ public class BookingController {
     @Autowired
     BookingService bookingService;
 
+    //GET ALL BOOKINGS
     @GetMapping("/all")
     private List<Booking> getAllBookings() {
         return bookingService.getAllBookings();
     }
 
+    //GET BOOKING BY EMPLOYEE ID
     @GetMapping("/{id}")
     private List<Booking> getBookingsByEmployee(@PathVariable("id") String id) {
         return bookingService.getBookingsByEmployee(id);
     }
 
+    //GET ALL AVAILABLE TIMES
     @GetMapping("/available/{employeeId}")
     private List<int[]> getAvailableTimes(@PathVariable("employeeId") String employeeId) {
         return bookingService.getAvailableTimesByEmployee(employeeId);
     }
 
+    //GET THE AVAILABLE TIME given DATE, the TYPE of service (ID), and EMPLOYEE
     @GetMapping("/available/time/{date}/{serviceId}/{employeeId}")
     private boolean getAvailableTimes(@PathVariable("date") String date,
                                       @PathVariable("serviceId") long serviceId,
@@ -40,6 +44,7 @@ public class BookingController {
     @GetMapping("/unconfirmed")
     private List<Booking> getUnconfirmedBookings(){return bookingService.getUnconfirmedBookings();}
 
+    //IF CALLED, SAVE BOOKING BASED ON FRONT-END SUBMISSION
     @PostMapping("")
     private long saveBooking(@RequestBody Booking booking) {
         Calendar cal = Calendar.getInstance();

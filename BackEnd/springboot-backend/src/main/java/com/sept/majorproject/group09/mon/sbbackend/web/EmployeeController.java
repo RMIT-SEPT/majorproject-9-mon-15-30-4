@@ -1,8 +1,7 @@
 package com.sept.majorproject.group09.mon.sbbackend.web;
 
-import com.sept.majorproject.group09.mon.sbbackend.model.Customer;
+
 import com.sept.majorproject.group09.mon.sbbackend.model.Employee;
-//import com.sept.majorproject.group09.mon.sbbackend.services.EmployeeService;
 import com.sept.majorproject.group09.mon.sbbackend.services.EmployeeService;
 
 import java.util.List;
@@ -49,7 +48,6 @@ public class EmployeeController {
      * 
      * @return Returns a list of all the employees in the system
      */
-    @SuppressWarnings("rawtypes")
 	@GetMapping("/AllEmployees")
     private List<Employee> getAllEmployees()
     {
@@ -61,6 +59,7 @@ public class EmployeeController {
     @Autowired
     JwtUtil jwtUtil;
 
+    //GET the employee token, needed for security purposes in the front-end.
     @GetMapping("/token/{jwt}")
     public ResponseEntity<?> getEmployeeFromToken(@PathVariable("jwt") String jwtToken)
     {

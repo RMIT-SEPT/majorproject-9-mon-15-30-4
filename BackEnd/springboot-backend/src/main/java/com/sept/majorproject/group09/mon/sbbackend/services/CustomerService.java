@@ -1,7 +1,6 @@
 package com.sept.majorproject.group09.mon.sbbackend.services;
 
 import com.sept.majorproject.group09.mon.sbbackend.model.Customer;
-//import com.sept.majorproject.group09.mon.sbbackend.repository.CustomerRepository;
 import com.sept.majorproject.group09.mon.sbbackend.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 

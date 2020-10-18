@@ -1,6 +1,4 @@
 package com.sept.majorproject.group09.mon.sbbackend.services;
-
-import com.sept.majorproject.group09.mon.sbbackend.model.Booking;
 import com.sept.majorproject.group09.mon.sbbackend.model.Service;
 import com.sept.majorproject.group09.mon.sbbackend.repositories.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;

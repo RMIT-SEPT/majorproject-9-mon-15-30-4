@@ -1,6 +1,5 @@
 package com.sept.majorproject.group09.mon.sbbackend.web;
 
-import com.sept.majorproject.group09.mon.sbbackend.model.Booking;
 import com.sept.majorproject.group09.mon.sbbackend.model.Service;
 import com.sept.majorproject.group09.mon.sbbackend.services.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.sept.majorproject.group09.mon.sbbackend.web;
 
 import com.sept.majorproject.group09.mon.sbbackend.model.Admin;
-import com.sept.majorproject.group09.mon.sbbackend.model.Employee;
+
 import com.sept.majorproject.group09.mon.sbbackend.services.AdminService;
 import com.sept.majorproject.group09.mon.sbbackend.tokenization.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +24,8 @@ public class AdminController
     @Autowired
     JwtUtil jwtUtil;
 
+    //GET ADMIN SPECIFIC CONTROLLER
+        //USED FOR FRONT-END VALIDATION PURPOSES
     @GetMapping("/token/{jwt}")
     public ResponseEntity<?> getAdminFromToken(@PathVariable("jwt") String jwtToken)
     {

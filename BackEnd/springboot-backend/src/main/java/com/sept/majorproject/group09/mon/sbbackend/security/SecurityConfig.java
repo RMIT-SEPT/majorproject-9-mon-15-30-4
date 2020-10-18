@@ -40,7 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 
     @Autowired
     JwtRequestFilter jwtRequestFilter;
-
+    //SET CONFIGURATION
+        //CERTAIN METHODS CAN ONLY BE USED BY CERTAIN USERS
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()

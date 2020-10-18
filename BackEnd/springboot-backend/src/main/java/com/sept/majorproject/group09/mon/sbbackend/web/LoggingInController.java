@@ -125,6 +125,8 @@ public class LoggingInController
     @Autowired
     private JwtUtil jwtTokenUtil;
 
+    //AUTHENTICATE the INPUT, via VALIDATING if the username and password ENTERED in the backend meets the BACKEND database.
+            //IF SO, RETURN "BEARER" + their JWT token (as a string).
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenicationToken(@RequestBody LoginRequest loginRequest) throws Exception
     {
@@ -149,7 +151,9 @@ public class LoggingInController
 
     @Autowired
     JwtUtil jwtUtil;
-
+    //VALIDATE CUSTOMER BASED ON TOKEN
+        //IF SO, RETURN TRUE
+        //OTHERWISE FALSE
     @GetMapping("/isCustomer/{token}")
     public ResponseEntity<?> isCustomer(@PathVariable("token") String jwtToken)
     {
@@ -166,7 +170,10 @@ public class LoggingInController
 
     @Autowired
     EmployeeService employeeService;
-
+    //VALIDATE TOKEN IF ACCOUNT TYPE OF EMPLOYEE
+        //RETURN BOOLEAN
+            //IF YES --- TRUE
+            //ELSE --- FALSE
     @GetMapping("/isEmployee/{token}")
     public ResponseEntity<?> isEmployee(@PathVariable("token") String jwtToken)
     {

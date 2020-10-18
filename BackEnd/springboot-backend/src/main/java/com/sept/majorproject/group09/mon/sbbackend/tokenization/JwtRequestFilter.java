@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//CREATE A FILTER TO ALLOW SPECIFIC METHODS TO BYPASS SECURITY METHODS
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
