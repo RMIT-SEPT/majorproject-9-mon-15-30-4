@@ -27,7 +27,7 @@ Trello Sprint 2 Board: https://trello.com/b/Zdhk2qgb/sprint2
 
 Trello Sprint 3 Board: https://trello.com/b/t6pjoOrn/sprint3
 
-Trello Sprint 4 Board: https://trello.com/b/YXj8HGf0/sprint-4
+Trello Sprint 4 Board: https://trello.com/b/YhvmRrlY/sprint-4
 
 Wireframe: https://www.figma.com/file/3hjNLqKwgagznMFFwnGL52/SEPT_A1_Wireframe_Draft?node-id=25%3A619
 
