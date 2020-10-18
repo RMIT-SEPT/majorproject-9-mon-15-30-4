@@ -1,15 +1,16 @@
 package com.sept.majorproject.group09.mon.sbbackend.web;
 
-import com.sept.majorproject.group09.mon.sbbackend.model.Booking;
+
 import com.sept.majorproject.group09.mon.sbbackend.model.WorkingHours;
 import com.sept.majorproject.group09.mon.sbbackend.services.WorkingHoursService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Optional;
+
 
 
 @RestController

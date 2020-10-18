@@ -36,10 +36,37 @@ public class CustomerService
             }
         }
 
+
+        public Customer getCustomerByUserNameTest(String userName)
+        {
+            try
+            {
+                return customerRepository.findByName(userName);
+            }
+            catch(IndexOutOfBoundsException e)
+            {
+                return null;
+            }
+        }
+
+        public List<Customer> getAllCustomers()
+        {
+            try
+            {
+                return customerRepository.getAllCustomers();
+            }
+            catch (IndexOutOfBoundsException e)
+            {
+                return null;
+            }
+
+        }
+
         public List<Customer> getAllCustomers()
         {
             return customerRepository.allCustomers();
         }
+
 
 
 

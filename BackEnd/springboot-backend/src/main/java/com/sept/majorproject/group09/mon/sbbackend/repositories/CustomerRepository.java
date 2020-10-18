@@ -23,11 +23,18 @@ public interface CustomerRepository extends AccountRepository
 
 
     @Query( value = "SELECT * FROM CUSTOMER WHERE USER_NAME= :userName", nativeQuery = true)
-    //@Query(value =  "SELECT u FROM CUSTOMER u WHERE u.userName = ?1", nativeQuery = true)
     List<Customer> customerUsername(@Param("userName") String userName);
 
+
+    @Query( value = "SELECT * FROM CUSTOMER WHERE USER_NAME= :userName", nativeQuery = true)
+    public Customer findByName(@Param("userName") String userName);
+
+    @Query(value = "SELECT * FROM CUSTOMER",nativeQuery = true)
+    List<Customer> getAllCustomers();
+  //Will need to rename the above, or point towards this one
     @Query( value = "SELECT * FROM CUSTOMER", nativeQuery = true)
     List<Customer> allCustomers();
+
 
 
 

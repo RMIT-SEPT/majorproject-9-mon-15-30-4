@@ -2,6 +2,7 @@ package com.sept.majorproject.group09.mon.sbbackend.web;
 
 import com.sept.majorproject.group09.mon.sbbackend.model.Customer;
 
+
 import com.sept.majorproject.group09.mon.sbbackend.model.Employee;
 import com.sept.majorproject.group09.mon.sbbackend.services.CustomerService;
 import com.sept.majorproject.group09.mon.sbbackend.tokenization.JwtUtil;
@@ -34,6 +35,12 @@ public class CustomerController
         Customer customer = customerService.saveOrUpdateCustomer(customerInput);
 
         return new ResponseEntity<Customer>(customer, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/AllCustomers")
+    public List<Customer> getAllCustomer()
+    {
+        return customerService.getAllCustomers();
     }
 
 
