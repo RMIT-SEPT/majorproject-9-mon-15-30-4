@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Jumbotron, Image, Row } from "react-bootstrap";
 import "./Customer.css";
 import customerService from "../../services/customerService";
+import CustBookingHistory from '../Bookings/CustBookingHistory/CustBookingHistory';
 
 
 
@@ -64,8 +65,8 @@ class Customer extends Component {
                                     <h6> Remember to work hard!</h6>
                                 </div>
                             </Row>
+                            <CustBookingHistory userName={this.state.userName}/>
                         </Jumbotron>
-
                     </div>
                 </section>
 
@@ -74,15 +75,11 @@ class Customer extends Component {
                 <section className="SectionCustomerBooking">
                     <div className="container">
                         <div className="row">
-
+                           
                         </div>
                     </div>
-
                 </section>
-
-
             </div>
-
         )
     }
 }
