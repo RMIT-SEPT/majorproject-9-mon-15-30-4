@@ -15,7 +15,7 @@ class BookingDataService {
             method: 'post',
             url: "http://localhost:8080/api/bookings",
             data: data,
-            headers: authHeader
+            headers: { Authorization: localStorage.getItem('login') }
         }).catch(e => {
             console.log(e);
         });
