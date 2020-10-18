@@ -1,0 +1,19 @@
+LucidChartClassDiagram
+https://app.lucidchart.com/invitations/accept/9385dd8e-f1cb-4e3b-84f4-fb64868e5913
+LucidChartERDiagram
+https://app.lucidchart.com/invitations/accept/044adaff-8b0b-491d-a7ef-d160187ff56f
+Trello
+Product Backlog
+https://trello.com/b/FPqfJ5Gc/backlog
+Sprint 0/ Sprint Planning board
+https://trello.com/b/B30DJY35/sprint-0
+Sprint 1 Board
+https://trello.com/b/LA2tAbY7/sprint-1
+Sprint 2 Board
+https://trello.com/b/Zdhk2qgb/sprint2
+Github Repository
+https://github.com/RMIT-SEPT/majorproject-9-mon-15-30-4
+Wireframe
+https://www.figma.com/file/3hjNLqKwgagznMFFwnGL52/SEPT_A1_Wireframe_Draft?node-id=25%3A619
+CircleCi Pipeline
+https://app.circleci.com/pipelines/github/RMIT-SEPT/majorproject-9-mon-15-30-4

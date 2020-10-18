@@ -1,0 +1,59 @@
+.noPadding
+{
+    padding-left:  0;
+    margin-left: 0;
+}
+
+.main
+{
+    overflow: auto;
+}
+
+.CardInfoOntopImage
+{
+    /* left: -150px; 
+    position: absolute; */
+    flex: 0 0 50px;
+    margin-right: 20px;
+}
+
+.ContainerMapOutside
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ContainerMap
+{
+    /* top: 300px;      */
+    /* right: 0px; 
+    position: absolute; */
+    width:400px; 
+    height:445px;
+    margin-left: auto;
+    margin-right: auto;
+   
+}
+
+.HeadersTitleContainer
+{
+    color:white;
+}
+.SubTitleHeaderH3
+{
+    color:beige;
+}
+.PageSectionServices
+{
+    background-image: url('/images/background-dumbellsrow.jpg');
+}
+
+.contents
+{
+    display: flex;
+}
+.footer
+{
+    background-image: url('/images/gray-shades-jpg');
+}
+
