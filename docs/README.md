@@ -60,11 +60,13 @@ Project
                 +- Bookings
 		    | +- AddBooking.js
 		    | +- BookingsButton.js
+		    | +- Booking.css
                 +- Customer
 		+- Employee
 		    | +- hoursButton.js
 		    | +- HoursDisplay.js
 		    | +- HoursNoEditable.js
+		    | +- Hours.css
                 +- Layout
                 +- Login
                 +- Register
@@ -148,7 +150,7 @@ Project
  - Assuming both the front-end and back-end is running, then a booking can be created.
  - Navigate to localhost:3000/Admin (Link on to edit provided on page)
  - Select an employee from the dropdown box.
- - Time blocks will be displayed in half hour increments. Greeb are scheduled, red are unscheduled.
+ - Time blocks will be displayed in half hour increments. Green are scheduled, red are unscheduled.
  - Click and or drag to toggle a timeblock. (When the mouse leaves a block or is released on one the toggle with execute)
  - Toggled time blocks are automatically saved.
  - To delete hours, toggle all time blocks to red.
