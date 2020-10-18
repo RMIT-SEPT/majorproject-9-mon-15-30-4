@@ -240,7 +240,7 @@ class HoursDisplay extends Component {
         return times;
     }
 
-    createTimeRows(dates, blocks){
+    createTimeRows(dates, blocks){ // Create table of schedule
         let rows = [];
         for (let i = 0; i < dates.length; i++) {
             rows = [...rows, <tr className="tr-eh"><th className="th-eh">{dates[i]}</th><th className="th-eh">{blocks[i]}</th></tr>]
@@ -252,7 +252,7 @@ class HoursDisplay extends Component {
         return rows;
     }
 
-    blockTimes(){
+    blockTimes(){ // Format the available dates for later use.
         let date, dates = [];
 
         if(this.state.hours[0] != null) {
@@ -277,9 +277,9 @@ class HoursDisplay extends Component {
         return dates;
     }
 
-    createBlocks(){
+    createBlocks(){ // Create the interactive schedule elements
         let blocks = [];
-        if(this.state.hours[0] != null) {
+        if(this.state.hours[0] != null) { // Process each available timeframe
             let dateString = this.state.hours[0]["date"].toString().split("-");
             let year = dateString[0], month = dateString[1], day = dateString[2];
             let date = new Date(year, month, day, 0, 0);
@@ -287,7 +287,7 @@ class HoursDisplay extends Component {
             let buttons = [];
 
             for (let i = 0; i < this.state.hours.length; i++) {
-                let cBR = this.createBlockButton(i, date);
+                let cBR = this.createBlockButton(i, date); // Creates a row of schedule elements
                 buttons = cBR[0];
 
                 blocks = [...blocks,
@@ -301,7 +301,7 @@ class HoursDisplay extends Component {
         return blocks;
     }
 
-    createBlockButton(i, prevDate) {
+    createBlockButton(i, prevDate) { // Creates the interactive scheule elements
         let dateString = this.state.hours[i]["date"].toString().split("-"), buttons = [],
             interval = 30, year = dateString[0], month = dateString[1], day = dateString[2],
             hour = this.state.hours[i]["startTime"].toString().split(".")[0],
@@ -315,7 +315,7 @@ class HoursDisplay extends Component {
         dateEndTime.setHours(24);
         dateEndTime.setMinutes(0);
 
-        while (new Date(date.getTime() + interval * 60000) <= dateEndTime) {
+        while (new Date(date.getTime() + interval * 60000) <= dateEndTime) { // Fill row with schedule elements
             valueId = (date.getHours().toString().length === 1 ? "0" + date.getHours()
                 : date.getHours()) + ":" + (date.getMinutes() === 0 ? "00" :
                 date.getMinutes()) + "#" + year + "-"
@@ -344,7 +344,7 @@ class HoursDisplay extends Component {
             date = new Date(date.getTime() + interval * 60000);
         }
 
-        for (; i < this.state.hours.length; i++) {
+        for (; i < this.state.hours.length; i++) { // Toggle scheduled times
             dateString = this.state.hours[i]["date"].toString().split("-");
             year = dateString[0];
             month = dateString[1];

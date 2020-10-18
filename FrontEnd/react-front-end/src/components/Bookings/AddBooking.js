@@ -38,14 +38,6 @@ class AddBooking extends Component {
         this.updateBookingFields();
     }
 
-    /*
-     * https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
-     * User: TLindig
-     */
-    onlyUnique(value, index, self) {
-        return self.indexOf(value) === index;
-    }
-
     updateBookingFields() 
     {
         servicesService.getAll()
@@ -201,16 +193,6 @@ class AddBooking extends Component {
         return <option key={"itemId" + X}>{X}</option>;
     };
 
-    formatAvailableTimes() {
-        let formattedString = "Available Times: \n";
-        for (const element of this.state.availableTimes) {
-            formattedString += element[3] + "/" + element[2] + "/" + element[1] + ", "
-                + element[4] + ":" + element[5] + " - " + element[6] + ":" + element[7]
-                + "\n";
-        }
-        return formattedString;
-    }
-
     generateScheduleTimes(size) {
         let times = [];
         let hours;
@@ -226,7 +208,7 @@ class AddBooking extends Component {
         return times;
     }
 
-    blockTimes(){
+    blockTimes(){ // Format the available dates for later use.
         let date, dates = [];
         if(this.state.availableTimes[0] != null) {
             let year = this.state.availableTimes[0][1], month = this.state.availableTimes[0][2],
@@ -249,9 +231,9 @@ class AddBooking extends Component {
         return dates;
     }
 
-    createBlocks(){
+    createBlocks(){ // Create the interactive appointment elements
         let blocks = [];
-        if(this.state.availableTimes[0] != null) {
+        if(this.state.availableTimes[0] != null) { // Process each available timeframe
             let year = this.state.availableTimes[0][1], month = this.state.availableTimes[0][2],
                 day = this.state.availableTimes[0][3];
             let date = new Date(year, month, day);
@@ -259,7 +241,7 @@ class AddBooking extends Component {
             let buttons = [];
 
             for (let i = 0; i < this.state.availableTimes.length; i++) {
-                let cBR = this.createBlockButton(i, date);
+                let cBR = this.createBlockButton(i, date); // Creates a row of appointment elements
                 buttons = cBR[0];
 
                 blocks = [...blocks,
@@ -272,7 +254,7 @@ class AddBooking extends Component {
         return blocks;
     }
 
-    createBlockButton(i, prevDate) {
+    createBlockButton(i, prevDate) { // Creates the interactive appointment elements
         let buttons = [], date, dateEndTime;
 
         for (; i < this.state.availableTimes.length; i++) {
@@ -282,11 +264,13 @@ class AddBooking extends Component {
                 endMinute = this.state.availableTimes[i][7];
             date = new Date(year, month, day, hour, minute);
             dateEndTime = new Date(year, month, day, endHour, endMinute);
+            // If new date stop adding to row.
             if (date.getFullYear() !== prevDate.getFullYear()
                 || date.getMonth() !== prevDate.getMonth()
                 || date.getDate() !== prevDate.getDate())
                 break;
 
+            // Fills available time span with appointment blocks
             while (new Date(date.getTime() + this.state.serviceDuration * 60000) <= dateEndTime) {
                 let position = (date.getHours() * 60 + date.getMinutes()) / 1440 * 100 + "%";
                 let length = this.state.serviceDuration / 1440 * 100 + "%";
@@ -315,7 +299,7 @@ class AddBooking extends Component {
         return [buttons, i - 1, date];
     }
 
-    createTimeRows(dates, blocks){
+    createTimeRows(dates, blocks){ // Generates the interactive booking table.
         let rows = [];
         for (let i = 0; i < dates.length; i++) {
             rows = [...rows, <tr className="tr-bp"><th className="th-bp">{dates[i]}</th><th className="th-bp">{blocks[i]}</th></tr>]
@@ -327,7 +311,7 @@ class AddBooking extends Component {
         return rows;
     }
 
-    blockMouseEnter(e){
+    blockMouseEnter(e){ // blockMouse methods used to toggle info popup.
         document.getElementById(e.target.value + "D").style.visibility  = "visible";
         document.getElementById(e.target.value + "T").style.visibility  = "visible";
     }
